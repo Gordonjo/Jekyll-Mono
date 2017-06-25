@@ -8,7 +8,7 @@ I am a first year Ph.D. candidate with the Computational and Biological Learning
 
 <div class='pull-right' markdown="1">
 
-<img src="/images/SitePic.jpg" height="400px" width="200px" >
+![test image size](/images/SitePic.jpg){:height="100px" width="400px"}
 
 </div>
 
