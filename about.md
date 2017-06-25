@@ -10,7 +10,7 @@ I am a first year Ph.D. candidate with the Computational and Biological Learning
 
 <div class='pull-left' markdown="1">
 
-![](/images/SitePic.jpg)
+![](/images/SitePicScaled.jpg)
 
 </div>
 
