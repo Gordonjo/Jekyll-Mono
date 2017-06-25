@@ -8,7 +8,7 @@ I am a first year Ph.D. candidate with the Computational and Biological Learning
 
 <div class='pull-right' markdown="1">
 
-![Profile Pic](/images/SitePic.jpg) <!-- .element height="50%" width="50%" -->
+![Profile Pic](/images/SitePic.jpg){:height="50%" width="50%"}
 
 </div>
 
