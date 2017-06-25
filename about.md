@@ -8,9 +8,9 @@ I am a first year Ph.D. candidate with the Computational and Biological Learning
 
 
 
-<div class='pull-right' markdown="1">
+<div class='pull-left' markdown="1">
 
-![ProfPic](/images/SitePicScaled.jpg)
+![](/images/SitePic.jpg)
 
 </div>
 
