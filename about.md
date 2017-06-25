@@ -8,7 +8,11 @@ I am a first year Ph.D. candidate with the Computational and Biological Learning
 
 
 
-<img src="images/SitePic.jpg" width="25%" height="25%" float="right">
+<div class='pull-right' markdown="1">
+
+![ProfPic](/images/SitePicScaled.jpg)
+
+</div>
 
 
 Lately, I have been focusing on deep generative models. Recent advances in stochastic backpropagation enable us to efficiently train increasingly complex models. Some notable examples are the variational autoencoder and Bayesian neural networks. In my research I aim to examine how we can design these (and similar) models to enable more efficient learning (data and computational efficiency) as well as learning in more complex settings. I am especially interested in leveraging generative abilities of models to these ends.
