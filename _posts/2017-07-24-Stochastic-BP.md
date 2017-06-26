@@ -68,14 +68,14 @@ So that's it. We're ready to put it all together in an algorithm called Auto-enc
 function stochastic_backprop(data, L):
     theta, phi <- initialize_variables()
     repeat:
-	    x_batch <- data.next_batch()
-	    eps_l <- peps.sample() for l in range(L)
-	    gradient <- L(x_batch, eps_l).gradient(theta, phi)
-	    theta, phi <- optimizer.update(gradients)
+	  x_batch <- data.next_batch()
+	  eps_l <- peps.sample() for l in range(L)
+	  gradient <- L(x_batch, eps_l).eval_gradient(theta, phi)
+	  theta, phi <- optimizer.update(gradient)
     until convergence (theta, phi)
     return theta, phi
 ```
-Of course, this is very rough psuedo code that is not meant to run. In the next post I will go into detail about with one model (VAE), and will run through a TensorFlow implementation with toy data. After that, I will discuss how the exact same algorithm can be used to train a BNN, and run through a TF implementation of that with the same data.
+Of course, this is very rough psuedo code that is not meant to run. In the next post I will go into detail about with one model (VAE), and will run through a TensorFlow implementation (including code) with toy data. After that, I will discuss how the exact same algorithm can be used to train a BNN, and run through a TF implementation of that with the same data.
 
 
 
