@@ -53,12 +53,14 @@ Luckily, some papers from a few years ago ([^2], [^3]) fleshed out how we could 
 so all we need is that \\(g_{\phi}\\) be differentiable and be able to sample from \\(p_{\epsilon}\\). This is almost always possible, and in many cases it is even super-easy. For example, if:
 
 \begin{equation}
-q(z|x) = \mathcal{N}(z; \mu_z, \sigma^2_z) \rightarrow \epsilon \sim \mathcal{N}(0,1); g(\epsilon, x); = \mu_z + \epsilon \otimes \sigma_z
+q(z|x) = \mathcal{N}(z; \mu(x), \sigma^2(x)) \rightarrow \epsilon \sim \mathcal{N}(0,1);\ \  g(\epsilon, x) = \mu(x) + \epsilon \otimes \sigma(x)
 \end{equation}
 
-Reparameterization, simple though it may appear, does two amazing things. (1) It 
+Reparameterization, simple though it may appear, does two amazing things. (1) It manipulates \\(\hat\mathcal{L}}\\) such that it is differentiable w.r.t. \\(\phi\\) - we can now jointly train the inference network and the model! (2) It allows us to reduce the variance of the estimator by sharing random numbers across terms and iterations. This may not be the only reason, but regardless, \\(\nabla_{\theta,\phi}\hat{\mathcal{L}}\\) exhibits low variance, and in practice converges very nicely.
 
- \mu_z + \epsilon \otimes \sigma_z
+
+
+
 
 
 ## References
