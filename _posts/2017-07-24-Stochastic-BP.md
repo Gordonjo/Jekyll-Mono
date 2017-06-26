@@ -23,7 +23,7 @@ Here, \\(x\\) are our inputs, \\(z\\) are the latent variables, and \\(\theta\\)
 The best approach seems to be variational inference (VI). The basic idea with VI is to introduce an approximation to the true posterior, which we will call \\(q\\), and parameterize it with the *variational parameters* - \\(\phi\\). Note that to do this, we must choose some parameteric family for \\(q\\), such as a Gaussian. Having chosen \\(q\\), the idea is to minimize the distance between the true posterior and our approximation. The minimization is over \\(\phi\\) and with respect to some divergence between distributions, such as the KL-divergence. The variational objective can be expressed as:
 
 \begin{equation}
-\mathcal{L}(\theta, \phi; x) = \mathbb{E}[\log p(x|z)] - KL(q(z|x)\|p(z))$$
+\mathcal{L}(\theta, \phi; x) = \mathbb{E}[\log p(x|z)] - KL(q(z|x)\|p(z))
 \end{equation}
 
 Which has a nice interpretation: the first term can be seen as reconstruction error - we are trying to maximize the likelihood of the data under the latent variable. The second term can be interpreted as a regularizer - it encourages the approximation to be as simple as possible by penalizing it for being different from the prior on \\(z\\), which is typically chosen to be something simple like a standard normal distribution.
@@ -42,9 +42,9 @@ To train the things, we would like to use our regular stochastic gradient optimi
 \mathbb{E}[\log p(x|z)] = \int q(z|x) \log p(x|z)dz \approx \frac{1}{L}\sum\limits_{l=1}^L \log p(x|z^l)
 \end{equation} 
 
-where we are sampling \\(z\sim q\\). Alas, the problem is that sampling for \\(z\\) means that \\(\mathcal{L}\\) is not differentiable w.r.t. \\(\phi\\).
+where we are sampling \\(z\sim q\\). Alas, the problem is that sampling for \\(z\\) means that \\(\mathcal{L}\\) is not differentiable w.r.t. \\(\phi\\), so we cannot train the inference network like this. Another idea might be to directly sample for the gradient \\(\nabla_{\theta, \phi}\mathcal{L}\\). Unfortunately, in [^1] it shown that this estimate, while unbiased, has very high variance, and training as such tends to diverge more often than not. 
 
-Luckily, some papers from a few years ago ([^2], [^3]) fleshed out how we could do this! The main idea is to introduce an inference network, that has the job of approximating the posterior distribution of \\(z\\), which is causing all the trouble.  If we 
+Luckily, some papers from a few years ago ([^2], [^3]) fleshed out how we could get around this using an almost embarrasingly simple trick - *reparameterization*.
 
 
 ## References
