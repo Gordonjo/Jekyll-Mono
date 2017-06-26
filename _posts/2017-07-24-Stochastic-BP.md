@@ -11,7 +11,7 @@ Recently I've had to train a few deep generative models with stochastic backprop
 
 We are considering the case where we have some complex latent variable model (later we will see how we can consider the weights as our latent variables and extend this to BNN) as shown below.
 
-<img src="https://raw.githubusercontent.com/Gordonjo/Jekyll-Mono/gh-pages/images/vae.png" width="15%" height="15%">
+<img src="https://raw.githubusercontent.com/Gordonjo/Jekyll-Mono/gh-pages/images/vae.png" width="20%" height="20%">
 
 
 Here, \\(x\\) are our inputs, \\(z\\) are the latent variables, and \\(\theta\\) parameterizes the conditional distribution. Usually, we use deep neural networks to map from \\(z\\) to \\(x\\), so \\(\theta\\) will be the parameters of the network. This is a very powerful family of models known as deep generative models (DGMs), even for very simple distributions of \\(z\\). What we would like to be able to do is perform learning (i.e., maximum likelihood or a-posteriori estimation) for \\(\theta\\), and inference for \\(z\\). Unfortunately, the posterior distribution for \\(z\\) is intractable, so doing this is not straightforward.
@@ -24,10 +24,22 @@ The best approach seems to be variational inference (VI). The basic idea with VI
 
 What's fantastic about VI is that it allows us to convert infernce from an integration problem (which we pretty much suck at) to an optimization one (which we are awesome at). On the flip-side, there are a few drawbacks: one problem is that we are usually limited to very simple posterior approximations, and the quality of our trained model is directly related to the quality of \\(q\\). Another problem is that posterior inference includes a separate set of variational parameters \\(\phi\\) for every data-point, and therefore needs to be recomputed for every new example we receive.   
 
-Luckily, some papers from a few years ago ([^1], [^2]) fleshed out how we could do this! The main idea is to introduce an inference network, that has the job of approximating the posterior distribution of \\(z\\), which is causing all the trouble. The main advantage of this is that it *ammortizes* posterior inference, so that while the number of latent variables grows linearly with the number of data points, posterior inference now has a fixed computational complexity. If we 
+
+## Inference Networks and Reparameterization
+-----
+
+To get around these problems, some guys had the brilliant idea of introducing an *inference network*. The idea is to use a neural network for \\(q\\). Ideally, we would then be able to train both networks \\(\theta, \phi\\) jointly. The main advantage of this is that it *ammortizes* posterior inference, so that while the number of latent variables grows linearly with the number of data points, posterior inference now has a fixed computational complexity. This seems great, but of course, there are still some problems.
+
+To train the things, we would like to use our regular stochastic gradient optimizers. The variational objective can be expressed as:
+
+$$\mathcal{L}(\theta, \phi; x) = \mathbb{E}\[\log p(x|z)\] - KL(q\|p)$$
+
+Luckily, some papers from a few years ago ([^2], [^3]) fleshed out how we could do this! The main idea is to introduce an inference network, that has the job of approximating the posterior distribution of \\(z\\), which is causing all the trouble.  If we 
 
 
+## References
+-----
 
-
-[^1]: Kingma, Diederik P and Welling, Max. Auto-encoding variational Bayes. 2013
-[^2]: Rezende, Danilo Jimenez, Mohamed, Shakir, and Wierstra, Daan. Stochastic backpropagation and approximate inference in deep generative models. 2014
+[^1]: Paisley, John, Blei, David M, and Jordan, Michael I. Variational Bayesian Inference with Stochastic Search. 2012
+[^2]: Kingma, Diederik P and Welling, Max. Auto-encoding variational Bayes. 2013
+[^3]: Rezende, Danilo Jimenez, Mohamed, Shakir, and Wierstra, Daan. Stochastic backpropagation and approximate inference in deep generative models. 2014
