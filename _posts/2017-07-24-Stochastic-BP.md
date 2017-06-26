@@ -11,6 +11,7 @@ Recently I've had to train a few deep generative models with stochastic backprop
 
 For completeness (and to introduce notation), I'll quickly review what it means to train a deep model with SBP. We are considering the case where we have some complex latent variable model (later we will see how we can consider the weights as our latent variables and extend this to BNN) as shown below.
 
-<img src="https://raw.githubusercontent.com/Gordonjo/Jekyll-Mono/gh-pages/images/vae.png" width="10%" height="10%" align="middle">
+<img src="https://raw.githubusercontent.com/Gordonjo/Jekyll-Mono/gh-pages/images/vae.png" width="15%" height="15%" align="middle">
 
 
+Here, $x$ are our inputs (for instance an image), $z$ is the latent variable, and $\theta$ parameterizes the distribution $p(x|z)$. Usually, we use deep neural networks to map from $z$ to $x$, so $\theta$ will be the parameters of the network. 
