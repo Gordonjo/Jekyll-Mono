@@ -42,7 +42,7 @@ To train the things, we would like to use our regular stochastic gradient optimi
 \mathbb{E}[\log p(x|z)] = \int q(z|x) \log p(x|z)dz \approx \frac{1}{L}\sum\limits_{l=1}^L \log p(x|z^l)
 \end{equation} 
 
-where we are sampling \\(z^l \sim q\\). Alas, the problem is that sampling for \\(z\\) means that \\(\hat{\mathcal{L}}\\) is not differentiable w.r.t. \\(\phi\\), so we cannot train the inference network. Another idea might be to directly sample for the gradient \\(\nabla_{\theta, \phi}\mathcal{L}\\). Unfortunately, in [^1] it shown that \\(\hat{\nabla}_{\phi}\mathcal{L}, while unbiased, has very high variance, and training as such tends to diverge more often than not. 
+where we are sampling \\(z^l \sim q\\). Alas, the problem is that sampling for \\(z\\) means that \\(\hat{\mathcal{L}}\\) is not differentiable w.r.t. \\(\phi\\), so we cannot train the inference network. Another idea might be to directly sample for the gradient \\(\nabla_{\theta, \phi}\mathcal{L}\\). Unfortunately, in [^1] it is shown that \\(\hat{\nabla}_{\phi}\mathcal{L}, while unbiased, has very high variance, and training as such tends to diverge more often than not. 
 
 Luckily, some papers from a few years ago ([^2], [^3]) fleshed out how we could get around this using an almost embarrasingly simple trick - *reparameterization*. The idea here is to introduce a random variable \\(\epsilon\\) who will contain all of the randomness for us. We now set up a new variable \\(\tilde{z}\\) such that:
 
@@ -53,12 +53,12 @@ Luckily, some papers from a few years ago ([^2], [^3]) fleshed out how we could 
 so all we need is that \\(g_{\phi}\\) be differentiable and be able to sample from \\(p_{\epsilon}\\). This is almost always possible, and in many cases it is even super-easy. For example, if:
 
 \begin{equation}
-\tilde{z} = g_{\phi}(\epsilon, x);\ \ \tilde{z} \sim q(z|x);\ \ \epsilon \sim p(\epsilon)
+q(z|x) = \mathcal{N}(z; \mu_z, \sigma^2_z)
 \end{equation}
 
 Reparameterization, simple though it may appear, does two amazing things. (1) It 
 
-q(z|x) = \mathcal{N}(z; \mu_z, \sigma^2_z) \rightarrow \epsilon \sim \mathcal{N}(0,1) \text{ and } g_{\phi} = \mu_z + \epsilon \times \sigma_z
+ \rightarrow \epsilon \sim \mathcal{N}(0,1) \text{ and } g_{\phi} = \mu_z + \epsilon \times \sigma_z
 
 ## References
 -----
