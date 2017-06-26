@@ -14,4 +14,4 @@ For completeness (and to introduce notation), I'll quickly review what it means 
 <img src="https://raw.githubusercontent.com/Gordonjo/Jekyll-Mono/gh-pages/images/vae.png" width="15%" height="15%">
 
 
-Here, $x$ are our inputs, $z$ are the latent variables, and $\theta$ parameterizes the conditional distribution $p(x|z)$. Usually, we use deep neural networks to map from $z$ to $x$, so $\theta$ will be the parameters of the network. 
+Here, \\(x\\) are our inputs, \\(z\\) are the latent variables, and \\(\theta\\) parameterizes the conditional distribution. Usually, we use deep neural networks to map from \\(z\\) to \\(x\\), so \\(\theta\\) will be the parameters of the network. 
