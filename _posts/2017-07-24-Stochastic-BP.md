@@ -53,12 +53,12 @@ Luckily, some papers from a few years ago ([^2], [^3]) fleshed out how we could 
 so all we need is that \\(g_{\phi}\\) be differentiable and be able to sample from \\(p_{\epsilon}\\). This is almost always possible, and in many cases it is even super-easy. For example, if:
 
 \begin{equation}
-q(z|x) = \mathcal{N}(z; \mu_z, \sigma^2_z)
+q(z|x) = \mathcal{N}(z; \mu_z, \sigma^2_z) \rightarrow 
 \end{equation}
 
 Reparameterization, simple though it may appear, does two amazing things. (1) It 
 
- \rightarrow \epsilon \sim \mathcal{N}(0,1) \text{ and } g_{\phi} = \mu_z + \epsilon \times \sigma_z
+  \epsilon \sim \mathcal{N}(0,1) \text{ and } g_{\phi} = \mu_z + \epsilon \times \sigma_z
 
 ## References
 -----
