@@ -4,7 +4,7 @@ title: Training Deep Models with Stochastic Backpropagation (Part 1 - Background
 author: Jonathan Gordon
 ---
 
-Recently I've had to train a few deep generative models with stochastic backpropagation (SBP). Specifically, I've been working with variational autoencoders (VAEs) and Bayesian neural networks (BNNs). Anyone who has read the literature on these training procedures and models knows that the theory seems quite complete. However, in practice I have found that quite a lot of elbow grease and magic is required to get these to work well. I'll share some of my experiences here. Since this is a hefty subject, I'll break this into two segments. In this part, I'll provide some background on the subject. In the next part, I'll walk through an example, and highlight some tips and tricks that really help.
+Recently I've had to train a few deep generative models with stochastic backpropagation. Specifically, I've been working with variational autoencoders and Bayesian neural networks. Anyone who has read the literature on these training procedures and models knows that the theory seems quite complete. However, in practice I have found that quite a lot of elbow grease and magic is required to get these to work well. I'll share some of my experiences here. Since this is a hefty subject, I'll break this into two segments. In this part, I'll provide some background on the subject. In the next part, I'll walk through an example, and highlight some tips and tricks that really help.
 
 ## Deep Generative Models
 -----
