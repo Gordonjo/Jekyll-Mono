@@ -56,7 +56,7 @@ so all we need is that \\(g_{\phi}\\) be differentiable and be able to sample fr
 q(z|x) = \mathcal{N}(z; \mu(x), \sigma^2(x)) \rightarrow \epsilon \sim \mathcal{N}(0,1);\ \  g(\epsilon, x) = \mu(x) + \epsilon \otimes \sigma(x)
 \end{equation}
 
-where I am using \\(\otimes\\) to denote an element-wise multiplication. Reparameterization, simple though it may appear, does two amazing things. (1) It manipulates \\(\hat{\mathcal{L}}\\) such that it is differentiable w.r.t. \\(\phi\\) - we can now jointly train the inference network and the model! (2) It allows us to reduce the variance of the estimator by sharing random numbers across terms and iterations. This may not be the only reason, but regardless, \\(\nabla_{\theta,\phi}\hat{\mathcal{L}}\\) exhibits low variance, and in practice converges very nicely. For a more detailed investigation/explanation of how and why reparameterization works, I strongly recommend Carl Doersch's excellent tutorial ([^4]).
+where I am using \\(\otimes\\) to denote an element-wise multiplication. Reparameterization, simple though it may appear, does two amazing things. (1) It manipulates \\(\hat{\mathcal{L}}\\) such that it is differentiable w.r.t. \\(\phi\\) - we can now jointly train the inference network and the model! (2) It allows us to reduce the variance of the estimator by sharing random numbers across terms and iterations. This may not be the only reason, but regardless, \\(\nabla_{\theta,\phi}\hat{\mathcal{L}}\\) exhibits low variance, and in practice converges very nicely. For a more detailed explanation of how and why reparameterization works, I strongly recommend Carl Doersch's excellent tutorial ([^4]).
 
 
 ## Stochastic Backpropagation
@@ -68,10 +68,10 @@ So that's it. We're ready to put it all together in an algorithm called Auto-enc
 function stochastic_backprop(data, L):
     theta, phi <- initialize_variables()
     repeat:
-	  x_batch <- data.next_batch()
-	  eps_l <- peps.sample() for l in range(L)
-	  gradient <- L(x_batch, eps_l).eval_gradient(theta, phi)
-	  theta, phi <- optimizer.update(gradient)
+        x_batch <- data.next_batch()
+        eps_l <- peps.sample() for l in range(L)
+        gradient <- L(x_batch, eps_l).eval_gradient(theta, phi)
+        theta, phi <- optimizer.update(gradient)
     until convergence (theta, phi)
     return theta, phi
 ```
