@@ -57,27 +57,27 @@ where we are sampling \\(z^l \sim q\\) with the reparameterization trick. In pra
 
 One of the great things about VAEs is how easy they are to implement. Lately I've been working in TensorFlow, which is very convenient for this. Let's step through the key aspects of the implementation (for a complete code visit my GitHub page). The first thing to do is set up the necessary placeholders:
 
-```
+{% highlight python %}
 def _create_placeholders(self):
     self.x_batch = tf.placeholder(tf.float32, shape=[self.BATCH_SIZE, self.X_DIM], name='x_batch')
     self.x_train = tf.placeholder(tf.float32, shape=[self.TRAINING_SIZE, self.X_DIM], name='x_train')
     self.x_test = tf.placeholder(tf.float32, shape=[self.TEST_SIZE, self.X_DIM], name='x_test')
-```
+{% endhighlight %}
 
 Next, we initialize the generative and inference networks. Here, I am calling upon a library I have constructed to handle neural networks parameterizing distributions. Each network is a dictionary of weights and biases, and the supporting library handles forward passes through the network.
 
-```
+{% highlight python %}
 def _initialize_networks(self):
     if self.TYPE_PX=='Gaussian':
         self.Pz_x = dgm._init_Gauss_net(self.Z_DIM, self.NUM_HIDDEN, self.X_DIM, 'Pz_x_')
     elif self.TYPE_PX=='Bernoulli':
         self.Pz_x = dgm._init_Cat_net(self.Z_DIM, self.NUM_HIDDEN, self.X_DIM, 'Pz_x_')	   
     self.Qx_z = dgm._init_Gauss_net(self.X_DIM, self.NUM_HIDDEN, self.Z_DIM, 'Qx_z_')
-```
+{% endhighlight %}
 
 Next, we can define the ELBO bound computation. The helper library handles (diagonal covariance) Gaussian log-likelihoods; the function expects the data evaluated, mean and log-variance of the distribution. I have placed that as the first function.
 
-```
+{% highlight python %}
 def _gauss_logp(x, mu, log_var):
     b_size = tf.cast(tf.shape(mu)[0], tf.float32)
     D = tf.cast(tf.shape(x)[1], tf.float32)
@@ -104,11 +104,11 @@ def _compute_logpx(self, x, z):
     l_pz = dgm._gauss_logp(z, tf.zeros_like(z), tf.ones_like(z)) 
     l_px = self._compute_logpx(x, z)
     return tf.reduce_mean(l_px + l_pz - l_qz)
-```
+{% endhighlight %}
 
 Thats it. All that's left is to implement a fit method. The class here interfaces with a data class that I have constructed for my more general research purposes, and fit here assumes the data as such. The class yields mini-batches according to different schemes, but here I use standard minibatching.
 
-```
+{% highlight python %}
 def fit(self, Data, n_epochs):
     self._create_placeholders()
     self._initialize_networks()
@@ -122,6 +122,6 @@ def fit(self, Data, n_epochs):
                                       feed_dict={self.x_batch:x_batch})
             if Data._epochs > epoch:
                 print('Epoch: {}, ELBO: {:5.3f},'.format(epoch,loss_batch)) 
-```
+{% endhighlight %}
 
 That's all there is to it. Of course, these are only the core lines of code, and this is enough to run the model. The rest is fluff and filler to allow multiple datasets, plotting options, logging with TF etc'. You can see all of this if you are interested on the GitHub page.
