@@ -5,7 +5,9 @@ author: Jonathan Gordon
 comments: true
 ---
 
-Recently I've had to train a few deep generative models with stochastic backpropagation. I've been working with variational autoencoders and Bayesian neural networks. If you've read the literature on these training procedures and models, you probably found the theory quite complete. When I implemented these models however, I found that quite a lot of elbow grease is required to get them to work well. From talking to some other researchers here, it seems like people dealing with these models are thirsty for practical advice. Since this is a hefty subject, I'll break it into two segments. In this part, I'll provide some background on the subject. In the next part, I'll walk through an example, and highlight some tips and hacks that really helped me with successfull implementation.
+Recently I've had to train a few deep generative models with stochastic backpropagation. I've been working with variational autoencoders and Bayesian neural networks. If you've read the literature on these training procedures and models, you probably found the theory quite complete. When I implemented these models however, I found that quite a lot of elbow grease is required to get them to work well. 
+
+From talking to some other researchers here, it seems like people dealing with these models are thirsty for practical advice. Since this is a hefty subject, I'll break it into two segments. In this part, I'll provide some background on the subject. In the next part, I'll walk through an example, and highlight some tips and hacks that really helped me with successfull implementation.
 
 ## Deep Generative Models
 -----
