@@ -4,14 +4,14 @@ title: Training Deep Models with Stochastic Backpropagation (Part 1 - Background
 author: Jonathan Gordon
 ---
 
-Recently I've had to train a few deep generative models with stochastic backpropagation. Specifically, I've been working with variational autoencoders and Bayesian neural networks. Anyone who has read the literature on these training procedures and models knows that the theory seems quite complete. However, in practice I have found that quite a lot of elbow grease and magic is required to get these to work well. I'll share some of my experiences here. Since this is a hefty subject, I'll break this into two segments. In this part, I'll provide some background on the subject. In the next part, I'll walk through an example, and highlight some tips and tricks that really help.
+Recently I've had to train a few deep generative models with stochastic backpropagation. I've been working with variational autoencoders and Bayesian neural networks. If you've read the literature on these training procedures and models, you probably found the theory quite complete. When I implemented these models however, I found that quite a lot of elbow grease is required to get them to work well. From talking to some other researchers here, it seems like people dealing with these models are thirsty for some practical advice. Since this is a hefty subject, I'll break it into two segments. In this part, I'll provide some background on the subject. In the next part, I'll walk through an example, and highlight some tips and hacks that really helped me with successfull implementation.
 
 ## Deep Generative Models
 -----
 
 We are considering the case where we have some complex latent variable model (later we will see how we can consider the weights as our latent variables and extend this to BNN) as shown below.
 
-<img src="https://raw.githubusercontent.com/Gordonjo/Jekyll-Mono/gh-pages/images/vae.png" width="20%" height="20%">
+<img src="https://raw.githubusercontent.com/Gordonjo/Jekyll-Mono/gh-pages/images/vae.png" width="20%" height="20%" class="centeritem" />
 
 
 Here, \\(x\\) are our inputs, \\(z\\) are the latent variables, and \\(\theta\\) parameterizes the conditional distribution. Usually, we use deep neural networks to map from \\(z\\) to \\(x\\), so \\(\theta\\) will be the parameters of the network. This is a very powerful family of models known as deep generative models (DGMs), even for very simple distributions of \\(z\\). What we would like to be able to do is perform learning (i.e., maximum likelihood or a-posteriori estimation) for \\(\theta\\), and inference for \\(z\\). Unfortunately, the posterior distribution for \\(z\\) is intractable, so doing this is not straightforward.
