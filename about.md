@@ -30,7 +30,7 @@ In my spare time I like to cook, run, listen and play music, watch movies etc'. 
 
 * [**Semisupervised and Active Learning with Deep Generative Models**](#) 
    
-   J. Gordon and J. M. H. Lobato, _ICML Workshop on Principled Approaches to Deep Learning, 2017_
+   J. Gordon and J. M. H. Lobato, _Working Paper_
 
 
 ***
