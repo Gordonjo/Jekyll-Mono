@@ -11,8 +11,9 @@ Recently I've had to train a few deep generative models with stochastic backprop
 
 We are considering the case where we have some complex latent variable model (later we will see how we can consider the weights as our latent variables and extend this to BNN) as shown below.
 
-<img src="https://raw.githubusercontent.com/Gordonjo/Jekyll-Mono/gh-pages/images/vae.png" width="20%" height="20%" class="centeritem" />
-
+{:refdef: style="text-align: center;"}
+<img src="https://raw.githubusercontent.com/Gordonjo/Jekyll-Mono/gh-pages/images/vae.png" width="20%" height="20%">
+{:refdef}
 
 Here, \\(x\\) are our inputs, \\(z\\) are the latent variables, and \\(\theta\\) parameterizes the conditional distribution. Usually, we use deep neural networks to map from \\(z\\) to \\(x\\), so \\(\theta\\) will be the parameters of the network. This is a very powerful family of models known as deep generative models (DGMs), even for very simple distributions of \\(z\\). What we would like to be able to do is perform learning (i.e., maximum likelihood or a-posteriori estimation) for \\(\theta\\), and inference for \\(z\\). Unfortunately, the posterior distribution for \\(z\\) is intractable, so doing this is not straightforward.
 
