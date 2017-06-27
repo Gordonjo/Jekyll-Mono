@@ -50,7 +50,7 @@ In my spare time I like to cook, run, listen and play music, watch movies etc'. 
 
 ***
     
-## Achievements and Scholarships
+## Awards and Scholarships
 
 
 * [**Research Grant and Studenship**](#) 
