@@ -133,7 +133,7 @@ That's all there is to it. Of course, these are only the core lines of code, and
 In a typical tutorial, MNIST would now be introduced, we could run the VAE, get the nice manifold, some 2-d T-SNE images etc'. However, MNIST has be *well* explored, and I would like to highlight certain aspects of VAE training that might be a little harder to see with MNIST. So, while the implementation can (and does) work with MNIST, here I will go through a dataset called moons, which you can see here below:
 
 {:refdef: style="text-align: center;"}
-<img src="https://raw.githubusercontent.com/Gordonjo/Jekyll-Mono/gh-pages/images/moons_plot.png" width="20%" height="20%">
+<img src="https://raw.githubusercontent.com/Gordonjo/Jekyll-Mono/gh-pages/images/moons_plot.png" width="50%" height="50%">
 {:refdef}
 
 
