@@ -124,4 +124,17 @@ def fit(self, Data, n_epochs):
                 print('Epoch: {}, ELBO: {:5.3f},'.format(epoch,loss_batch)) 
 {% endhighlight %}
 
-That's all there is to it. Of course, these are only the core lines of code, and this is enough to run the model. The rest is fluff and filler to allow multiple datasets, plotting options, logging with TF etc'. You can see all of this if you are interested on the GitHub page.
+That's all there is to it. Of course, these are only the core lines of code, and this is enough to run the model. The rest is fluff and filler to allow multiple datasets, plotting options, logging with TF etc'. You can see all of this if you are interested on the GitHub page. Let's try it out on some toy data.
+
+
+## Moons Data
+-----
+
+In a typical tutorial, MNIST would now be introduced, we could run the VAE, get the nice manifold, some 2-d T-SNE images etc'. However, MNIST has be *well* explored, and I would like to highlight certain aspects of VAE training that might be a little harder to see with MNIST. So, while the implementation can (and does) work with MNIST, here I will go through a dataset called moons, which you can see here below:
+
+{:refdef: style="text-align: center;"}
+<img src="https://raw.githubusercontent.com/Gordonjo/Jekyll-Mono/gh-pages/images/moons_plot.png" width="20%" height="20%">
+{:refdef}
+
+
+
