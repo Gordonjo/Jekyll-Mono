@@ -14,7 +14,7 @@ Since after training the model is used for classification (rather than the varia
 
 ### [A Machine Learning Analysis of ALS](http://ieeexplore.ieee.org/abstract/document/7899957/) 
     
-    ALS is a devastating neuro-muscular disease characterized by wildly varying manifestations across patients. The variation in the symptoms and progression rates makes both treatment and clinical research extremely challenging. In this research project we develop and apply models and pipelines that predict disease progression rate based on [PRO_ACT](https://nctu.partners.org/ProACT), a clinical trial database. We further propose clustering methods based on disease progression patterns, and demonstrate how the clusters may be used to gain insights into the disease and improve prediction performance.
+ALS is a devastating neuro-muscular disease characterized by wildly varying manifestations across patients. The variation in the symptoms and progression rates makes both treatment and clinical research extremely challenging. In this research project we develop and apply models and pipelines that predict disease progression rate based on [PRO_ACT](https://nctu.partners.org/ProACT), a clinical trial database. We further propose clustering methods based on disease progression patterns, and demonstrate how the clusters may be used to gain insights into the disease and improve prediction performance.
 
 ***
 
