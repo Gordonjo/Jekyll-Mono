@@ -19,18 +19,12 @@ In my spare time I like to cook, run, listen and play music, watch movies etc'. 
 * 2014 - BSc. in Engineering -- Ben-Gurion University (magna cum laude).
 
 
-## Skills
-
-* **Machine Learning** - `Deep Learning` / `Probabilistic Modeling` / `Approximate Inference`
-* **Programming** - `Python` / `Matlab` / `R` / `HTK`
-* **Deep Learning Software** - `Tensorflow` / `Theano` / `Keras`    
-
 
 ## Publications
 
 * [**Semisupervised and Active Learning with Deep Generative Models**](#) 
    
-   J. Gordon and J. M. H. Lobato, _arXiv:1706.09751_
+   J. Gordon and J. M. H. Lobato, _ICML Workshop on Principled Approaches to Deep Learning_, [arXiv:1706.09751](https://arxiv.org/abs/1706.09751)
 
 
 ***
