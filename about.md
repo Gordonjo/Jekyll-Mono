@@ -22,14 +22,14 @@ In my spare time I like to cook, run, listen and play music, watch movies etc'. 
 
 ## Publications
 
-* [**Semisupervised and Active Learning with Deep Generative Models**](#) 
+* **Semisupervised and Active Learning with Deep Generative Models** 
    
    J. Gordon and J. M. H. Lobato, _ICML Workshop on Principled Approaches to Deep Learning_, [arXiv:1706.09751](https://arxiv.org/abs/1706.09751)
 
 
 ***
 
-* [**Exposing and Modeling Underlying Mechanisms in ALS with Machine Learning**](#) 
+* **Exposing and Modeling Underlying Mechanisms in ALS with Machine Learning** 
    
    J. Gordon and B. Lerner, _International Conference on Pattern Recognition, 2016_
 
@@ -37,7 +37,7 @@ In my spare time I like to cook, run, listen and play music, watch movies etc'. 
 ***
 
 
-* [**Disease State Prediction, Knowledge Representation, and Heterogeneity Decomposition for ALS**](#) 
+* **Disease State Prediction, Knowledge Representation, and Heterogeneity Decomposition for ALS** 
    
    J. Gordon and B. Lerner, _UAI Workshop on Machine Learning in Healthcare, 2016_
 
