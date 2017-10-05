@@ -2,6 +2,7 @@
 layout: post
 title: Training Deep Models with Stochastic Backpropagation (Part 2 - Variational Autoencoder)
 author: Jonathan Gordon
+comments: true
 ---
 
 In my previous post, I set up some background for training deep generative models with stochastic backpropagation. In this post what I want to do is walk through a tensorflow implementation of a variational autoencoder (VAE) with some toy data. I specifically chose data that highlights some possible pitfalls of the VAE, and I'll show how we might diagnose and deal with these. 
@@ -33,7 +34,7 @@ where again, \\(\mu(x)\\) and \\(\sigma(x)\\) are parameterized by neural networ
 g_{\phi}(\epsilon, x) = \mu(x) + \epsilon \otimes \sigma(x)
 \end{equation}
 
-VAEs are popular because they represent a princpled approach to performing deep unsupervised learning. \\(z\\) can be thought of as a latent, low-dimensional encoding of \\(x\\), and has been shown to capture nice intuitive characterstics of inputs. For instance, if \\(x\\) is a set of facial images from a single person, \\(z\\) has been known to capture things like rotation of the face, some notion of facial expression, etc'. Another nice things about VAEs is that they can generate synthetic examples that mimic the original data in a compelling manner. 
+VAEs are popular because they represent a princpled approach to performing deep unsupervised learning. \\(z\\) can be thought of as a latent, low-dimensional encoding of \\(x\\), and has been shown to capture nice intuitive characterstics of inputs. For instance, if \\(x\\) is a set of facial images from a single person, \\(z\\) has been known to capture things like rotation of the face, some notion of facial expression, etc'. Another nice things about VAEs is that they can generate synthetic examples that mimic the original data in a compelling manner.
 
 ## Optimization and Training
 -----
@@ -127,14 +128,40 @@ def fit(self, Data, n_epochs):
 That's all there is to it. Of course, these are only the core lines of code, and this is enough to run the model. The rest is fluff and filler to allow multiple datasets, plotting options, logging with TF etc'. You can see all of this if you are interested on the GitHub page. Let's try it out on some toy data.
 
 
+## MNIST
+-----
+
+MNIST is a dataset containing greyscale, handwritten digits (from 0--9). The images are represented in 28x28 pixel matrices with greyscale values from 0--255. It is a standard dataset used for development and testing in ML. Its also very nice for demonstrating some of the cooler capabilities of the VAE like generating synthetic samples and encoding into manifolds. I'll showcase some of these capabilities just for completeness (this is also useful for verifying implementations).
+
+First, let's show off some of the generative capabilities. We can also use this to show the importance of the latent space dimensionality. 
+
+| [![z_2](https://raw.githubusercontent.com/Gordonjo/Jekyll-Mono/gh-pages/images/vae_samples_2.png)](dim(z)=2)  | [![z_10](https://raw.githubusercontent.com/Gordonjo/Jekyll-Mono/gh-pages/images/vae_samples_10.png)](dim(z)=10) |
+|:---:|:---:|
+| 2 dimensional latent space | 10 dimensional latent space | 
+
+In the figures below I have plotted 100 generated images from two different VAEs, each trained to convergence on MNIST. There is no significance to the ordering of the numbers in the matrices, it is completely random. What we see is that when the VAE is trained with a 10d latent space the digits are crisper and more compelling than with a 2d latent space. Another thing we can look at is a 2d manifold learned by the VAE. This is plotted below in two different formats.
+
+| [![z_2](https://raw.githubusercontent.com/Gordonjo/Jekyll-Mono/gh-pages/images/vae_manifold.png)](dim(z)=2)  | [![z_10](https://raw.githubusercontent.com/Gordonjo/Jekyll-Mono/gh-pages/images/vae_encode.png)](dim(z)=10) |
+|:---:|:---:|
+| 2 dimensional latent manifold | t-SNE manifold for a 10d latent space | 
+
+On the left I have plotted out the manifold of the digits in the latent space of a VAE with two latent dimensions. What I have done is gridded a 2d unit cube, and passed all the values through the inverse Gaussian cdf, and generated samples with the decoder for each of those values. On the right I have shown this manifold a little differently: I have encoded all the test examples into the latent space using a trained decoder (VAE with 10d latent space). Then, I applied t-SNE [^1] to the 10d representations to bring them down to 2d, and plot those representations. In both cases we can see that the VAE has naturally learned a latent representation that separates the different classes, and seems to also encode some notion of style of the handwriting (this seems to be the case for the 2d latent space).
+
 ## Moons Data
 -----
 
-In a typical tutorial, MNIST would now be introduced, we could run the VAE, get the nice manifold, some 2-d T-SNE images etc'. However, MNIST has be *well* explored, and I would like to highlight certain aspects of VAE training that might be a little harder to see with MNIST. So, while the implementation can (and does) work with MNIST, here I will go through a dataset called moons, which you can see here below:
+I would like to highlight certain aspects of VAE training that might be a little harder to see with MNIST. So here I will go through a dataset called moons, which you can see here below:
 
 {:refdef: style="text-align: center;"}
-<img src="https://raw.githubusercontent.com/Gordonjo/Jekyll-Mono/gh-pages/images/moons_plot.png" width="50%" height="50%">
+<img src="https://raw.githubusercontent.com/Gordonjo/Jekyll-Mono/gh-pages/images/moons_unsup.png" width="50%" height="50%">
 {:refdef}
 
 
+I've plotted the data in an unsupervised way, suitable for VAEs. In the next post, we'll look at the same data from a supervised perspective, and walk through it with a BNN. Now we can run our VAE on this data, and see what it learns. 
 
+
+
+## References
+-----
+
+[^1]: van der Maaten, Laurens, and Hinton, Geoffrey. Visualizing Data with t-SNE. 2008
