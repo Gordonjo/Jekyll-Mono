@@ -14,6 +14,7 @@ In my spare time I like to cook, run, listen and play music, watch movies etc'. 
 
 ## Education
 
+* Present - PhD in Machine learning -- University of Cambridge 
 * 2017 - MPhil in Machine Learning, Speech and Language Technology -- University of Cambridge (distinction).
 * 2016 - MSc. in Applied Statistics and Engineering -- Ben-Gurion University (magna cum laude).
 * 2014 - BSc. in Engineering -- Ben-Gurion University (magna cum laude).
