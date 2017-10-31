@@ -23,6 +23,12 @@ In my spare time I like to cook, run, listen and play music, watch movies etc'. 
 
 ## Publications
 
+* **Cambridge MPhil thesis**
+
+	MPhil thesis on Bayesian adaptations of VAEs and VAE-BNN hybrids [Download](https://github.com/Gordonjo/mphil_thesis/blob/master/thesis.pdf?raw=true)
+
+***
+
 * **Bayesian Semisupervised and Active Learning with Deep Generative Models** 
    
    J. Gordon and J. M. H. Lobato, _ICML Workshop on Principled Approaches to Deep Learning_, [arXiv:1706.09751](https://arxiv.org/abs/1706.09751)
