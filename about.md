@@ -25,7 +25,7 @@ In my spare time I like to cook, run, listen and play music, watch movies etc'. 
 
 * **Cambridge MPhil thesis**
 
-	MPhil thesis on Bayesian adaptations of VAEs and VAE-BNN hybrids ([Download](https://github.com/Gordonjo/mphil_thesis/blob/master/thesis.pdf?raw=true))
+	MPhil thesis on Bayesian adaptations of VAEs and VAE-BNN hybrids ([Download](https://github.com/Gordonjo/papers/blob/master/MPhilThesis/thesis.pdf/?raw=true))
 
 ***
 
