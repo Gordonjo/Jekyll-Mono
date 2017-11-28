@@ -20,9 +20,12 @@
 
  .post {
         a {
-         color: $mono-color;
-         &:hover{
-           color: darken($mono-color,20);
+         //color: $mono-color;
+         //&:hover{
+         //  color: darken($mono-color,20);
+	 color: $darkBlue;
+	 &:hover{
+	    color: darken($darkBlue,20);
          }
      }
  }
