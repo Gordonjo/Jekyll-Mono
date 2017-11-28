@@ -2,15 +2,15 @@
 layout: page
 title: About
 permalink: /about/
----
-
-I am a first year Ph.D. candidate with the [Computational and Biological Learning group](http://mlg.eng.cam.ac.uk/) at the University of Cambridge, supervised by [Dr Jose-Miguel Hernandez-Lobato](https://jmhl.org/) and advised by [Dr Richard Turner](http://cbl.eng.cam.ac.uk/Public/Turner/WebHome). My research is focused on developing probabilistic models (typically parameterized by deep neural networks) and associated scalable approximate inference procedures.
+--- 
+sé Miguel Hernández-Lobato
+I am a first year Ph.D. candidate with the [Computational and Biological Learning group](http://mlg.eng.cam.ac.uk/) at the University of Cambridge, supervised by [Dr José Miguel Hernández-Lobato](https://jmhl.org/) and advised by [Dr Richard Turner](http://cbl.eng.cam.ac.uk/Public/Turner/WebHome). My research is focused on developing probabilistic models (typically parameterized by deep neural networks) and associated scalable approximate inference procedures.
 
 Lately, I have been focusing on deep generative models. Recent advances in stochastic backpropagation enable us to efficiently train increasingly complex models. Some notable examples are the variational autoencoder and Bayesian neural networks. In my research I aim to examine how we can design these (and similar) models to enable more efficient learning (statistical and computational efficiency) as well as learning in more complex settings. I am especially interested in leveraging generative abilities of models to these ends.
 
 In my previous studies I examined applications of machine learning to specific domains such as healthcare and manufacturing. Specifically, I examined how machine learning might be useful in prognosis and prediction of ALS progression based on clinical trial data. I also worked on a project to develop optimal sampling strategies for quality assurance processes in semi-conductor manufacturing environments.
 
-In my spare time I like to cook, run, listen and play music, watch movies etc'. I also love spending time with the best part of me: my beautiful and perfect wife R.C.
+In my spare time I like to cook, run, listen and play music, watch movies etc. I also love spending time with the best part of me: my beautiful and perfect wife R.C.
 
 ## Education
 
