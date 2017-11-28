@@ -3,7 +3,6 @@ layout: page
 title: About
 permalink: /about/
 --- 
-sé Miguel Hernández-Lobato
 I am a first year Ph.D. candidate with the [Computational and Biological Learning group](http://mlg.eng.cam.ac.uk/) at the University of Cambridge, supervised by [Dr José Miguel Hernández-Lobato](https://jmhl.org/) and advised by [Dr Richard Turner](http://cbl.eng.cam.ac.uk/Public/Turner/WebHome). My research is focused on developing probabilistic models (typically parameterized by deep neural networks) and associated scalable approximate inference procedures.
 
 Lately, I have been focusing on deep generative models. Recent advances in stochastic backpropagation enable us to efficiently train increasingly complex models. Some notable examples are the variational autoencoder and Bayesian neural networks. In my research I aim to examine how we can design these (and similar) models to enable more efficient learning (statistical and computational efficiency) as well as learning in more complex settings. I am especially interested in leveraging generative abilities of models to these ends.
