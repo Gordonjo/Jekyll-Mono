@@ -1,13 +1,13 @@
 ---
 layout: post
-title: Training Deep Models with Stochastic Backpropagation (Part 1 - Background)
+title: Training Deep Models with Stochastic Backpropagation
 author: Jonathan Gordon
 comments: true
 ---
 
 Recently I've had to train a few deep generative models with stochastic backpropagation. I've been working with variational autoencoders and Bayesian neural networks. If you've read the literature on these training procedures and models, you probably found the theory quite complete. When I implemented these models however, I found that quite a lot of elbow grease is required to get them to work well. 
 
-From talking to some other researchers here, it seems like people dealing with these models are thirsty for practical advice. Since this is a hefty subject, I'll break it into two segments. In this part, I'll provide some background on the subject. In the next part, I'll walk through an example, and highlight some tips and hacks that really helped me with successfull implementation.
+From talking to some other researchers here, it seems like people dealing with these models are thirsty for practical advice. In this post, I will provide some background on the subject, and highlight some tips and hacks that really helped me with successfull implementation.
 
 ## Deep Generative Models
 -----
@@ -72,7 +72,7 @@ where I am using \\(\otimes\\) to denote an element-wise multiplication. Reparam
 ## Stochastic Backpropagation
 -----
 
-So that's it. We're ready to put it all together in an algorithm called Auto-encoding Variational Bayes ([^2]), or Stochastic Backpropagation ([^3]) (the thing was concurrently discovered and published by two separate groups). Conveniently, we can run this optimization in mini-batch form, so basically its just stochastic gradient descent with your favorite optimizer on the estimator described above. Just for closure, here's the complete algorithm (in rough pseudo-code):
+So that's it. We're ready to put it all together in an algorithm called Auto-encoding Variational Bayes ([^2]), or Stochastic Backpropagation ([^3]) (the thing was concurrently discovered and published by two separate groups). Conveniently, we can run this optimization in mini-batch form, so basically its just stochastic gradient descent with your favorite optimizer on the estimator described above. Just for closure, here is the complete algorithm (in rough pseudo-code):
 
 ```
 function stochastic_backprop(data, L):
@@ -85,7 +85,7 @@ function stochastic_backprop(data, L):
     until convergence (theta, phi)
     return theta, phi
 ```
-Of course, this is very rough psuedo code that is not meant to run. In the next post I will go into detail with one model (VAE), and will run through a TensorFlow implementation (including code) with toy data. After that, I will discuss how the exact same algorithm can be used to train a BNN, and run through a TF implementation of that with the same data.
+Of course, this is very rough psuedo code that is not meant to run. Perhaps in a future post I will go into detail with one model (VAE), and will run through a TensorFlow implementation (including code) with toy data. There I can also discuss how the exact same algorithm can be used to train a BNN, and run through a TF implementation of that with the same data.
 
 
 
