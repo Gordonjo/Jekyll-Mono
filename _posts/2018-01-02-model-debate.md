@@ -7,7 +7,7 @@ comments: true
 
 An interesting debate has arisen lately in the machine learning community concerning two competing (?) approaches to ML and (more generally) AI. The debate is rather high-level, but in my opinion touches upon something that is at the very core of research in the field. In this post I will lay out the fundamental aspects of the debate as I see them, and try and give my personal perspective on the issue.
 
-## The Rise of Deep Learning
+## Connectionist, Gradient Based Learning
 ----
 
 Undoubtably the most dominant trend in ML at the moment is deep learning - i.e., learning that is based on neural networks and their offspring achieved by applying gradient-based methods (error-back propagation, a.k.a backprop). DL has led to some undeniably outstanding successes, achieving human-level (or better) performance in specific tasks such as object recognition, speech (recognition and synthesis), and game-playing. This in turn has led to wide-spread adoption and integration of DL technologies in many leading tech companies, and has generated a lot of media hype and public recognition. 
