@@ -26,6 +26,8 @@ In my spare time I like to cook, run, listen and play music, watch movies etc. I
 
     J. Gordon, J. F. Bronskill, M. Bauer, S. Nowozin, and R. E. Turner [_arXiv_:1805.09921](https://arxiv.org/abs/1805.09921)
 
+***
+
 * **Cambridge MPhil thesis**
 
 	MPhil thesis on Bayesian adaptations of VAEs and VAE-BNN hybrids ([Download](https://github.com/Gordonjo/papers/blob/master/MPhilThesis/thesis.pdf/?raw=true))
