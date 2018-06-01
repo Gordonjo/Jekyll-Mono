@@ -4,6 +4,12 @@ title: Projects
 permalink: /projects/
 ---
 
+### [Probabilistic Meta-Learning](https://gordonjo.github.io/Jekyll-Mono/projects/)
+
+Meta-learning, the idea of learning to learn, has received much attention in the recent literature. In particular, meta-learning allows a learner to leverage similarity in multiple learning tasks (e.g., multiple vision related tasks) to improve both performance and data-efficiency in each individual tasks. In this project, we develop a theoretical foundation for meta-learning, grounded in Bayesian decision theory. The framework recovers many of the recent meta-learning methods, as well as enables us to suggest a new method, `Versa`, which achieves state of the art performance in several challenging few-shot learning tasks.
+
+***
+
 ### [Extending the Neural Statistician](https://github.com/Gordonjo/NS_extensions)
 
 In this project we follow up on [recent exciting work](https://arxiv.org/abs/1606.02185) by Harrison Edwards and [Amos Storkey](http://homepages.inf.ed.ac.uk/amos/). They propsed a Neural Statistician - a VAE based model for datasets rather than datapoints. We believe this approach has much potential for numerous applications such as multi-modal learning, model recommendation, and k-shot learning, and investigate methods to improve the original model to meet these difficult challenges.

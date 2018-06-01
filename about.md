@@ -22,13 +22,17 @@ In my spare time I like to cook, run, listen and play music, watch movies etc. I
 
 ## Publications
 
+* **Decision-Theoretic Meta-Learning: Versatile and Efficient Amortization of Few-Shot Learning**
+
+    J. Gordon, J. F. Bronskill, M. Bauer, S. Nowozin, and R. E. Turner [_arXiv_:1805.09921](https://arxiv.org/abs/1805.09921)
+
 * **Cambridge MPhil thesis**
 
 	MPhil thesis on Bayesian adaptations of VAEs and VAE-BNN hybrids ([Download](https://github.com/Gordonjo/papers/blob/master/MPhilThesis/thesis.pdf/?raw=true))
 
 ***
 
-* **Bayesian Semisupervised and Active Learning with Deep Generative Models** 
+* **Bayesian Semi-Supervised and Active Learning with Deep Generative Models**
    
    J. Gordon and J. M. H. Lobato, _ICML Workshop on Principled Approaches to Deep Learning_, [arXiv:1706.09751](https://arxiv.org/abs/1706.09751)
 
