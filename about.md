@@ -3,7 +3,7 @@ layout: page
 title: About
 permalink: /about/
 --- 
-I am a first year Ph.D. candidate with the [Computational and Biological Learning group](http://mlg.eng.cam.ac.uk/) at the University of Cambridge, supervised by [Dr José Miguel Hernández-Lobato](https://jmhl.org/) and advised by [Dr Richard Turner](http://cbl.eng.cam.ac.uk/Public/Turner/WebHome). My research is focused on developing probabilistic models (typically parameterized by deep neural networks) and associated scalable approximate inference procedures.
+I am a Ph.D. candidate with the [Computational and Biological Learning group](http://mlg.eng.cam.ac.uk/) at the University of Cambridge, supervised by [Dr José Miguel Hernández-Lobato](https://jmhl.org/) and advised by [Dr Richard Turner](http://cbl.eng.cam.ac.uk/Public/Turner/WebHome). My research is focused on developing probabilistic models (typically parameterized by deep neural networks) and associated scalable approximate inference procedures.
 
 Recent advances in stochastic backpropagation enable us to efficiently train increasingly complex models. Some notable examples are the variational autoencoder and Bayesian neural networks. In my research I aim to examine how we can design these (and similar) models to enable more efficient learning (statistical and computational efficiency) as well as learning in more complex settings. I am especially interested in leveraging generative abilities of models to these ends.
 
@@ -22,9 +22,25 @@ In my spare time I like to cook, run, listen and play music, watch movies etc. I
 
 ## Publications
 
-* **Decision-Theoretic Meta-Learning: Versatile and Efficient Amortization of Few-Shot Learning**
+* **Probabilistic Neural Architecture Search**
 
-    J. Gordon, J. F. Bronskill, M. Bauer, S. Nowozin, and R. E. Turner [_arXiv_:1805.09921](https://arxiv.org/abs/1805.09921)
+    F. P. Casale, J. Gordon, N. Fusi, [arXiv:1902.05116](https://arxiv.org/abs/1902.05116)
+
+* **Meta-Learning Probabilistic Inference for Prediction**
+
+    J. Gordon, J. F. Bronskill, M. Bauer, S. Nowozin, and R. E. Turner, _ICLR 2019_ [_arXiv_:1805.09921](https://arxiv.org/abs/1805.09921)
+
+***
+
+* **Consolidating the Meta-Learning Zoo: a Unifying Perspective as Posterior Predictive Inference**
+
+    J. Gordon, J. F. Bronskill, M. Bauer, S. Nowozin, and R. E. Turner, [_Meta-Learning Workshop, NeurIPS 2018_](http://metalearning.ml/2018/papers/metalearn2018_paper26.pdf)
+
+***
+
+* **Versa: Versatile and Efficient Few-Shot Learning**
+
+    J. Gordon, J. F. Bronskill, M. Bauer, S. Nowozin, and R. E. Turner, [_Bayesian Deep Learning Workshop, NeurIPS 2018_](http://bayesiandeeplearning.org/2018/papers/10.pdf)
 
 ***
 
