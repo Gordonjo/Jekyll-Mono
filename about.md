@@ -25,6 +25,8 @@ In my spare time I like to cook, run, listen and play music, watch movies etc. I
 * **Probabilistic Neural Architecture Search**
 
     F. P. Casale, J. Gordon, N. Fusi, [arXiv:1902.05116](https://arxiv.org/abs/1902.05116)
+    
+***
 
 * **Meta-Learning Probabilistic Inference for Prediction**
 
