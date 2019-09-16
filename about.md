@@ -24,13 +24,13 @@ In my spare time I like to cook, run, listen and play music, watch movies etc. I
 
 * **Bayesian Batch Active Learning as Sparse Subset Approximation**
 
-    R. Pinsler, J. Gordon, E. Nalisnick, J. M. H. Lobato, [arXiv:1908.02144](https://arxiv.org/abs/1908.02144)
+    R. Pinsler, J. Gordon, E. Nalisnick, J. M. H. Lobato, _NeurIPS 2019_, [arXiv:1908.02144](https://arxiv.org/abs/1908.02144)
     
 ***
 
 * **Fast and Flexible Multi-Task Classification Using Conditional Neural Adaptive Processes**
 
-    J. R. Requima, J. Gordon, J. F. Bronskill, S. Nowozin, and R. E. Turner, [arXiv:1906.07697](https://arxiv.org/abs/1906.07697)
+    J. R. Requima, J. Gordon, J. F. Bronskill, S. Nowozin, and R. E. Turner, _NeurIPS 2019_, [arXiv:1906.07697](https://arxiv.org/abs/1906.07697)
     
 ***
 
