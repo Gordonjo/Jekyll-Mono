@@ -3,13 +3,23 @@ layout: page
 title: About
 permalink: /about/
 --- 
-I am a Ph.D. candidate with the [Computational and Biological Learning group](http://mlg.eng.cam.ac.uk/) at the University of Cambridge, supervised by [Dr José Miguel Hernández-Lobato](https://jmhl.org/) and advised by [Dr Richard Turner](http://cbl.eng.cam.ac.uk/Public/Turner/WebHome). My research is focused on developing probabilistic models (typically parameterized by deep neural networks) and associated scalable approximate inference procedures.
+I am a Ph.D. candidate with the [Computational and Biological Learning group](http://mlg.eng.cam.ac.uk/) at the University 
+of Cambridge, supervised by [Dr José Miguel Hernández-Lobato](https://jmhl.org/) and advised by 
+[Dr Richard Turner](http://cbl.eng.cam.ac.uk/Public/Turner/WebHome). My research focuses on developing probabilistic 
+models (typically parameterized by deep neural networks) and associated scalable approximate inference procedures.
 
-Recent advances in stochastic backpropagation enable us to efficiently train increasingly complex models. Some notable examples are the variational autoencoder and Bayesian neural networks. In my research I aim to examine how we can design these (and similar) models to enable more efficient learning (statistical and computational efficiency) as well as learning in more complex settings. I am especially interested in leveraging generative abilities of models to these ends.
+I am particularly interested in developing deep probabilistic models that capture structure existing in specific data modalities,
+and exhibit nice behaviours such as sample and parameter efficiency, generalization, and calibrated uncertainties. Much of 
+my recent work has focused on meta-learning, which enables fast few-shot generalization. Another theme in my research 
+is modelling symmetries in the data, such as by incorporating translation or permutation equivariance. 
 
-In my previous studies I examined applications of machine learning to specific domains such as healthcare and manufacturing. Specifically, I examined how machine learning might be useful in prognosis and prediction of ALS progression based on clinical trial data. I also worked on a project to develop optimal sampling strategies for quality assurance processes in semi-conductor manufacturing environments.
+In my previous studies I examined applications of machine learning to specific domains such as healthcare and manufacturing. 
+Specifically, I examined how machine learning might be useful in prognosis and prediction of ALS progression based on 
+clinical trial data. I also worked on a project to develop optimal sampling strategies for quality assurance processes in 
+semi-conductor manufacturing environments.
 
-In my spare time I like to cook, run, listen and play music, watch movies etc. I also love spending time with the best part of me: my beautiful and perfect wife R.C.
+In my spare time I like to cook, run, listen and play music, watch movies etc. I also love spending time with the best part 
+of me: my beautiful and perfect wife R.C.
 
 ## Education
 
@@ -22,17 +32,18 @@ In my spare time I like to cook, run, listen and play music, watch movies etc. I
 
 ## Publications
 
-* **Bayesian Batch Active Learning as Sparse Subset Approximation**
-
-    R. Pinsler, J. Gordon, E. Nalisnick, J. M. H. Lobato, [arXiv:1908.02144](https://arxiv.org/abs/1908.02144)
-    
-***
-
 * **Fast and Flexible Multi-Task Classification Using Conditional Neural Adaptive Processes**
 
-    J. R. Requima, J. Gordon, J. F. Bronskill, S. Nowozin, and R. E. Turner, [arXiv:1906.07697](https://arxiv.org/abs/1906.07697)
+    J. R. Requima, J. Gordon, J. F. Bronskill, S. Nowozin, and R. E. Turner, _NeurIPS 2019_ (spotlight) [arXiv:1906.07697](https://arxiv.org/abs/1906.07697)
     
 ***
+
+* **Bayesian Batch Active Learning as Sparse Subset Approximation**
+
+    R. Pinsler, J. Gordon, E. Nalisnick, J. M. H. Lobato, _NeurIPS 2019_ [arXiv:1908.02144](https://arxiv.org/abs/1908.02144)
+    
+***
+
 
 * **Probabilistic Neural Architecture Search**
 
