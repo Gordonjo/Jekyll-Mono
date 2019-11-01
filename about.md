@@ -34,13 +34,13 @@ of me: my beautiful and perfect wife R.C.
 
 * **Conditional Convolutional Neural Processes**
 
-    J. Gordon*, W. P. Bruinsma*, A. Y. K. Foong, J. Requeima, Y. Dubois, and R. E. Turner, [arXiv:1910.13556](https://arxiv.org/abs/1910.13556)
+    J. Gordon, W. P. Bruinsma, A. Y. K. Foong, J. Requeima, Y. Dubois, and R. E. Turner, [arXiv:1910.13556](https://arxiv.org/abs/1910.13556)
     
 ***
 
 * **Fast and Flexible Multi-Task Classification Using Conditional Neural Adaptive Processes**
 
-    J. R. Requima*, J. Gordon*, J. F. Bronskill*, S. Nowozin, and R. E. Turner, _NeurIPS 2019_ (spotlight) [arXiv:1906.07697](https://arxiv.org/abs/1906.07697)
+    J. R. Requima, J. Gordon, J. F. Bronskill, S. Nowozin, and R. E. Turner, _NeurIPS 2019_ (spotlight) [arXiv:1906.07697](https://arxiv.org/abs/1906.07697)
     
 ***
 
@@ -53,25 +53,25 @@ of me: my beautiful and perfect wife R.C.
 
 * **Probabilistic Neural Architecture Search**
 
-    F. P. Casale*, J. Gordon*, N. Fusi, [arXiv:1902.05116](https://arxiv.org/abs/1902.05116)
+    F. P. Casale, J. Gordon, N. Fusi, [arXiv:1902.05116](https://arxiv.org/abs/1902.05116)
     
 ***
 
 * **Meta-Learning Probabilistic Inference for Prediction**
 
-    J. Gordon*, J. F. Bronskill*, M. Bauer, S. Nowozin, and R. E. Turner, _ICLR 2019_ [_arXiv_:1805.09921](https://arxiv.org/abs/1805.09921)
+    J. Gordon, J. F. Bronskill, M. Bauer, S. Nowozin, and R. E. Turner, _ICLR 2019_ [_arXiv_:1805.09921](https://arxiv.org/abs/1805.09921)
 
 ***
 
 * **Consolidating the Meta-Learning Zoo: a Unifying Perspective as Posterior Predictive Inference**
 
-    J. Gordon*, J. F. Bronskill*, M. Bauer, S. Nowozin, and R. E. Turner, [_Meta-Learning Workshop, NeurIPS 2018_](http://metalearning.ml/2018/papers/metalearn2018_paper26.pdf)
+    J. Gordon, J. F. Bronskill, M. Bauer, S. Nowozin, and R. E. Turner, [_Meta-Learning Workshop, NeurIPS 2018_](http://metalearning.ml/2018/papers/metalearn2018_paper26.pdf)
 
 ***
 
 * **Versa: Versatile and Efficient Few-Shot Learning**
 
-    J. Gordon*, J. F. Bronskill*, M. Bauer, S. Nowozin, and R. E. Turner, [_Bayesian Deep Learning Workshop, NeurIPS 2018_](http://bayesiandeeplearning.org/2018/papers/10.pdf)
+    J. Gordon, J. F. Bronskill, M. Bauer, S. Nowozin, and R. E. Turner, [_Bayesian Deep Learning Workshop, NeurIPS 2018_](http://bayesiandeeplearning.org/2018/papers/10.pdf)
 
 ***
 
