@@ -18,9 +18,6 @@ Specifically, I examined how machine learning might be useful in prognosis and p
 clinical trial data. I also worked on a project to develop optimal sampling strategies for quality assurance processes in 
 semi-conductor manufacturing environments.
 
-In my spare time I like to cook, run, listen and play music, watch movies etc. I also love spending time with the best part 
-of me: my beautiful and perfect wife R.C.
-
 ## Education
 
 * Present - PhD in Machine learning -- University of Cambridge 
