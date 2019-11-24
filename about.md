@@ -29,7 +29,7 @@ semi-conductor manufacturing environments.
 
 ## Publications
 
-* **Conditional Convolutional Neural Processes**
+* **Convolutional Conditional Neural Processes**
 
     J. Gordon, W. P. Bruinsma, A. Y. K. Foong, J. Requeima, Y. Dubois, and R. E. Turner, [arXiv:1910.13556](https://arxiv.org/abs/1910.13556)
     
