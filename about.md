@@ -31,7 +31,13 @@ semi-conductor manufacturing environments.
 
 * **Convolutional Conditional Neural Processes**
 
-    J. Gordon, W. P. Bruinsma, A. Y. K. Foong, J. Requeima, Y. Dubois, and R. E. Turner, [arXiv:1910.13556](https://arxiv.org/abs/1910.13556)
+    J. Gordon, W. P. Bruinsma, A. Y. K. Foong, J. Requeima, Y. Dubois, and R. E. Turner, _ICLR 2019_ (Oral presentation) [arXiv:1910.13556](https://arxiv.org/abs/1910.13556)
+    
+***
+
+* **Permutation Equivariant Models for Compositional Generalization in Language**
+
+    J. Gordon, D. Lopez-Paz, M. Baroni, and D. Bouchacourt, [_ICLR 2019_](https://openreview.net/forum?id=SylVNerFvr)
     
 ***
 
@@ -43,14 +49,20 @@ semi-conductor manufacturing environments.
 
 * **Bayesian Batch Active Learning as Sparse Subset Approximation**
 
-    R. Pinsler, J. Gordon, E. Nalisnick, J. M. H. Lobato, _NeurIPS 2019_ [arXiv:1908.02144](https://arxiv.org/abs/1908.02144)
+    R. Pinsler, J. Gordon, E. Nalisnick, and J. M. H. Lobato, _NeurIPS 2019_ [arXiv:1908.02144](https://arxiv.org/abs/1908.02144)
+    
+***
+
+* **Combining Deep Genereative and Discriminative Models for Bayesian Semi-supervised Learning**
+
+    J. Gordon, and J. M. H. Lobato, [_Pattern Recognition_](https://www.sciencedirect.com/science/article/pii/S003132031930456X)
     
 ***
 
 
 * **Probabilistic Neural Architecture Search**
 
-    F. P. Casale, J. Gordon, N. Fusi, [arXiv:1902.05116](https://arxiv.org/abs/1902.05116)
+    F. P. Casale, J. Gordon, and N. Fusi, [arXiv:1902.05116](https://arxiv.org/abs/1902.05116)
     
 ***
 
