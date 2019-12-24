@@ -43,7 +43,7 @@ semi-conductor manufacturing environments.
 
 * **Fast and Flexible Multi-Task Classification Using Conditional Neural Adaptive Processes**
 
-    J. R. Requima, J. Gordon, J. F. Bronskill, S. Nowozin, and R. E. Turner, _NeurIPS 2019_ (spotlight) [arXiv:1906.07697](https://arxiv.org/abs/1906.07697)
+    J. R. Requima, J. Gordon, J. F. Bronskill, S. Nowozin, and R. E. Turner, _NeurIPS 2019_ (Spotlight) [arXiv:1906.07697](https://arxiv.org/abs/1906.07697)
     
 ***
 
