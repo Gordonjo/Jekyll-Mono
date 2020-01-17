@@ -14,26 +14,47 @@
     <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+          });
+
+        MathJax.Hub.Queue(function() {
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i=0; i < all.length; i += 1) {
+                all[i].SourceElement().parentNode.className += ' has-jax';
+            }
+        });
+
+    </script>
+
+    <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+
   </head>
 
   <body>
-    
-    <div class="intro-header">
-        <div class="wrapper-masthead">
-         <div class="container">
-           <header class="masthead clearfix">
-             <div class="site-info">
-               <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
-               <p class="site-description">{{ site.description }}</p>
-             </div>
-             <nav>
-               <a href="{{ site.baseurl }}/">Blog</a>
-               <a href="{{ site.baseurl }}/about">About</a>
-               <a href="{{ site.baseurl }}/projects">Projects</a>
-             </nav>
-           </header>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+      <div class="intro-header">
+          <div class="wrapper-masthead">
+           <div class="container">
+             <header class="masthead clearfix">
+               <div class="site-info">
+                 <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
+                 <p class="site-description">{{ site.description }}</p>
+               </div>
+               <nav>
+                 <a href="{{ site.baseurl }}/">Blog</a>
+                 <a href="{{ site.baseurl }}/about">About</a>
+                 <a href="{{ site.baseurl }}/projects">Projects</a>
+               </nav> 
+             </header>
+           </div>
          </div>
-       </div>
        
         <div class="container">
             <div class="space-small"></div>

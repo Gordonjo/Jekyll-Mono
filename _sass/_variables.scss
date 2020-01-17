@@ -14,26 +14,44 @@ $lightGray: #eee;
 $white: #fff;
 $blue: #4183C4;
 
+// Color Palletes (http://blog.visme.co/website-color-schemes/)
+//Natural and earthy
+$lightBlue: #659DBD;
+$green: #8D8741;
+$lightBrown: #DAAD86;
+$brown: #BC986A;
+$cream: #FBEEC1; 
+
+// Cool and Fresh
+$darkBlue: #05386B;
+$deepGreen: #379683;
+$brightGreen: #5CDB95;
+$lightGreen: #8EE4AF;
+$beige: #EDF5E1;
 
 // Main theme colors 
 // Some cool main theme colors(violet:#8476ad;blue:#5cacee;red:#ff7373,#ff6f69;green:#6acf64,#2ddbb3;orange:#ffa268)
 
-$mono-color:#8476ad;                // main theme color(header, links, footer icons, buttons, post-title)
-$hl-color: $darkGray;              // header link color (author name and posted on date) for blog post meta 
-$navbar-hover-color:$gray;        // navbar hover color (site name and navbar links hover color)
-$link-color: $darkerGray;        // normal hyperlink color other than the ones above.
+// Original color scheme
+//$mono-color:#8476ad;               // main theme color(header, links, footer icons, buttons, post-title)
+//$hl-color: $darkGray;              // header link color (author name and posted on date) for blog post meta 
+//$navbar-hover-color:$gray ;        // navbar hover color (site name and navbar links hover color)
+//$link-color: $blue;                // normal hyperlink color other than the ones above.
 
-
+// Playing around with schemes
+$mono-color:$deepGreen;            // main theme color(header, links, footer icons, buttons, post-title) 
+$hl-color: $darkBlue;                // header link color (author name and posted on date) for blog post meta
+$navbar-hover-color:$darkBlue;       // navbar hover color (site name and navbar links hover color)
+$link-color: $darkBlue;              // normal hyperlink color other than the ones above.
 // Heading colors
-// You can play around with these too!
-$h1-color: $mono-color;
-$h2-color: $mono-color; 
+$h1-color: $darkBlue;              
+$h2-color: $darkBlue; 
 $h3-color: $darkerGray; 
 $h4-color: $gray; 
 
 // Your avatar
 
-$avatar: "/images/avatar.jpg";
+$avatar: "https://raw.githubusercontent.com/Gordonjo/Jekyll-Mono/gh-pages/images/myAvatar.png";
 
 
 // Font stacks
@@ -41,6 +59,7 @@ $helvetica: Helvetica, Arial, sans-serif;
 $helveticaNeue: "Helvetica Neue", Helvetica, Arial, sans-serif;
 $raleway: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $georgia: Georgia, serif;
+$custom: "Droid Serif", "Josefin Slab", "Abril Fatface","Arvo", "Vollkorn"; 
 
 // Mobile breakpoints
 @mixin mobile {

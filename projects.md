@@ -4,29 +4,41 @@ title: Projects
 permalink: /projects/
 ---
 
-### [Project 1](https://github.com/tux4kids/tuxmania) 
-Proin pellentesque malesuada mauris, quis aliquam augue vestibulum ac. Vestibulum ut feugiat nibh. Sed faucibus felis purus, sed convallis leo dictum vehicula.
+### [Probabilistic Meta-Learning](https://gordonjo.github.io/Jekyll-Mono/projects/)
+
+Meta-learning, the idea of learning to learn, has received much attention in the recent literature. In particular, meta-learning allows a learner to leverage similarity in multiple learning tasks (e.g., multiple vision related tasks) to improve both performance and data-efficiency in each individual tasks. In this project, we develop a theoretical foundation for meta-learning, grounded in Bayesian decision theory. The framework recovers many of the recent meta-learning methods, as well as enables us to suggest a new method, `Versa`, which achieves state of the art performance in several challenging few-shot learning tasks.
 
 ***
 
-### [Project 2](https://github.com/AkshayAgarwal007/Moodly)
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam imperdiet urna eu dolor placerat varius. Vivamus eros augue, consequat id scelerisque nec, fringilla in est. Proin pellentesque malesuada mauris, quis aliquam augue vestibulum ac. Vestibulum ut feugiat nibh. Sed faucibus felis purus, sed convallis leo dictum vehicula.
+### [Extending the Neural Statistician](https://github.com/Gordonjo/NS_extensions)
 
-Proin pellentesque malesuada mauris, quis aliquam augue vestibulum ac. Vestibulum ut feugiat nibh. Sed faucibus felis purus, sed convallis leo dictum vehicula.
+In this project we follow up on [recent exciting work](https://arxiv.org/abs/1606.02185) by Harrison Edwards and [Amos Storkey](http://homepages.inf.ed.ac.uk/amos/). They propsed a Neural Statistician - a VAE based model for datasets rather than datapoints. We believe this approach has much potential for numerous applications such as multi-modal learning, model recommendation, and k-shot learning, and investigate methods to improve the original model to meet these difficult challenges.
 
 ***
 
-## Other Projects
+### [Deep Blended Models](https://github.com/Gordonjo/generativeSSL)
 
-### This Could Be Another Project Name
+Much of the deep learning research has been focused on discriminative training of models complex models for supervised tasks. Recently, there has been a growing interest in training deep generative models, which are suited for a range of supervised and unsupervised tasks. Both approaches have advantages and disadvantages. In this work we propose a framework to train models that combine discriminative and generative components in a principled way, allowing users to enjoy the best of both worlds.   
 
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam imperdiet urna eu dolor placerat varius. Vivamus eros augue, consequat id scelerisque nec, fringilla in est. Proin pellentesque malesuada mauris, quis aliquam augue vestibulum ac. Vestibulum ut feugiat nibh. Sed faucibus felis purus, sed convallis leo dictum vehicula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam imperdiet urna eu dolor placerat varius. Vivamus eros augue, consequat id scelerisque nec, fringilla in est. Proin pellentesque malesuada mauris, quis aliquam augue vestibulum ac. Vestibulum ut feugiat nibh. Sed faucibus felis purus, sed convallis leo dictum vehicula.
-   
-### This Could Be Yet Another Project Name
+***
 
-   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam imperdiet urna eu dolor placerat varius. Vivamus eros augue, consequat id scelerisque nec, fringilla in est. Proin pellentesque malesuada mauris, quis aliquam augue vestibulum ac. Vestibulum ut feugiat nibh. Sed faucibus felis purus, sed convallis leo dictum vehicula.
+### [Semisupervised and Active Learning with Deep Generative Models](https://github.com/Gordonjo/generativeSSL)
+
+
+We developed a deep generative model that has a discriminative component. The idea is to leverage the generative aspects of the model to enable learning about the structure of the data, while also leveraging the model for supervised tasks. 
+
+Since after training the model is used for classification (rather than the variational approximation), we can express model uncertainty. This in turn can be used for active learning, which can potentially increase data-efficiency even further.
+
+***
+
+
+### [A Machine Learning Analysis of ALS](http://ieeexplore.ieee.org/abstract/document/7899957/) 
+    
+ALS is a devastating neuro-muscular disease characterized by wildly varying manifestations across patients. The variation in the symptoms and progression rates makes both treatment and clinical research extremely challenging. In this research project we develop and apply models and pipelines that predict disease progression rate based on [PRO_ACT](https://nctu.partners.org/ProACT), a clinical trial database. We further propose clustering methods based on disease progression patterns, and demonstrate how the clusters may be used to gain insights into the disease and improve prediction performance.
+
+***
 
 
 ## Contact me
 
-[agarwal.akshay.akshay8@gmail.com](mailto:agarwal.akshay.akshay8@gmail.com)
+[jg801@cam.ac.uk](mailto:jg801@cam.ac.uk)
