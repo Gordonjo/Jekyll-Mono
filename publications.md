@@ -4,8 +4,6 @@ title: Publications
 permalink: /publications/
 ---
 
-## Publications
-
 * **Convolutional Conditional Neural Processes**
 
     J. Gordon, W. P. Bruinsma, A. Y. K. Foong, J. Requeima, Y. Dubois, and R. E. Turner, _ICLR 2019_ (Oral presentation) [arXiv:1910.13556](https://arxiv.org/abs/1910.13556)
