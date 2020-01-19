@@ -21,6 +21,10 @@
 of Cambridge, supervised by &lt;a href=&#34;https://jmhl.org/&#34;&gt;Dr José Miguel Hernández-Lobato&lt;/a&gt; and advised by
 &lt;a href=&#34;http://cbl.eng.cam.ac.uk/Public/Turner/WebHome&#34;&gt;Dr Richard Turner&lt;/a&gt;. My research focuses on developing probabilistic
 models (typically parameterized by deep neural networks) and associated scalable approximate inference procedures.&lt;/p&gt;
+&lt;p&gt;I am particularly interested in developing deep probabilistic models that capture structure existing in specific data modalities,
+and exhibit nice behaviours such as sample and parameter efficiency, generalization, and calibrated uncertainties. Much of
+my recent work has focused on meta-learning, which enables fast few-shot generalization. Another theme in my research
+is modelling symmetries in the data, such as by incorporating translation or permutation equivariance.&lt;/p&gt;
 </description>
     </item>
     
