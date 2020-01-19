@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Authors | Jonathan Gordon</title>
+    <link>/authors/</link>
+      <atom:link href="/authors/index.xml" rel="self" type="application/rss+xml" />
+    <description>Authors</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 10 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Authors</title>
+      <link>/authors/</link>
+    </image>
+    
+    <item>
+      <title></title>
+      <link>/authors/admin/</link>
+      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/authors/admin/</guid>
+      <description>&lt;p&gt;I am a Ph.D. candidate with the &lt;a href=&#34;http://mlg.eng.cam.ac.uk/&#34;&gt;Computational and Biological Learning group&lt;/a&gt; at the University
+of Cambridge, supervised by &lt;a href=&#34;https://jmhl.org/&#34;&gt;Dr José Miguel Hernández-Lobato&lt;/a&gt; and advised by
+&lt;a href=&#34;http://cbl.eng.cam.ac.uk/Public/Turner/WebHome&#34;&gt;Dr Richard Turner&lt;/a&gt;. My research focuses on developing probabilistic
+models (typically parameterized by deep neural networks) and associated scalable approximate inference procedures.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Andrew Y. K. Foong</title>
+      <link>/authors/andrew-y.-k.-foong/</link>
+      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/authors/andrew-y.-k.-foong/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>David Lopez-Paz</title>
+      <link>/authors/david-lopez-paz/</link>
+      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/authors/david-lopez-paz/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Diane Bouchecourt</title>
+      <link>/authors/diane-bouchecourt/</link>
+      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/authors/diane-bouchecourt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>James Requeima*</title>
+      <link>/authors/james-requeima/</link>
+      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/authors/james-requeima/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jonathan Gordon*</title>
+      <link>/authors/jonathan-gordon/</link>
+      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/authors/jonathan-gordon/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Marco Baroni</title>
+      <link>/authors/marco-baroni/</link>
+      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/authors/marco-baroni/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Richard Turner</title>
+      <link>/authors/richard-turner/</link>
+      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/authors/richard-turner/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Wessel Bruinsma*</title>
+      <link>/authors/wessel-bruinsma/</link>
+      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/authors/wessel-bruinsma/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Yann Dubois</title>
+      <link>/authors/yann-dubois/</link>
+      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/authors/yann-dubois/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>John Bronskill*</title>
+      <link>/authors/john-bronskill/</link>
+      <pubDate>Sun, 01 Dec 2019 00:00:00 +0000</pubDate>
+      <guid>/authors/john-bronskill/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sebastian Nowozin</title>
+      <link>/authors/sebastian-nowozin/</link>
+      <pubDate>Sun, 01 Dec 2019 00:00:00 +0000</pubDate>
+      <guid>/authors/sebastian-nowozin/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Eric Nalisnick</title>
+      <link>/authors/eric-nalisnick/</link>
+      <pubDate>Tue, 10 Sep 2019 00:00:00 +0000</pubDate>
+      <guid>/authors/eric-nalisnick/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jose Miguel Hernandez-Lobato</title>
+      <link>/authors/jose-miguel-hernandez-lobato/</link>
+      <pubDate>Tue, 10 Sep 2019 00:00:00 +0000</pubDate>
+      <guid>/authors/jose-miguel-hernandez-lobato/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Robert Pinsler</title>
+      <link>/authors/robert-pinsler/</link>
+      <pubDate>Tue, 10 Sep 2019 00:00:00 +0000</pubDate>
+      <guid>/authors/robert-pinsler/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Dustin Tran</title>
+      <link>/authors/dustin-tran/</link>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0000</pubDate>
+      <guid>/authors/dustin-tran/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jasper Snoek</title>
+      <link>/authors/jasper-snoek/</link>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0000</pubDate>
+      <guid>/authors/jasper-snoek/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Marton Havasi</title>
+      <link>/authors/marton-havasi/</link>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0000</pubDate>
+      <guid>/authors/marton-havasi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Matthias Bauer</title>
+      <link>/authors/matthias-bauer/</link>
+      <pubDate>Tue, 10 Apr 2018 00:00:00 +0000</pubDate>
+      <guid>/authors/matthias-bauer/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Francesco Paolo Casale</title>
+      <link>/authors/francesco-paolo-casale/</link>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 +0000</pubDate>
+      <guid>/authors/francesco-paolo-casale/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Nicolo Fusi</title>
+      <link>/authors/nicolo-fusi/</link>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 +0000</pubDate>
+      <guid>/authors/nicolo-fusi/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

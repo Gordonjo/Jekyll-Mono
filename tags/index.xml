@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags | Jonathan Gordon</title>
+    <link>/tags/</link>
+      <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <description>Tags</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 10 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Tags</title>
+      <link>/tags/</link>
+    </image>
+    
+    <item>
+      <title>Deep learning</title>
+      <link>/tags/deep-learning/</link>
+      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/tags/deep-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Deep sets</title>
+      <link>/tags/deep-sets/</link>
+      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/tags/deep-sets/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Meta learning</title>
+      <link>/tags/meta-learning/</link>
+      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/tags/meta-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Natural language</title>
+      <link>/tags/natural-language/</link>
+      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/tags/natural-language/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Neural processes</title>
+      <link>/tags/neural-processes/</link>
+      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/tags/neural-processes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Permutation equivariance</title>
+      <link>/tags/permutation-equivariance/</link>
+      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/tags/permutation-equivariance/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Translation equivariance</title>
+      <link>/tags/translation-equivariance/</link>
+      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/tags/translation-equivariance/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Approximate inference</title>
+      <link>/tags/approximate-inference/</link>
+      <pubDate>Sun, 01 Dec 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/approximate-inference/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Few-shot learning</title>
+      <link>/tags/few-shot-learning/</link>
+      <pubDate>Sun, 01 Dec 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/few-shot-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Active learning</title>
+      <link>/tags/active-learning/</link>
+      <pubDate>Tue, 10 Sep 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/active-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Generative models</title>
+      <link>/tags/generative-models/</link>
+      <pubDate>Fri, 10 May 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/generative-models/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Semi-Supervised learning</title>
+      <link>/tags/semi-supervised-learning/</link>
+      <pubDate>Fri, 10 May 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/semi-supervised-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Bayesian Neural Networks</title>
+      <link>/tags/bayesian-neural-networks/</link>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0000</pubDate>
+      <guid>/tags/bayesian-neural-networks/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Variational Inference</title>
+      <link>/tags/variational-inference/</link>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0000</pubDate>
+      <guid>/tags/variational-inference/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Architecture search</title>
+      <link>/tags/architecture-search/</link>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 +0000</pubDate>
+      <guid>/tags/architecture-search/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

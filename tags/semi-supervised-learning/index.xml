@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Semi-Supervised learning | Jonathan Gordon</title>
+    <link>/tags/semi-supervised-learning/</link>
+      <atom:link href="/tags/semi-supervised-learning/index.xml" rel="self" type="application/rss+xml" />
+    <description>Semi-Supervised learning</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 10 May 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Semi-Supervised learning</title>
+      <link>/tags/semi-supervised-learning/</link>
+    </image>
+    
+    <item>
+      <title>Combining Deep Generative and Discriminative Models for Bayesian Semi-Supervised Learning</title>
+      <link>/publication/combining/</link>
+      <pubDate>Fri, 10 May 2019 00:00:00 +0000</pubDate>
+      <guid>/publication/combining/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

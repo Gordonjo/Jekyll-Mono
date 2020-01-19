@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Deep learning | Jonathan Gordon</title>
+    <link>/tags/deep-learning/</link>
+      <atom:link href="/tags/deep-learning/index.xml" rel="self" type="application/rss+xml" />
+    <description>Deep learning</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 10 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Deep learning</title>
+      <link>/tags/deep-learning/</link>
+    </image>
+    
+    <item>
+      <title>Convolutional Conditional Neural Processes</title>
+      <link>/publication/convcnp/</link>
+      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/publication/convcnp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Permutation Equivariant Models for Compositional Generalization in Language</title>
+      <link>/publication/compositional/</link>
+      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/publication/compositional/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Fast and Flexible Multi-Task Classification Using Conditional Neural Adaptive Processes</title>
+      <link>/publication/cnaps/</link>
+      <pubDate>Sun, 01 Dec 2019 00:00:00 +0000</pubDate>
+      <guid>/publication/cnaps/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Combining Deep Generative and Discriminative Models for Bayesian Semi-Supervised Learning</title>
+      <link>/publication/combining/</link>
+      <pubDate>Fri, 10 May 2019 00:00:00 +0000</pubDate>
+      <guid>/publication/combining/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Meta Learning Probabilistic Inference for Prediction</title>
+      <link>/publication/mlpip/</link>
+      <pubDate>Tue, 10 Apr 2018 00:00:00 +0000</pubDate>
+      <guid>/publication/mlpip/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Probabilistic Neural Architecture Search</title>
+      <link>/publication/nas/</link>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 +0000</pubDate>
+      <guid>/publication/nas/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
