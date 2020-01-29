@@ -5,12 +5,95 @@
     <link>/post/</link>
       <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 02 Jan 2018 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 29 Jan 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
       <title>Posts</title>
       <link>/post/</link>
     </image>
+    
+    <item>
+      <title>A Brief High-Level Intro to Amortized VI</title>
+      <link>/post/amortized_vi/</link>
+      <pubDate>Wed, 29 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/post/amortized_vi/</guid>
+      <description>&lt;p&gt;In this post I will give a very high-level introduction to the concept of &lt;em&gt;amortized vartiational inference&lt;/em&gt;&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;.
+Before diving in, let me briefly describe the setting first, as the best way to understand amortized variational inference
+(in my opinion) is in the context of regular variational inference (VI).&lt;/p&gt;
+&lt;h2 id=&#34;quick-background-on-vi&#34;&gt;Quick background on VI&lt;/h2&gt;
+&lt;p&gt;Let’s assume that we have some latent variable model, such that for every data-point $x$ there is a corresponding local
+latent variable $z$. VI is applicable more generally than this setting, but this is scenario provides a good intuition
+for how and why VI works. We are interested in the posterior distribution of the latent variable conditioned on the
+observations $p(z | x)$, which is crucial to “learning” in such a model. For simple models, we can apply Bayes’ rule
+directly to get this distribution. For more complicated models, this is unfortunately intractable.&lt;/p&gt;
+&lt;p&gt;The basic premise in VI is to approximate this intractable distribution with a simpler one that we know how to evaluate
+and handle. We refer to this simpler distribution as the approximate posterior, or &lt;em&gt;variational approximation&lt;/em&gt;, and denote
+it $q$. Typically, this will be from some parametrized family $\mathcal{Q}$, e.g., Gaussian. We can then optimize the
+parameters of this simple distribution (sometimes referred to as variational parameters) w.r.t. an appropriate objective
+function (this is called the ELBO, which is a lower bound on the log-marginal likelihood of the observed data). This is
+equivalent to finding the distribution in the specified family closest (in the KL-divergence sense) to the true posterior
+&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;. The beauty of this is that we have substituted intractable posterior inference with optimization, which is something
+we can generally do at scale (especially with the introduction of stochastic VI&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;).&lt;/p&gt;
+&lt;h2 id=&#34;practical-issues-with-vi&#34;&gt;Practical issues with VI&lt;/h2&gt;
+&lt;p&gt;What does this mean, practically? For a Gaussian posterior approximation, we would introduce a mean and variance
+parameter for every observation, and optimize all of these jointly. Two problems to notice with this procedure. The
+first is the number of parameters we need to optimize grows (at least) linearly with the number of observations. Not
+ideal for massive data-sets. The second is that if we get new observations, or have test observations we would like
+to perform inference for, it is not clear how this fits in to our framework. In general, for new observations we would
+need to re-run the optimization procedure.&lt;/p&gt;
+&lt;h2 id=&#34;amortizing-posterior-inference&#34;&gt;Amortizing Posterior Inference&lt;/h2&gt;
+&lt;p&gt;Amortized VI is the idea that instead of optimizing a set of free parameters, we can introduce a parameterized
+function that maps from observation space to the parameters of the approximate posterior distribution. In practice,
+we might (for example) introduce a neural network that accepts an observation as input, and outputs the mean and
+variance parameter for the latent variable associated with that observation &lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;sup id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;5&lt;/a&gt;&lt;/sup&gt;. We can then optimize the
+parameters of this neural network instead of the individual parameters of each observation. That’s it — that’s what
+amortized VI is.&lt;/p&gt;
+&lt;h2 id=&#34;whats-great-about-this&#34;&gt;What’s great about this?&lt;/h2&gt;
+&lt;p&gt;Notice that this directly addresses the issues mentioned earlier. First, the number of variational parameters is
+now constant w.r.t. to the data size! In our example, we need only specify the parameters of the neural network,
+and that is not dependent in any way on the number of observations we have. Second, for a new observation, all we
+need to do is pass it through the network, and voila, we have an approximate posterior distribution over its
+associated latent variables! At the constant cost of a forward pass through a network!! These gains are the source of
+the term &lt;em&gt;amortized&lt;/em&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;is-this-a-free-win&#34;&gt;Is this a free win?&lt;/h2&gt;
+&lt;p&gt;No, of course not — that’s almost always a rhetorical question. A common misconception is that since this
+distribution is generated by a neural network, it is somehow more expressive than the original framing. Quite the
+opposite; the amortized posterior approximation is less expressive than its free-form counterpart. The approximate
+posterior is still Gaussian, but now there is an additional constraint imposed by requiring that all the variational
+parameters lie in the range of the network. &lt;strong&gt;Within a specific parametric family, nothing is more general than freely
+optimizing the variational parameters&lt;/strong&gt;. This cost is known as the amortization gap&lt;sup id=&#34;fnref:6&#34;&gt;&lt;a href=&#34;#fn:6&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;6&lt;/a&gt;&lt;/sup&gt;. For a network with infinite capacity,
+this gap goes away, and we can be (only) as good as the free-form optimization setting. Of course, that is not the
+case in any practical implementations, as all networks have finite capacity.&lt;/p&gt;
+&lt;p&gt;Regardless of this drawback, amortized VI represents a significant advancement in probabilistic machine learning,
+and has opened the door to massive improvements in both modelling and inference.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Originally a &lt;a href=&#34;https://www.quora.com/What-is-amortized-variational-inference/answer/Jonathan-Gordon-23?__filter__=all&amp;amp;__nsrc__=1&amp;amp;__sncid__=4003521990&amp;amp;__snid3__=6556450011&#34;&gt;Quora answer&lt;/a&gt;&lt;/em&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
+&lt;hr&gt;
+&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Zhang, Cheng, et al. Advances in Variational Inference. 2018 &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Wainwright, Martin and Jordan, Michael. Graphical Models, Exponential Families, and Variational Inference. 2008 &lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:3&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Hoffman, Matthew, et al. Stochastic Variational Inference. 2013 &lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:4&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Kingma, Deidrik and Welling, Max. Auto-Encdoing Variational Bayes. 2013 &lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:5&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Rezende, Danilo, et al. Stochastic Backpropagation and Approximate Inference in Deep Generative Models. 2014, &lt;a href=&#34;#fnref:5&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:6&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Cremer, Chris, et al. Inference Suboptimality in Variational Autoencoders. 2018 &lt;a href=&#34;#fnref:6&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</description>
+    </item>
     
     <item>
       <title>On Model-Based vs. Model-Free AI</title>
