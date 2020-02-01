@@ -5,7 +5,7 @@
     <link>/</link>
       <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <description>Jonathan Gordon</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 29 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 31 Jan 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
       <title>Jonathan Gordon</title>
@@ -13,9 +13,239 @@
     </image>
     
     <item>
-      <title>A Brief High-Level Intro to Amortized VI</title>
+      <title>A Gentle Introduction to Deep Sets and Neural Processes</title>
+      <link>/post/deepsets_nps/</link>
+      <pubDate>Fri, 31 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/post/deepsets_nps/</guid>
+      <description>&lt;p&gt;In this post, I will discuss two topics that I have been thinking a lot about recently: Deep Sets and Neural
+Processes. I&#39;ll lay out what I see as the important bits of these models, and hopefully provide some intuition
+as to why they are useful. My motivation will, in particular, focus on meta-learning. I&#39;ll start with a brief
+introduction to meta-learning, which will serve the dual purpose of (i) motivating everything I&#39;ll talk about
+later, and (ii) will allow me to introduce some terminology and objects that we&#39;ll need for the rest of the post.&lt;/p&gt;
+&lt;h2 id=&#34;quick-background-on-meta-learning&#34;&gt;Quick Background on Meta-Learning&lt;/h2&gt;
+&lt;p&gt;Let&#39;s first recall what the (supervised) meta-learning setting is. In the standard supervised learning setting,
+we are often interested in learning / approximating a function ($f$) that maps inputs ($x$) to outputs ($y$).
+A supervised learning algorithm ($L$) may be considered an algorithm that, given a dataset of such input-output
+pairs, returns a function approximator ($\hat f$). If $L$ is a good algorithm, $\hat f \approx f$ in some
+meaningful sense.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.imgur.com/gwuSltc.png&#34; alt=&#34;&#34;&gt;
+&lt;em&gt;Fig. 1: Observations from a nonlinear function are passed to a learning algorithm. In this visualization I am
+using a Gaussian Process (GP) as the learning algorithm $L$. GPs being probabilistic models, this produces
+a &lt;em&gt;distribution&lt;/em&gt; over $\hat{f}$.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;In the meta-learning setting, rather than assuming we have access to one such (potentially very large) dataset,
+we assume that our dataset is comprised of many &lt;em&gt;tasks&lt;/em&gt;, each containing a &lt;em&gt;context set&lt;/em&gt; ($D_c$) and a target set
+($D_\tau$). Each of these, in turn, contain a variable number of input-output pairs. Our assumption is that while
+the mapping between inputs and outputs may differ across tasks, the tasks share some statistical properties
+that, when modelled appropriately, should improve the overall performance of the learning algorithms.&lt;/p&gt;
+&lt;p&gt;So the goal of meta-learning is to learn to produce the black-box algorithm that maps from datasets to function
+approximators. In other words, our goal is to use our dataset of tasks to train a model that, at test time accepts
+new training sets, and produces function approximators that perform well on unseen data from the same task.
+Intuitively, the meta-learning algorithm &lt;em&gt;&lt;strong&gt;learns a learning algorithm&lt;/strong&gt;&lt;/em&gt; that is appropriate for all of the
+observed tasks. A good meta-learning algorithm results in a learning algorithm that has desirable properties for
+tasks similar to those in our training set (e.g., produce good function approximators, are sample-efficient, etc&amp;rsquo;).
+This is where the popular description of meta-learning as &lt;em&gt;&lt;strong&gt;learning to learn&lt;/strong&gt;&lt;/em&gt; comes from.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.imgur.com/Ui9k16t.png&#34; alt=&#34;&#34;&gt;
+&lt;em&gt;Fig. 2: A large collection of few-shot tasks is provided during &lt;em&gt;meta-training&lt;/em&gt;. The meta-learner learns to map
+few-shot tasks to meaningful predictive distributions.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;One of the most compelling motivations for meta-learning is &lt;em&gt;data efficiency&lt;/em&gt;. Neural networks notoriously
+require large datasets to learn from. However, it has been observed&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; that humans, for example, are able to
+learn from just a handful of examples. This is a major difference between human intelligence and our current
+machine learning systems, and an extremely attractive feature to aspire for with our learning systems. Sample-efficient learners would be wildly useful in many applications such as robotics, reinforcement learning,
+and others. This line of thinking has lead to the sub-field of research called &lt;em&gt;&lt;strong&gt;few-shot&lt;/strong&gt;&lt;/em&gt; learning. In this
+setting, models are only provided a handful of examples of the task they are required to perform. Meta-learning
+is a particularly successful approach to designing models that can achieve this.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.imgur.com/McDSeRM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Fig. 3: Two examples of few-shot learning problems. (Left) An example image is shown (in the red box). All
+images of the same object must be identified from the set on the bottom. (Right) Same setup, now with characters
+from an alphabet. Images borrowed from [1].&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id=&#34;the-neural-process-family&#34;&gt;The Neural Process Family&lt;/h2&gt;
+&lt;p&gt;Let us know focus our attention on the Neural Process (NP) family&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;. NPs are a recently introduced family of
+models for probabilistic meta-learning. While there are interesting latent variable variants, in this blog post
+I&#39;ll focus on &lt;em&gt;&lt;strong&gt;conditional&lt;/strong&gt;&lt;/em&gt; neural processes (CNPs), which are a simple deterministic variant of NPs.&lt;/p&gt;
+&lt;p&gt;CNPs leverage a series of mappings to directly model the predictive distribution at some location of interest
+($x_t$) conditioned on a &lt;em&gt;&lt;strong&gt;context set&lt;/strong&gt;&lt;/em&gt;. Mathematically, for a Gaussian predictive likelihood we can express
+this as&lt;/p&gt;
+&lt;p&gt;$$
+p(y_t | x_t, D_c) = \mathcal{N} \left(y_t; \mu_\theta(x_t, D_c), \sigma^2_\theta(x_t, D_c) \right),
+\tag{1}\label{eq1}
+$$&lt;/p&gt;
+&lt;p&gt;where $x_t$ is the input we wish to make a prediction at, and $D_c$ is the context set to condition on. The
+computational structure of NPs is best understood from an encoder-decoder perspective: computationally, we can
+visualize this model as follows:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.imgur.com/rjsDE9N.png&#34; alt=&#34;&#34;&gt;
+&lt;em&gt;Fig. 3: Computational diagram of CNPs. On the left, $(x_i, y_i)$ represent the context set. The $e$ block is the
+encoder, the $a$-circle the pooling operation, and the $d$ block is the decoder. Output is a Gaussian distribution
+over $y_t$ for the $x_t$ passed to the decoder. Image borrowed from the DeepMind NP repository&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Note the important form of the encoder: it first applies the same mapping ($e$) to each of the $(x_i, y_i)$ pairs
+in the context set, producing a representation ($r_i$). A natural choice is to implement $e$ with a neural network.
+Then, a &lt;em&gt;&lt;strong&gt;pooling operation&lt;/strong&gt;&lt;/em&gt; $a$ is applied to the representations, yielding a single, vector-valued
+representation of the context set, denoted $r$. This pooling operation is very important, and we&#39;ll return to it
+later. Finally, to make predictions at $x_t$, we concatenate it to $r$, and pass this through our decoder, $d$,
+which maps to a mean and variance for the predictive distribution. A natural choice for $d$ is also a neural
+network.&lt;/p&gt;
+&lt;p&gt;That&#39;s it! Given a dataset of tasks, we can now train the parameters of the model (the weights $\theta$ of the
+encoder and decoder) to maximize the log-likelihood i.e., the $\log$ of Eq. $\eqref{eq1}$:
+$$
+\theta^\ast = \underset{\theta \in \Theta}{\text{argmax}}\  \mathbb{E}_\tau
+\left[ \sum \log p \left(y; x, D_c \right) \right],
+$$&lt;/p&gt;
+&lt;p&gt;where we can take the expectation over tasks $\tau$ with our dataset, and the inner summation is over $(x_t, y_t)$
+pairs in the target set. In practice, at every iteration we sample a batch of tasks from our dataset of tasks,
+and (if they are not already) partition them into context and target sets. We then pass each context set through
+$e$ to produce $r$. Each $x_t$ in the target sets is concatenated with $r$, and this is passed through the decoder
+to get the predictive distribution. The objective function for the iteration is then the sum over the likelihoods
+in the target sets, averaged across the tasks. This is fully differentiable wrt the model parameters, so we can
+use standard optimizers and auto-differentiation to train the model.&lt;/p&gt;
+&lt;p&gt;Below, I show the training progression of a simple CNP trained on samples from a Gaussian Process with an EQ
+kernel after 0, 20, and 40 epochs of training.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.imgur.com/gi2gPVt.png&#34; alt=&#34;&#34;&gt;
+&lt;em&gt;Fig. 4: Snapshots from CNP training procedure after 0, 20, and 40 epochs. Each epoch iterates over 1024 randomly
+sampled tasks.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;One thing you might immediately notice is that the CNP seems to underfit compared to the oracle GP (by oracle, I
+mean using the ground truth kernel). On the one hand, this is true: the uncertainty is not tight, even when many
+data points are observed. One the other hand, the GP has far more domain knowledge (the exact kernel used to
+generate the data), and so it is not clear how certain the CNP really should be. Regardless, CNPs suffer from a
+severe under-fitting problem. In my next post, I will explore several interesting additions to the NP-family that
+are aimed at addressing this issue.&lt;/p&gt;
+&lt;h2 id=&#34;deep-sets&#34;&gt;Deep Sets&lt;/h2&gt;
+&lt;p&gt;OK, let&#39;s dive a little deeper into the inner workings of the CNP. A useful way to think about them is as follows.
+Our &lt;em&gt;&lt;strong&gt;decoder&lt;/strong&gt;&lt;/em&gt; is a standard neural network that maps $X \to Y$, with one small tweak: we condition it on an
+additional input $r$, which is a &lt;em&gt;&lt;strong&gt;dataset-specific&lt;/strong&gt;&lt;/em&gt; representation. The &lt;em&gt;&lt;strong&gt;encoder&#39;s&lt;/strong&gt;&lt;/em&gt; job is really just to
+embed datasets into an appropriate vector space. CNPs specify such an embedding, and provide a way to train this
+embedding end-to-end with a predictive model. However, one might ask &amp;ndash; is this the &amp;ldquo;correct&amp;rdquo; form for such an
+embedding?&lt;/p&gt;
+&lt;p&gt;So the question that really arises is &amp;ndash; what does a function that embeds datasets into a vector space look like?
+This is quite different from the standard machine learning model, where we expect inputs to be an instance from
+some space, typically a vector space (feature vectors, images, etc&amp;rsquo;), or at worst &amp;ndash; sequences (e.g., for RNNs).
+Here what we want is a function approximator that accepts as inputs &lt;em&gt;&lt;strong&gt;sets&lt;/strong&gt;&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;What are the properties of sets, and what properties would we want such a function to have? Well, the first
+problem is that sets have varying sizes, and we would like to be able to handle arbitrarily-sized sets. The second
+key issue is that, by definition, &lt;em&gt;sets have no order&lt;/em&gt;. As such, any module operating on sets must be invariant to
+the order of the elements to be considered valid. This property is known as &lt;em&gt;&lt;strong&gt;permutation invariance&lt;/strong&gt;&lt;/em&gt;, and is
+a key concept in the rapidly growing literature on modelling and representation learning with sets.&lt;/p&gt;
+&lt;p&gt;Now, this is a bit of sticky situation: on the one hand, we&#39;ve declared that sets have no ordering. On the other
+hand, I am now stating that our module must be invariant to their ordering. The resolution to this stickiness is
+that in practice, our algorithms must operate on representations of sets, and must process these sequentially.
+Thus, it would be more accurate to say that we are construcing modules that process &lt;em&gt;&lt;strong&gt;ordered tuples&lt;/strong&gt;&lt;/em&gt;, and we
+require that they be permutation invariant, which is equivalent to treating the ordered tuples as sets.&lt;/p&gt;
+&lt;h3 id=&#34;the-rho-sum-decomposition&#34;&gt;The $\rho$-sum Decomposition&lt;/h3&gt;
+&lt;p&gt;It turns out that NPs were not the first model to bump into this question. The Neural Statistician&lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt; and
+PointNet&lt;sup id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;5&lt;/a&gt;&lt;/sup&gt;, to name a few examples, also considered the problem of representing sets, and proposed a similar
+solution to CNPs. This form has been dubbed the sum decomposition, or &lt;em&gt;Deep Sets&lt;/em&gt;. For a set $S$, it is computed
+as follows
+\begin{equation}
+\hat{f}(S) = \rho \left( \sum_{s \in S} \phi (s) \right),\tag{3}\label{eq3}
+\end{equation}&lt;/p&gt;
+&lt;p&gt;where $\phi$ maps elements of $s$ to a vector space $\mathbb{R}^D$, and $\rho$ maps elements of $\mathbb{R}^D$ to
+$\mathbb{R}^M$. Note that this is a more general form of the NP computational graph: in Fig. 3, $e$ plays the
+role of $\phi$, and $d$ is (a conditional version of) $\rho$. Here the pooling operation ($a$ in Fig. 3) is
+implemented as a sum. This was also the operation chosen in the Neural Statistician and PointNet. However, the
+role of this operation is to enforce the permutation invariance, and as such, any permutation invariant pooling
+operation (such as mean or max) would also be suitable in place of the sum.&lt;/p&gt;
+&lt;p&gt;Zaheer et al. (2017)&lt;sup id=&#34;fnref:6&#34;&gt;&lt;a href=&#34;#fn:6&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;6&lt;/a&gt;&lt;/sup&gt; provided a more rigorous treatment of the issue. Their key theorem demonstrates that
+(with a few important caveats) any function on sets has a representation of the form of Eq. $\eqref{eq3}$. Some
+caveats are that $\phi$ and $\rho$ must be universal approximators of their function class (motivating the use of
+neural networks). An important caveat is, when the elements of $S$ are drawn from an uncountable set (e.g.,
+$\mathbb{R}^m$), the theorem was only proven for fixed-size sets. So just shy of the varying-sized requirement.&lt;/p&gt;
+&lt;p&gt;Despite the caveats on the theory, Zaheer et al. provide a remarkable result towards characterizing the
+approximation capabilities of Deep Set networks, and justify their usage in a wide range of machine learning
+problems.&lt;/p&gt;
+&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
+&lt;p&gt;I&#39;ll wrap this post up here. We have taken a first look at the Neural Process family of models for probabilistic
+meta-learning, and looked at the key role that representation learning on sets plays in this model class.&lt;/p&gt;
+&lt;p&gt;The modelling of sets is an important and fascinating subfield at the frontier of machine learning research.
+Personally, I am drawn to this topic due to its role in meta-learning, a topic which is near and dear to my
+heart. Indeed, one perspective on the meta / few-shot learning lines of research is as learning to flexibly
+condition models on small sets of data, and of course, Deep Sets have a key role to play in that perspective.&lt;/p&gt;
+&lt;p&gt;Neural processes take just this approach. Arguably the most straightforward perspective of CNPs is as simple
+predictors parameterized by DeepSet networks, trained with maximum-likelihood. Yet this simple approach has
+proven extremely powerful. The original papers show that this class of models is capable of providing strong
+probabilistic predictions, and perform very well in the low-data regime. Requeima et al.&lt;sup id=&#34;fnref:7&#34;&gt;&lt;a href=&#34;#fn:7&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;7&lt;/a&gt;&lt;/sup&gt; run with this view,
+and adapt CNPs to the large scale, few-shot image classification setting, demonstrating very strong performance
+(full disclosure, I am an author on that paper). Finally, there have been several recent advances in this class
+of models that has increased their capacity and addressed their susceptibility to underfitting. These will be the
+topic of my next post on Attentive&lt;sup id=&#34;fnref:8&#34;&gt;&lt;a href=&#34;#fn:8&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;8&lt;/a&gt;&lt;/sup&gt; and Convolutional&lt;sup id=&#34;fnref:9&#34;&gt;&lt;a href=&#34;#fn:9&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;9&lt;/a&gt;&lt;/sup&gt; CNPs.&lt;/p&gt;
+&lt;h1 id=&#34;references&#34;&gt;References&lt;/h1&gt;
+&lt;hr&gt;
+&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;https://web.mit.edu/cocosci/Papers/Science-2015-Lake-1332-8.pdf&#34;&gt;Brendan Lake et al. Human-level concept learning through probabilistic program induction. 2015&lt;/a&gt; &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;https://arxiv.org/abs/1807.01622&#34;&gt;Marta Garnelo et al. Neural Processes. 2018&lt;/a&gt; &lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:3&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/deepmind/neural-processes&#34;&gt;DeepMind Neural Process GitHub Repository&lt;/a&gt; &lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:4&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;https://arxiv.org/abs/1606.02185&#34;&gt;Harrison Edwards and Amos Storkey. Towards a neural statistician. 2016&lt;/a&gt; &lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:5&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;https://arxiv.org/abs/1612.00593&#34;&gt;Charles R. Qi et al. PointNet: deep learning on point sets for 3d classification and segmentation. 2016&lt;/a&gt; &lt;a href=&#34;#fnref:5&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:6&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;https://arxiv.org/abs/1703.06114&#34;&gt;Manzil Zaheer et al. Deep Sets. 2017&lt;/a&gt; &lt;a href=&#34;#fnref:6&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:7&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;https://arxiv.org/abs/1906.07697&#34;&gt;James Requeima et al. Fast and flexible multi-task classification with conditional neural adaptive processes. 2019&lt;/a&gt; &lt;a href=&#34;#fnref:7&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:8&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;https://arxiv.org/abs/1901.05761&#34;&gt;Hyunjik Kim et al. Attentive Neural Processes. 2019&lt;/a&gt; &lt;a href=&#34;#fnref:8&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:9&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;https://arxiv.org/abs/1910.13556&#34;&gt;Jonathan Gordon et al. Convolutional Conditional Neural Processes. 2020&lt;/a&gt; &lt;a href=&#34;#fnref:9&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Convolutional Conditional Neural Processes</title>
+      <link>/publication/convcnp/</link>
+      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/publication/convcnp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Permutation Equivariant Models for Compositional Generalization in Language</title>
+      <link>/publication/compositional/</link>
+      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/publication/compositional/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Fast and Flexible Multi-Task Classification Using Conditional Neural Adaptive Processes</title>
+      <link>/publication/cnaps/</link>
+      <pubDate>Sun, 01 Dec 2019 00:00:00 +0000</pubDate>
+      <guid>/publication/cnaps/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Bayesian Batch Active Learning as Sparse Subset Approximation</title>
+      <link>/publication/batch-al/</link>
+      <pubDate>Tue, 10 Sep 2019 00:00:00 +0000</pubDate>
+      <guid>/publication/batch-al/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Combining Deep Generative and Discriminative Models for Bayesian Semi-Supervised Learning</title>
+      <link>/publication/combining/</link>
+      <pubDate>Fri, 10 May 2019 00:00:00 +0000</pubDate>
+      <guid>/publication/combining/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>A Brief, High-Level Intro to Amortized VI</title>
       <link>/post/amortized_vi/</link>
-      <pubDate>Wed, 29 Jan 2020 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 16 Apr 2019 00:00:00 +0000</pubDate>
       <guid>/post/amortized_vi/</guid>
       <description>&lt;p&gt;In this post I will give a very high-level introduction to the concept of &lt;em&gt;amortized vartiational inference&lt;/em&gt;&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;.
 Before diving in, let me briefly describe the setting first, as the best way to understand amortized variational inference
@@ -73,66 +303,26 @@ and has opened the door to massive improvements in both modelling and inference.
 &lt;hr&gt;
 &lt;ol&gt;
 &lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Zhang, Cheng, et al. Advances in Variational Inference. 2018 &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://arxiv.org/abs/1711.05597&#34;&gt;Zhang, Cheng, et al. Advances in Variational Inference. 2018&lt;/a&gt; &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:2&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Wainwright, Martin and Jordan, Michael. Graphical Models, Exponential Families, and Variational Inference. 2008 &lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://people.eecs.berkeley.edu/~wainwrig/Papers/WaiJor08_FTML.pdf&#34;&gt;Wainwright, Martin and Jordan, Michael. Graphical Models, Exponential Families, and Variational Inference. 2008&lt;/a&gt; &lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:3&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Hoffman, Matthew, et al. Stochastic Variational Inference. 2013 &lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.columbia.edu/~jwp2128/Papers/HoffmanBleiWangPaisley2013.pdf&#34;&gt;Hoffman, Matthew, et al. Stochastic Variational Inference. 2013&lt;/a&gt; &lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:4&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Kingma, Deidrik and Welling, Max. Auto-Encdoing Variational Bayes. 2013 &lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://arxiv.org/abs/1312.6114&#34;&gt;Kingma, Deidrik and Welling, Max. Auto-Encdoing Variational Bayes. 2013&lt;/a&gt; &lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:5&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Rezende, Danilo, et al. Stochastic Backpropagation and Approximate Inference in Deep Generative Models. 2014, &lt;a href=&#34;#fnref:5&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://arxiv.org/abs/1401.4082&#34;&gt;Rezende, Danilo, et al. Stochastic Backpropagation and Approximate Inference in Deep Generative Models. 2014&lt;/a&gt; &lt;a href=&#34;#fnref:5&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:6&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Cremer, Chris, et al. Inference Suboptimality in Variational Autoencoders. 2018 &lt;a href=&#34;#fnref:6&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://arxiv.org/abs/1801.03558&#34;&gt;Cremer, Chris, et al. Inference Suboptimality in Variational Autoencoders. 2018&lt;/a&gt; &lt;a href=&#34;#fnref:6&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/section&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>Convolutional Conditional Neural Processes</title>
-      <link>/publication/convcnp/</link>
-      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/publication/convcnp/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Permutation Equivariant Models for Compositional Generalization in Language</title>
-      <link>/publication/compositional/</link>
-      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/publication/compositional/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Fast and Flexible Multi-Task Classification Using Conditional Neural Adaptive Processes</title>
-      <link>/publication/cnaps/</link>
-      <pubDate>Sun, 01 Dec 2019 00:00:00 +0000</pubDate>
-      <guid>/publication/cnaps/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Bayesian Batch Active Learning as Sparse Subset Approximation</title>
-      <link>/publication/batch-al/</link>
-      <pubDate>Tue, 10 Sep 2019 00:00:00 +0000</pubDate>
-      <guid>/publication/batch-al/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Combining Deep Generative and Discriminative Models for Bayesian Semi-Supervised Learning</title>
-      <link>/publication/combining/</link>
-      <pubDate>Fri, 10 May 2019 00:00:00 +0000</pubDate>
-      <guid>/publication/combining/</guid>
-      <description></description>
     </item>
     
     <item>
@@ -156,48 +346,130 @@ and has opened the door to massive improvements in both modelling and inference.
       <link>/post/model-debate/</link>
       <pubDate>Tue, 02 Jan 2018 00:00:00 +0000</pubDate>
       <guid>/post/model-debate/</guid>
-      <description>&lt;p&gt;An interesting debate has arisen lately in the machine learning community concerning two competing (?) approaches to ML and (more generally) AI. The debate is rather high-level, but in my opinion touches upon something that is at the very core of research in the field. In this post I will lay out the fundamental aspects of the debate as I see them, and try and give my personal perspective on the issue.&lt;/p&gt;
+      <description>&lt;p&gt;An interesting debate has arisen lately in the machine learning community concerning two competing (?)
+approaches to ML and (more generally) AI. The debate is rather high-level, but in my opinion touches upon
+something that is at the very core of research in the field. In this post I will lay out the fundamental aspects
+of the debate as I see them, and try and give my personal perspective on the issue.&lt;/p&gt;
 &lt;h2 id=&#34;connectionist-gradient-based-learning&#34;&gt;Connectionist, Gradient Based Learning&lt;/h2&gt;
 &lt;hr&gt;
-&lt;p&gt;Undoubtably the most dominant trend in ML at the moment is deep learning - i.e., learning that is based on neural networks and their offspring achieved by applying gradient-based methods (error-back propagation, a.k.a backprop). DL has led to some undeniably outstanding successes, achieving human-level (or better) performance in specific tasks such as object recognition, speech (recognition and synthesis), and game-playing. This in turn has led to wide-spread adoption and integration of DL technologies in many leading tech companies, and has generated a lot of media hype and public recognition.&lt;/p&gt;
-&lt;p&gt;Despite these impressive successes, there are major drawbacks to DL. The obvious problems are terrible data-efficiency and an inability to generalize across tasks or domains. Both of these characteristics arise from the fact that neural networks are at their core &lt;em&gt;pattern matching&lt;/em&gt; machines. Essentially, they find complex patterns in massive datasets that correlate with a desired output. Often, these patterns may correspond to interesting notions of underlying structure in the data (i.e., edges in an image), lending to the notion of &lt;em&gt;representation learning&lt;/em&gt;. However, these representations are highly specified for specific tasks, and training a network for a new task must be done from scratch. This can be frustrating since we often &lt;em&gt;intuitively know&lt;/em&gt; there must be transferable knowledge between the tasks. An example of this is the phenomenon known as catastrophic forgetting [&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;], where performance of a trained network on task A will deteriorate significantly when trained for related task B. Essentially, every time we train a neural network we must do so (pretty much) from scratch, even if there are many shared components that &lt;em&gt;should&lt;/em&gt; be leveraged.&lt;/p&gt;
+&lt;p&gt;Undoubtably the most dominant trend in ML at the moment is deep learning - i.e., learning that is based on neural
+networks and their offspring achieved by applying gradient-based methods (error-back propagation, a.k.a backprop).
+DL has led to some undeniably outstanding successes, achieving human-level (or better) performance in specific
+tasks such as object recognition, speech (recognition and synthesis), and game-playing. This in turn has led to
+wide-spread adoption and integration of DL technologies in many leading tech companies, and has generated a lot
+of media hype and public recognition.&lt;/p&gt;
+&lt;p&gt;Despite these impressive successes, there are major drawbacks to DL. The obvious problems are terrible
+data-efficiency and an inability to generalize across tasks or domains. Both of these characteristics arise from
+the fact that neural networks are at their core &lt;em&gt;pattern matching&lt;/em&gt; machines. Essentially, they find complex
+patterns in massive datasets that correlate with a desired output. Often, these patterns may correspond to
+interesting notions of underlying structure in the data (i.e., edges in an image), lending to the notion of
+&lt;em&gt;representation learning&lt;/em&gt;. However, these representations are highly specified for specific tasks, and training a
+network for a new task must be done from scratch. This can be frustrating since we often &lt;em&gt;intuitively know&lt;/em&gt; there
+must be transferable knowledge between the tasks. An example of this is the phenomenon known as catastrophic
+forgetting&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;, where performance of a trained network on task A will deteriorate significantly when trained for
+related task B. Essentially, every time we train a neural network we must do so (pretty much) from scratch, even
+if there are many shared components that &lt;em&gt;should&lt;/em&gt; be leveraged.&lt;/p&gt;
 &lt;h2 id=&#34;a-real-world-counter-example&#34;&gt;A Real-World Counter Example&lt;/h2&gt;
 &lt;hr&gt;
-&lt;p&gt;Given the recent successes of DL and gradient-based learning, and the impressive ability of generic neural networks to learn meaningful representations, should we in fact consider alternative approaches? Well, we have a biological counter-example of general intelligence that works - humans. As many have pointed out, artificial flight was achieved when humans moved away from biological inspirations. This is a valid point, and I do not believe we should limit our investigation of intelligent systems to mimicking human intelligence. On the other hand, human intelligence provides an excellent benchmark for measuring performance of artificial systems &lt;em&gt;and&lt;/em&gt; a source from which to draw aspirations.&lt;/p&gt;
-&lt;p&gt;In context of this post, we observe that humans learn rich representations that generalize across complex tasks from very few examples. For instance, given a single visual example of a new object, humans easily infer high level traits such as its purpose, decomposition into parts and the relations between them, and how it may interact with different environments (image and motivation taken from [&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;]). They can then use these traits to classify new visual examples of the object, draw (or imagine) variations on the object, or think of uses for it. All of this from observing a single example.&lt;/p&gt;
-&lt;p&gt;{:refdef: style=&amp;quot;text-align: center;&amp;quot;}
+&lt;p&gt;Given the recent successes of DL and gradient-based learning, and the impressive ability of generic neural
+networks to learn meaningful representations, should we in fact consider alternative approaches? Well, we have
+a biological counter-example of general intelligence that works - humans. As many have pointed out, artificial
+flight was achieved when humans moved away from biological inspirations. This is a valid point, and I do not
+believe we should limit our investigation of intelligent systems to mimicking human intelligence. On the other
+hand, human intelligence provides an excellent benchmark for measuring performance of artificial systems &lt;em&gt;and&lt;/em&gt; a
+source from which to draw aspirations.&lt;/p&gt;
+&lt;p&gt;In context of this post, we observe that humans learn rich representations that generalize across complex tasks
+from very few examples. For instance, given a single visual example of a new object, humans easily infer high
+level traits such as its purpose, decomposition into parts and the relations between them, and how it may interact
+with different environments (image and motivation taken from&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;). They can then use these traits to classify new
+visual examples of the object, draw (or imagine) variations on the object, or think of uses for it. All of this
+from observing a single example.&lt;/p&gt;
 &lt;img src=&#34;https://raw.githubusercontent.com/Gordonjo/Jekyll-Mono/gh-pages/images/human_concepts.png&#34; width=&#34;100%&#34; height=&#34;100%&#34;&gt;
-{:refdef}&lt;/p&gt;
-&lt;p&gt;The presence of these traits in human intelligence serves both to highlight the drawbacks of neural-network based learning and perhaps indicate that DL alone will not be sufficient to achieve significant progress towards more general intelligence. Further, (though I am no neuroscientist), there seems to be sufficient evidence it is highly unlikely the brain is composed of sets of generic, single purpose neural networks [&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;].&lt;/p&gt;
-&lt;p&gt;In [&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;], the authors argue that the ability of humans to learn such complex representations of new concepts given little data is due to the existence of &lt;em&gt;models&lt;/em&gt; that allow humans to leverage their past experiences to do so. They go on to argue that important characteristics of these models are the presence of &lt;em&gt;fundamental learning structures&lt;/em&gt; from early age (e.g., intuitive physical and psychological knowledge), &lt;em&gt;causality&lt;/em&gt;, and &lt;em&gt;compositionality&lt;/em&gt;. Importantly, none of these are characteristics of DL.&lt;/p&gt;
+&lt;p&gt;The presence of these traits in human intelligence serves both to highlight the drawbacks of neural-network based
+learning and perhaps indicate that DL alone will not be sufficient to achieve significant progress towards more
+general intelligence. Further, (though I am no neuroscientist), there seems to be sufficient evidence it is highly
+unlikely the brain is composed of sets of generic, single purpose neural networks&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;p&gt;Lake et al.&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt; argue that the ability of humans to learn such complex representations of new concepts given
+little data is due to the existence of &lt;em&gt;models&lt;/em&gt; that allow humans to leverage their past experiences to do so.
+They go on to argue that important characteristics of these models are the presence of &lt;em&gt;fundamental learning
+structures&lt;/em&gt; from early age (e.g., intuitive physical and psychological knowledge), &lt;em&gt;causality&lt;/em&gt;, and
+&lt;em&gt;compositionality&lt;/em&gt;. Importantly, none of these are characteristics of DL.&lt;/p&gt;
 &lt;h3 id=&#34;the-heart-of-the-debate&#34;&gt;The Heart of the Debate&lt;/h3&gt;
-&lt;p&gt;Given what is discussed above, we can now ask the central question, which is exemplified in two recent papers [&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;, &lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;]: how much emphasis should we place on encoding knowledge into our models?&lt;/p&gt;
+&lt;p&gt;Given what is discussed above, we can now ask the central question, which is exemplified in two recent
+papers&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;: how much emphasis should we place on encoding knowledge into our models?&lt;/p&gt;
 &lt;h2 id=&#34;the-case-for-model-free-ml&#34;&gt;The Case for Model-Free ML&lt;/h2&gt;
 &lt;hr&gt;
-&lt;p&gt;Among the main proponents of &lt;em&gt;learning from scratch&lt;/em&gt; and largely &lt;em&gt;model free&lt;/em&gt; ML are researchers at Google DeepMind, who authored [&lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;]. DeepMind are responsible for some of the most noteworthy successes of DL such as mastering Atari games [&lt;sup id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;5&lt;/a&gt;&lt;/sup&gt;] and Go [&lt;sup id=&#34;fnref:6&#34;&gt;&lt;a href=&#34;#fn:6&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;6&lt;/a&gt;&lt;/sup&gt;]. These successes have been achieved with advances in model-free systems. Indeed, the only inductive biases introduced in these systems is that of standard convolutional nets for parsing images. As discussed in [&lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;], there are (at least) two significant arguments against incoporating and encoding prior knowledge into our models.&lt;/p&gt;
-&lt;p&gt;The first has to do with the notion of generality (&lt;em&gt;not&lt;/em&gt; generalization). For many domains, prior or expert knowledge may not be available, or may be intractable to encode. For instance, physical laws can provide important prior knowledge in domains such as robotic movement, and the model-based approach justifies leveraging that knowledge. This may indeed improve performance of deployed systems. However, in many domains (e.g., healthcare, dialogue systems) such knowledge may not be so straight-forward to include. How would a general model-based approach towards intelligence then deal with these domains? To quote [&lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;]:&lt;/p&gt;
-&lt;p&gt;&amp;ldquo;&lt;em&gt;&amp;hellip; it is not clear that detailed knowledge engineering will be realistically attainable in all areas we will want our agents to tackle&lt;/em&gt;&amp;quot;.&lt;/p&gt;
-&lt;p&gt;With this in mind, generic models that make no prior assumptions on the domain and &amp;ldquo;learn from scratch&amp;rdquo; may be more generally applicable to a wider range of areas.&lt;/p&gt;
-&lt;p&gt;The second point has to do with avoiding encoding our own biases into intelligent agents. The knowledge and inductive biases that [&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;] argue should be included in our intelligent models are specifically human. There is no reason to believe that these principles are required (let alone &lt;em&gt;optimal&lt;/em&gt;) for machines to be intelligent. Indeed, encoding incomplete notions of inductive biases in an attempt to mimick the human brain may &lt;em&gt;hinder&lt;/em&gt; progress, much as attempting to achieve artificial flight by mimicking birds proved unproductive. Proponents of model-free learning argue that by starting from a &amp;lsquo;blank slate&amp;rsquo;, machines generate representations and inductive biases that are useful to them for the specified task. From this view, learning from scratch is a feature rather than a bug.&lt;/p&gt;
-&lt;p&gt;Proponents of the model free approach argue that in fact we should avoid encoding knowledge into our models for the reasons specified above. Existing problems in neural networks, such as data efficiency and transferability, can be solved within the context of DL and do not require prior/expert knowledge. Recent advances in DL (such as memory or attention mechanisms, deep generative models) are indeed steps in these directions, though it is not clear that these will solve the core issues.&lt;/p&gt;
+&lt;p&gt;Among the main proponents of &lt;em&gt;learning from scratch&lt;/em&gt; and largely &lt;em&gt;model free&lt;/em&gt; ML are researchers at Google
+DeepMind, who authored [&lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;]. DeepMind are responsible for some of the most noteworthy successes of DL such as
+mastering Atari games&lt;sup id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;5&lt;/a&gt;&lt;/sup&gt; and Go&lt;sup id=&#34;fnref:6&#34;&gt;&lt;a href=&#34;#fn:6&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;6&lt;/a&gt;&lt;/sup&gt;. These successes have been achieved with advances in model-free
+systems. Indeed, the only inductive biases introduced in these systems is that of standard convolutional nets
+for parsing images. As discussed in [&lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;], there are (at least) two significant arguments against incoporating
+and encoding prior knowledge into our models.&lt;/p&gt;
+&lt;p&gt;The first has to do with the notion of generality (&lt;em&gt;not&lt;/em&gt; generalization). For many domains, prior or expert
+knowledge may not be available, or may be intractable to encode. For instance, physical laws can provide important
+prior knowledge in domains such as robotic movement, and the model-based approach justifies leveraging that
+knowledge. This may indeed improve performance of deployed systems. However, in many domains (e.g., healthcare,
+dialogue systems) such knowledge may not be so straight-forward to include. How would a general model-based
+approach towards intelligence then deal with these domains? To quote Botvinick et al.&lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;&lt;em&gt;&amp;hellip; it is not clear that detailed knowledge engineering will be realistically attainable in all areas we will
+want our agents to tackle&lt;/em&gt;&amp;quot;.&lt;/p&gt;
+&lt;p&gt;With this in mind, generic models that make no prior assumptions on the domain and &amp;ldquo;learn from scratch&amp;rdquo; may be
+more generally applicable to a wider range of areas.&lt;/p&gt;
+&lt;p&gt;The second point has to do with avoiding encoding our own biases into intelligent agents. The knowledge and
+inductive biases that Lake et al.&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt; argue should be included in our intelligent models are specifically human.
+There is no reason to believe that these principles are required (let alone &lt;em&gt;optimal&lt;/em&gt;) for machines to be
+intelligent. Indeed, encoding incomplete notions of inductive biases in an attempt to mimick the human brain may
+&lt;em&gt;hinder&lt;/em&gt; progress, much as attempting to achieve artificial flight by mimicking birds proved unproductive.
+Proponents of model-free learning argue that by starting from a &amp;lsquo;blank slate&amp;rsquo;, machines generate representations
+and inductive biases that are useful to them for the specified task. From this view, learning from scratch is a
+feature rather than a bug.&lt;/p&gt;
+&lt;p&gt;Proponents of the model free approach argue that in fact we should avoid encoding knowledge into our models for
+the reasons specified above. Existing problems in neural networks, such as data efficiency and transferability,
+can be solved within the context of DL and do not require prior/expert knowledge. Recent advances in DL (such as
+memory or attention mechanisms, deep generative models) are indeed steps in these directions, though it is not
+clear that these will solve the core issues.&lt;/p&gt;
 &lt;h2 id=&#34;how-much-is-really-gained-by-models&#34;&gt;How Much is Really Gained by Models?&lt;/h2&gt;
 &lt;hr&gt;
 &lt;p&gt;The main motivation for heavily engineered models is achieving human-like learning: rich, generalizable representations of complex concepts with little examples. However, is it clear that encoding knowledge into models can actually achieve this? Below I discuss an example that shows how heavily engineered models can indeed get around some of the major difficulties of DL.&lt;/p&gt;
 &lt;h3 id=&#34;game-playing-with-minor-environmental-variations&#34;&gt;Game-Playing with Minor Environmental Variations&lt;/h3&gt;
-&lt;p&gt;In [&lt;sup id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;5&lt;/a&gt;&lt;/sup&gt;], the authors show that a single deep RL algorithm can achieve human-level performance on a wide range of Atari games using only the screen pixels as input. This is a very impressive achievement, and one that has been subsequently improved upon. However, in [&lt;sup id=&#34;fnref:7&#34;&gt;&lt;a href=&#34;#fn:7&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;7&lt;/a&gt;&lt;/sup&gt;] the authors point out a major flaw of those deep RL agents: minor variations in the environment completely break performance.&lt;/p&gt;
-&lt;p&gt;{:refdef: style=&amp;quot;text-align: center;&amp;quot;}
+&lt;p&gt;Mnih et al.&lt;sup id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;5&lt;/a&gt;&lt;/sup&gt; famously show that a single deep RL algorithm can achieve human-level performance on a wide
+range of Atari games using only the screen pixels as input. This is a very impressive achievement, and one that
+has been subsequently improved upon. However, Kansky et al.&lt;sup id=&#34;fnref:7&#34;&gt;&lt;a href=&#34;#fn:7&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;7&lt;/a&gt;&lt;/sup&gt; point out a major flaw of those deep RL agents:
+minor variations in the environment completely break performance.&lt;/p&gt;
 &lt;img src=&#34;https://raw.githubusercontent.com/Gordonjo/Jekyll-Mono/gh-pages/images/breakout.png&#34; width=&#34;100%&#34; height=&#34;100%&#34;&gt;
-{:refdef}&lt;/p&gt;
-&lt;p&gt;In other words, the &amp;ldquo;knowledge&amp;rdquo; gained by the agent while learning to play the original version of the game is so specific that any variation to the environment (including ones that humans easily adapt to) is a completely new domain and the agent must be retrained. Clearly, this is unsatisfying, and we desire our agents to be more general than this.&lt;/p&gt;
-&lt;p&gt;The authors go on to propose schema networks; complex graphical models that model objects, their movements and attributes, and causal relations between actions/objects/reward. This allows the agent to perform long term planning (phrased as inference) after training. The paper then details experiments showing that schema networks easily adapt to the variations in environment that break the deep RL agents.&lt;/p&gt;
-&lt;p&gt;Beside causal relations, the schema network model encodes knowledge on intuitive physics, namely that objects are smooth, and contain physical attributes relating to movement, size, etc. This paper demonstrates how encoding fundamental principles of causality and physics can enable models to be more robust to changes (as well as learn more efficiently).&lt;/p&gt;
-&lt;p&gt;For interested readers, other excellent examples of how models improve both data-efficiency and generalization can be found in [&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;, &lt;sup id=&#34;fnref:8&#34;&gt;&lt;a href=&#34;#fn:8&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;8&lt;/a&gt;&lt;/sup&gt;].&lt;/p&gt;
+&lt;p&gt;In other words, the &amp;ldquo;knowledge&amp;rdquo; gained by the agent while learning to play the original version of the game is
+so specific that any variation to the environment (including ones that humans easily adapt to) is a completely
+new domain and the agent must be retrained. Clearly, this is unsatisfying, and we desire our agents to be more
+general than this.&lt;/p&gt;
+&lt;p&gt;The authors go on to propose schema networks; complex graphical models that model objects, their movements and
+attributes, and causal relations between actions/objects/reward. This allows the agent to perform long term
+planning (phrased as inference) after training. The paper then details experiments showing that schema networks
+easily adapt to the variations in environment that break the deep RL agents.&lt;/p&gt;
+&lt;p&gt;Beside causal relations, the schema network model encodes knowledge on intuitive physics, namely that objects
+are smooth, and contain physical attributes relating to movement, size, etc. This paper demonstrates how
+encoding fundamental principles of causality and physics can enable models to be more robust to changes (as well
+as learn more efficiently).&lt;/p&gt;
+&lt;p&gt;For interested readers, other excellent examples of how models improve both data-efficiency and generalization
+can be found in [&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;, &lt;sup id=&#34;fnref:8&#34;&gt;&lt;a href=&#34;#fn:8&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;8&lt;/a&gt;&lt;/sup&gt;].&lt;/p&gt;
 &lt;h2 id=&#34;my-own-two-cents&#34;&gt;My Own Two Cents&lt;/h2&gt;
 &lt;hr&gt;
-&lt;p&gt;Personally, I find this debate fascinating, and at the very core of what AI and ML research are all about. Both sides make compelling points, and it is not clear to me that one is correct. My natural inclination leans more towards the modeling perspective: I believe that intelligence has much to do with (probabilistic) models, and whether or not these draw inspitation from human intelligence, I cannot imagine an intelligent agent that is completely model free.&lt;/p&gt;
-&lt;p&gt;However, I see no reason for the two approaches to be mutually exclusive (this notion is also emphasized in [&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;]). Much of the most interesting recent work has been on teaching neural networks to perform probabilistic inference. This is where I believe the most interesting and promising work currently lies: bridging the gap between DL and model-based ML. Neural networks are incredibly powerful tools, and integrating them into the toolbox of probabilistic modelling holds enormous potential.&lt;/p&gt;
-&lt;p&gt;Further, a potential goal is to merge model-based and model-free ML. My opinion is that, where possible, we should encode (fundamental) notions such as physics and theory of mind into our models, and neural networks can provide flexible mappings for complex relations. Where no such expert knowledge exists, latent variable models with neural network parameterizations can provide a powerful avenue to allow systems to learn abstract concepts from scratch. Ideally, these notions can co-exist within single systems.&lt;/p&gt;
-&lt;p&gt;As in many debates, my hunch is that the most progress can be made by integrating both sides, trying to take the best of both worlds.&lt;/p&gt;
+&lt;p&gt;Personally, I find this debate fascinating, and at the very core of what AI and ML research are all about. Both
+sides make compelling points, and it is not clear to me that one is correct. My natural inclination leans more
+towards the modeling perspective: I believe that intelligence has much to do with (probabilistic) models, and
+whether or not these draw inspitation from human intelligence, I cannot imagine an intelligent agent that is
+completely model free.&lt;/p&gt;
+&lt;p&gt;However, I see no reason for the two approaches to be mutually exclusive (this notion is also emphasized by
+Lake et al.&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;). Much of the most interesting recent work has been on teaching neural networks to perform
+probabilistic inference. This is where I believe the most interesting and promising work currently lies: bridging
+the gap between DL and model-based ML. Neural networks are incredibly powerful tools, and integrating them into
+the toolbox of probabilistic modelling holds enormous potential.&lt;/p&gt;
+&lt;p&gt;Further, a potential goal is to merge model-based and model-free ML. My opinion is that, where possible, we
+should encode (fundamental) notions such as physics and theory of mind into our models, and neural networks can
+provide flexible mappings for complex relations. Where no such expert knowledge exists, latent variable models
+with neural network parameterizations can provide a powerful avenue to allow systems to learn abstract concepts
+from scratch. Ideally, these notions can co-exist within single systems.&lt;/p&gt;
+&lt;p&gt;As in many debates, my hunch is that the most progress can be made by integrating both sides, trying to take the
+best of both worlds.&lt;/p&gt;
 &lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
 &lt;hr&gt;
 &lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
@@ -237,26 +509,46 @@ and has opened the door to massive improvements in both modelling and inference.
       <link>/post/few-shot-learning/</link>
       <pubDate>Fri, 29 Dec 2017 00:00:00 +0000</pubDate>
       <guid>/post/few-shot-learning/</guid>
-      <description>&lt;p&gt;Few-shot learning is (in my opinion) one of the most interesting and important research areas in ML. It touches at the very core of what ML/DL can’t do today, and is one of the clear indicators of how much work is left. All the approaches to few-shot learning I am aware of use probabilistic modelling. In fact, one of the reasons I’m so sold on Bayesian learning is that it offers avenues to pursue these problems - its not clear to me how one can even approach this not from a probabilistic perspective.&lt;/p&gt;
+      <description>&lt;p&gt;Few-shot learning is (in my opinion) one of the most interesting and important research areas in ML. It touches
+at the very core of what ML/DL can’t do today, and is one of the clear indicators of how much work is left. All
+the approaches to few-shot learning I am aware of use probabilistic modelling. In fact, one of the reasons I’m
+so sold on Bayesian learning is that it offers avenues to pursue these problems - its not clear to me how one can
+even approach this not from a probabilistic perspective.&lt;/p&gt;
 &lt;h2 id=&#34;a-discriminative-approach&#34;&gt;A Discriminative Approach&lt;/h2&gt;
 &lt;hr&gt;
-&lt;p&gt;An interesting paper by Rich Turner&#39;s group (in collaboration with Bernard Scholkopf&#39;s group) [&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;] proposed using the representations found in the final hidden layer of a deepNet to generalize to unseen classes for classification.&lt;/p&gt;
-&lt;p&gt;{:refdef: style=&amp;quot;text-align: center;&amp;quot;}
+&lt;p&gt;An interesting paper&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; by Rich Turner&#39;s group (in collaboration with Bernard Scholkopf&#39;s group) proposed using
+the representations found in the final hidden layer of a deepNet to generalize to unseen classes for
+classification.&lt;/p&gt;
 &lt;img src=&#34;https://raw.githubusercontent.com/Gordonjo/Jekyll-Mono/gh-pages/images/kshot_discriminative.png&#34; width=&#34;100%&#34; height=&#34;100%&#34;&gt;
-{:refdef}&lt;/p&gt;
-&lt;p&gt;By placing a prior on the weights they can perform posterior inference on the values for a new class, and show impressive results using very simple priors and likelihood functions. This is the only discriminative approach I am familiar with, and I think it shows a lot of promise for future work.&lt;/p&gt;
+&lt;p&gt;By placing a prior on the weights they can perform posterior inference on the values for a new class, and show
+impressive results using very simple priors and likelihood functions. This is the only discriminative approach
+I am familiar with, and I think it shows a lot of promise for future work.&lt;/p&gt;
 &lt;h2 id=&#34;generative-models-for-few-shot-learning&#34;&gt;Generative Models for Few-Shot Learning&lt;/h2&gt;
 &lt;hr&gt;
-&lt;p&gt;More common are the use of generative models. These can largely be placed on a spectrum of how &lt;em&gt;structured&lt;/em&gt; the models are.&lt;/p&gt;
+&lt;p&gt;More common are the use of generative models. These can largely be placed on a spectrum of how &lt;em&gt;structured&lt;/em&gt; the
+models are.&lt;/p&gt;
 &lt;h3 id=&#34;unstructured-models&#34;&gt;Unstructured Models&lt;/h3&gt;
-&lt;p&gt;On one end of the generative spectrum are completely unstructured models [&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;, &lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;]. Here, researchers attempt to learn meaningful representations in latent variables, and then make use of that ‘information’ for new tasks. This has shown good results, even though optimal mechanisms for information sharing are not yet clear. A lot of interesting work is being done here.&lt;/p&gt;
+&lt;p&gt;On one end of the generative spectrum are completely unstructured models [&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;, &lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;]. Here, researchers attempt
+to learn meaningful representations in latent variables, and then make use of that ‘information’ for new tasks.
+This has shown good results, even though optimal mechanisms for information sharing are not yet clear. A lot of
+interesting work is being done here.&lt;/p&gt;
 &lt;h3 id=&#34;heavily-structured-models&#34;&gt;Heavily Structured Models&lt;/h3&gt;
-&lt;p&gt;On the other hand are heavily structured models [&lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;, &lt;sup id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;5&lt;/a&gt;&lt;/sup&gt;, &lt;sup id=&#34;fnref:6&#34;&gt;&lt;a href=&#34;#fn:6&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;6&lt;/a&gt;&lt;/sup&gt;]. These works come from a faction of ML researchers who believe we should encode as much knowledge as possible into our models [&lt;sup id=&#34;fnref:7&#34;&gt;&lt;a href=&#34;#fn:7&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;7&lt;/a&gt;&lt;/sup&gt;]. For example, in [&lt;sup id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;5&lt;/a&gt;&lt;/sup&gt;] the authors show how a heavily engineered model can transfer its capabilities to unseen scenarios in game playing, something that state of the art deep RL agents are catastrophically bad at.&lt;/p&gt;
-&lt;p&gt;{:refdef: style=&amp;quot;text-align: center;&amp;quot;}
+&lt;p&gt;On the other hand are heavily structured models [&lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;, &lt;sup id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;5&lt;/a&gt;&lt;/sup&gt;, &lt;sup id=&#34;fnref:6&#34;&gt;&lt;a href=&#34;#fn:6&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;6&lt;/a&gt;&lt;/sup&gt;]. These works come from a faction of ML
+researchers who believe we should encode as much knowledge as possible into our models [&lt;sup id=&#34;fnref:7&#34;&gt;&lt;a href=&#34;#fn:7&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;7&lt;/a&gt;&lt;/sup&gt;]. For example, in
+Kansky et al.&lt;sup id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;5&lt;/a&gt;&lt;/sup&gt; show how a heavily engineered model can transfer its capabilities to unseen scenarios in game
+playing, something that state of the art deep RL agents are catastrophically bad at.&lt;/p&gt;
 &lt;img src=&#34;https://raw.githubusercontent.com/Gordonjo/Jekyll-Mono/gh-pages/images/breakout.png&#34; width=&#34;100%&#34; height=&#34;100%&#34;&gt;
-{:refdef}&lt;/p&gt;
-&lt;p&gt;There is a tradeoff here: structured models achieve very impressive generalization, sample efficiency, and few-shot capabilities. It is clear that by encoding knowledge we can achieve significant gains in these aspects. On the other hand, this entails expert knowledge and the ability to encode it in a computationally tractable manner. This is obviously not possible for all domains, and it may not be a scalable approach to improving AI [&lt;sup id=&#34;fnref:8&#34;&gt;&lt;a href=&#34;#fn:8&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;8&lt;/a&gt;&lt;/sup&gt;]. Conversely, unstructured generative modelling relieves the burden of human engineering, which is a clear goal of ML. However, it is not clear how to guide the latent variables towards useful representations, nor is it clear what is the ‘right’ way to then transfer this knowledge.&lt;/p&gt;
-&lt;p&gt;One interesting recent paper [&lt;sup id=&#34;fnref:9&#34;&gt;&lt;a href=&#34;#fn:9&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;9&lt;/a&gt;&lt;/sup&gt;] proposes a method for encoding known axes of variation in partially observed variables while allowing latent variables to capture unknown axes of variation. The paper proposes a general approach for variational inference in these models. I believe this approach of finding the middle ground of the spectrum will be very influential in the near future.&lt;/p&gt;
+&lt;p&gt;There is a tradeoff here: structured models achieve very impressive generalization, sample efficiency, and
+few-shot capabilities. It is clear that by encoding knowledge we can achieve significant gains in these aspects.
+On the other hand, this entails expert knowledge and the ability to encode it in a computationally tractable
+manner. This is obviously not possible for all domains, and it may not be a scalable approach to improving AI
+[&lt;sup id=&#34;fnref:8&#34;&gt;&lt;a href=&#34;#fn:8&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;8&lt;/a&gt;&lt;/sup&gt;]. Conversely, unstructured generative modelling relieves the burden of human engineering, which is a clear
+goal of ML. However, it is not clear how to guide the latent variables towards useful representations, nor is it
+clear what is the ‘right’ way to then transfer this knowledge.&lt;/p&gt;
+&lt;p&gt;One interesting recent paper&lt;sup id=&#34;fnref:9&#34;&gt;&lt;a href=&#34;#fn:9&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;9&lt;/a&gt;&lt;/sup&gt; proposes a method for encoding known axes of variation in partially observed
+variables while allowing latent variables to capture unknown axes of variation. The paper proposes a general
+approach for variational inference in these models. I believe this approach of finding the middle ground of the
+spectrum will be very influential in the near future.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Originally a &lt;a href=&#34;https://www.quora.com/What-are-the-recent-developments-in-one-shot-learning/answer/Jonathan-Gordon-23&#34;&gt;Quora answer&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 &lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
 &lt;hr&gt;
@@ -339,36 +631,85 @@ and has opened the door to massive improvements in both modelling and inference.
       <link>/post/stochastic-bp/</link>
       <pubDate>Mon, 24 Jul 2017 00:00:00 +0000</pubDate>
       <guid>/post/stochastic-bp/</guid>
-      <description>&lt;p&gt;Recently I&#39;ve had to train a few deep generative models with stochastic backpropagation. I&#39;ve been working with variational autoencoders and Bayesian neural networks. If you&#39;ve read the literature on these training procedures and models, you probably found the theory quite complete. When I implemented these models however, I found that quite a lot of elbow grease is required to get them to work well.&lt;/p&gt;
-&lt;p&gt;From talking to some other researchers here, it seems like people dealing with these models are thirsty for practical advice. In this post, I will provide some background on the subject, and highlight some tips and hacks that really helped me with successfull implementation.&lt;/p&gt;
+      <description>&lt;p&gt;Recently I&#39;ve had to train a few deep generative models with stochastic backpropagation.
+I&#39;ve been working with variational autoencoders and Bayesian neural networks. If you&#39;ve read
+the literature on these training procedures and models, you probably found the descriptions
+quite complete. When I implemented these models however, I found that quite a lot of elbow
+grease is required to get them to work well.&lt;/p&gt;
+&lt;p&gt;From talking to some other researchers here, it seems like people dealing with these models
+are thirsty for practical advice. In this post, I will provide some background on the subject,
+and highlight some tips and hacks that really helped me with successful implementation.&lt;/p&gt;
 &lt;h2 id=&#34;deep-generative-models&#34;&gt;Deep Generative Models&lt;/h2&gt;
 &lt;hr&gt;
-&lt;p&gt;We are considering the case where we have some complex latent variable model (later we will see how we can consider the weights as our latent variables and extend these ideas to BNNs) as shown below.&lt;/p&gt;
-&lt;p&gt;{:refdef: style=&amp;quot;text-align: center;&amp;quot;}
+&lt;p&gt;We are considering the case where we have some complex latent variable model (later we will
+see how we can consider the weights as our latent variables and extend these ideas to BNNs)
+as shown below.&lt;/p&gt;
 &lt;img src=&#34;https://raw.githubusercontent.com/Gordonjo/Jekyll-Mono/gh-pages/images/vae.png&#34; width=&#34;20%&#34; height=&#34;20%&#34;&gt;
-{:refdef}&lt;/p&gt;
-&lt;p&gt;Here, \(x\) are our inputs, \(z\) are the latent variables, and \(\theta\) parameterizes the conditional distribution. Usually, we use deep neural networks to map from \(z\) to \(x\), so \(\theta\) will be the parameters of the network. This is a very powerful family of models known as deep generative models (DGMs), even for very simple distributions of \(z\). What we would like to do is perform learning (i.e., maximum likelihood or a-posteriori estimation) for \(\theta\), and inference for \(z\). Unfortunately, the posterior distribution for \(z\) is intractable, so something like EM would not work for us here.&lt;/p&gt;
+&lt;p&gt;Here, \(x\) are our inputs, \(z\) are the latent variables, and \(\theta\) parameterizes
+the conditional distribution. Usually, we use deep neural networks to map from \(z\) to
+\(x\), so \(\theta\) will be the parameters of the network. This is a very powerful
+family of models known as deep generative models (DGMs), even for very simple distributions
+of \(z\). What we would like to do is perform learning (i.e., maximum likelihood or
+a-posteriori estimation) for \(\theta\), and inference for \(z\). Unfortunately,
+the posterior distribution for \(z\) is intractable, so something like EM would not work
+for us here.&lt;/p&gt;
 &lt;h2 id=&#34;variational-inference-for-dgms&#34;&gt;Variational Inference for DGMs&lt;/h2&gt;
 &lt;hr&gt;
-&lt;p&gt;The best approach seems to be variational inference (VI). The basic idea with VI is to introduce an approximation to the true posterior, which we`ll call \(q\), and parameterize it with the &lt;em&gt;variational parameters&lt;/em&gt; - \(\phi\). To do this, we need to first choose some parameteric family for \(q\), such as a Gaussian. Having chosen \(q\), the idea is to minimize the distance between the true posterior and our approximation. The minimization is over \(\phi\) and with respect to some divergence between distributions, such as the KL-divergence. Once we&#39;ve optimized \(q\), we can use it instead of \(p\) whenever we need the posterior distribution. The variational objective can be expressed as:&lt;/p&gt;
+&lt;p&gt;The best approach seems to be variational inference (VI). The basic idea with VI is to
+introduce an approximation to the true posterior, which we`ll call \(q\), and parameterize
+it with the &lt;em&gt;variational parameters&lt;/em&gt; - \(\phi\). To do this, we need to first choose some
+parameteric family for \(q\), such as a Gaussian. Having chosen \(q\), the idea is to
+minimize the distance between the true posterior and our approximation. The minimization is
+over \(\phi\) and with respect to some divergence between distributions, such as the
+KL-divergence. Once we&#39;ve optimized \(q\), we can use it instead of \(p\) whenever we
+need the posterior distribution. The variational objective can be expressed as:&lt;/p&gt;
 &lt;p&gt;\begin{equation}
 \mathcal{L}(\theta, \phi; x) = \mathbb{E}[\log p(x|z)] - KL(q(z|x)||p(z))
 \end{equation}&lt;/p&gt;
-&lt;p&gt;which has a nice interpretation: the first term can be seen as reconstruction error - we are trying to maximize the likelihood of the data under the latent variable. The second term can be interpreted as a regularizer - it encourages the approximation to be as simple as possible by penalizing it for being different from the prior on \(z\), which is typically chosen to be something simple like a standard normal distribution.&lt;/p&gt;
-&lt;p&gt;What&#39;s fantastic about VI is that it allows us to convert inference from an integration problem (which we pretty much suck at) to an optimization one (which we are awesome at). On the flip-side, there are a few drawbacks: one problem is that we are usually limited to very simple posterior approximations, and the quality of our trained model is directly related to the quality of \(q\). Another problem is that posterior inference includes a separate set of variational parameters \(\phi\) for every data-point, and therefore needs to be recomputed for every new example we receive.&lt;/p&gt;
+&lt;p&gt;which has a nice interpretation: the first term can be seen as reconstruction error - we are
+trying to maximize the likelihood of the data under the latent variable. The second term can
+be interpreted as a regularizer - it encourages the approximation to be as simple as possible
+by penalizing it for being different from the prior on \(z\), which is typically chosen to
+be something simple like a standard normal distribution.&lt;/p&gt;
+&lt;p&gt;What&#39;s fantastic about VI is that it allows us to convert inference from an integration
+problem (which we pretty much suck at) to an optimization one (which we are awesome at). On
+the flip-side, there are a few drawbacks: one problem is that we are usually limited to very
+simple posterior approximations, and the quality of our trained model is directly related to
+the quality of \(q\). Another problem is that posterior inference includes a separate set
+of variational parameters \(\phi\) for every data-point, and therefore needs to be
+recomputed for every new example we receive.&lt;/p&gt;
 &lt;h2 id=&#34;inference-networks-and-reparameterization&#34;&gt;Inference Networks and Reparameterization&lt;/h2&gt;
 &lt;hr&gt;
-&lt;p&gt;To get around these problems, some guys had the brilliant idea of introducing an &lt;em&gt;inference network&lt;/em&gt;. The idea is to use a neural network to learn \(q\). Ideally, we would train both networks \(\theta, \phi\) jointly. The main advantage of this is that it &lt;em&gt;ammortizes&lt;/em&gt; posterior inference, so that while the number of latent variables grows linearly with the number of data points, posterior inference now has fixed computational and statistical complexity. This seems great, but of course, there are still some problems.&lt;/p&gt;
-&lt;p&gt;To train the things, we would like to use our regular stochastic gradient optimizers. The KL term in \(\mathcal{L}\) can often be evaluated analytically, especially for the standard choices of distributions. The difficult term is the reconstruction error, which is pesky because it is under expectation of the approximate posterior, which is intractable. However, we can use Monte-Carlo to approximate it:&lt;/p&gt;
+&lt;p&gt;To get around these problems, some guys had the brilliant idea of introducing an &lt;em&gt;inference
+network&lt;/em&gt;. The idea is to use a neural network to learn \(q\). Ideally, we would train both
+networks \(\theta, \phi\) jointly. The main advantage of this is that it &lt;em&gt;ammortizes&lt;/em&gt;
+posterior inference, so that while the number of latent variables grows linearly with the
+number of data points, posterior inference now has fixed computational and statistical
+complexity. This seems great, but of course, there are still some problems.&lt;/p&gt;
+&lt;p&gt;To train the things, we would like to use our regular stochastic gradient optimizers. The KL
+term in \(\mathcal{L}\) can often be evaluated analytically, especially for the standard
+choices of distributions. The difficult term is the reconstruction error, which is pesky
+because it is under expectation of the approximate posterior, which is intractable. However,
+we can use Monte-Carlo to approximate it:&lt;/p&gt;
 &lt;p&gt;\begin{equation}
 \mathbb{E}[\log p(x|z)] = \int q(z|x) \log p(x|z)dz \approx \frac{1}{L}\sum\limits_{l=1}^L \log p(x|z^l)
 \end{equation}&lt;/p&gt;
-&lt;p&gt;where we are sampling \(z^l \sim q\). Alas, the problem is that sampling for \(z\) means that \(\hat{\mathcal{L}}\) is not differentiable w.r.t. \(\phi\), so we cannot train the inference network. Another idea might be to directly sample the gradient \(\nabla_{\theta, \phi}\mathcal{L}\). Unfortunately, in &lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; it is shown that \(\hat{\nabla}_{\phi}\mathcal{L}\), while unbiased, has very high variance, and training as such tends to diverge more often than not.&lt;/p&gt;
-&lt;p&gt;Luckily, some papers from a few years ago (&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;, &lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;) fleshed out how we could get around this using an almost embarrasingly simple trick - &lt;em&gt;reparameterization&lt;/em&gt;. The idea here is to introduce a random variable \(\epsilon\) that will contain all of the randomness in \(z\) for us. We now set up a new variable \(\tilde{z}\) such that:&lt;/p&gt;
+&lt;p&gt;where we are sampling \(z^l \sim q\). Alas, the problem is that sampling for \(z\) means
+that \(\hat{\mathcal{L}}\) is not differentiable w.r.t. \(\phi\), so we cannot train the
+inference network. Another idea might be to directly sample the gradient \(\nabla_{\theta,
+\phi}\mathcal{L}\). Unfortunately, Paisley et al.&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; show that \(\hat{\nabla}_{\phi}
+\mathcal{L}\), while unbiased, has very high variance, and training as such tends to diverge
+more often than not.&lt;/p&gt;
+&lt;p&gt;Luckily, some papers from a few years ago (&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;, &lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;) fleshed out how we could get around
+this using an almost embarrasingly simple trick - &lt;em&gt;reparameterization&lt;/em&gt;. The idea here is to
+introduce a random variable \(\epsilon\) that will contain all of the randomness in \(z\)
+for us. We now set up a new variable \(\tilde{z}\) such that:&lt;/p&gt;
 &lt;p&gt;\begin{equation}
 \tilde{z} = g_{\phi}(\epsilon, x);\ \ \tilde{z} \sim q(z|x);\ \ \epsilon \sim p(\epsilon)
 \end{equation}&lt;/p&gt;
-&lt;p&gt;so all we need is that \(g_{\phi}\) be differentiable and be able to sample from \(p_{\epsilon}\). This is almost always possible, and in many cases it is even super-easy. For example, if:&lt;/p&gt;
+&lt;p&gt;so all we need is that \(g_{\phi}\) be differentiable and be able to sample from
+\(p_{\epsilon}\). This is almost always possible, and in many cases it is even super-easy.
+For example, if:&lt;/p&gt;
 &lt;p&gt;\begin{equation}
 q(z|x) = \mathcal{N}(z; \mu(x), \sigma^2(x))
 \end{equation}&lt;/p&gt;
@@ -376,10 +717,22 @@ q(z|x) = \mathcal{N}(z; \mu(x), \sigma^2(x))
 &lt;p&gt;\begin{equation}
 p(\epsilon) = \mathcal{N}(\epsilon; 0,1);\ \  g(\epsilon, x) = \mu(x) + \epsilon \otimes \sigma(x)
 \end{equation}&lt;/p&gt;
-&lt;p&gt;where I am using \(\otimes\) to denote an element-wise multiplication. Reparameterization, simple though it may appear, does two amazing things. (1) It manipulates \(\hat{\mathcal{L}}\) such that it is differentiable w.r.t. \(\phi\) - we can now jointly train the inference network and the model! (2) It allows us to reduce the variance of the estimator by sharing random numbers across terms and iterations. This may not be the only reason, but regardless, \(\nabla_{\theta,\phi}\hat{\mathcal{L}}\) exhibits low variance, and in practice converges very nicely. For a more detailed explanation of how and why reparameterization works, I strongly recommend Carl Doersch&#39;s excellent tutorial (&lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;).&lt;/p&gt;
+&lt;p&gt;where I am using \(\otimes\) to denote an element-wise multiplication. Reparameterization,
+simple though it may appear, does two amazing things. (1) It manipulates
+\(\hat{\mathcal{L}}\) such that it is differentiable w.r.t. \(\phi\) - we can now jointly
+train the inference network and the model! (2) It allows us to reduce the variance of the
+estimator by sharing random numbers across terms and iterations. This may not be the only
+reason, but regardless, \(\nabla_{\theta,\phi}\hat{\mathcal{L}}\) exhibits low variance,
+and in practice converges very nicely. For a more detailed explanation of how and why
+reparameterization works, I strongly recommend Carl Doersch&#39;s excellent tutorial (&lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;).&lt;/p&gt;
 &lt;h2 id=&#34;stochastic-backpropagation&#34;&gt;Stochastic Backpropagation&lt;/h2&gt;
 &lt;hr&gt;
-&lt;p&gt;So that&#39;s it. We&#39;re ready to put it all together in an algorithm called Auto-encoding Variational Bayes (&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;), or Stochastic Backpropagation (&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;) (the thing was concurrently discovered and published by two separate groups). Conveniently, we can run this optimization in mini-batch form, so basically its just stochastic gradient descent with your favorite optimizer on the estimator described above. Just for closure, here is the complete algorithm (in rough pseudo-code):&lt;/p&gt;
+&lt;p&gt;So that&#39;s it. We&#39;re ready to put it all together in an algorithm called Auto-encoding
+Variational Bayes (&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;), or Stochastic Backpropagation (&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;) (the thing was concurrently
+discovered and published by two separate groups). Conveniently, we can run this optimization
+in mini-batch form, so basically its just stochastic gradient descent with your favorite
+optimizer on the estimator described above. Just for closure, here is the complete algorithm
+(in rough pseudo-code):&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;function stochastic_backprop(data, L):
     theta, phi &amp;lt;- initialize_variables()
     repeat:
@@ -390,7 +743,11 @@ p(\epsilon) = \mathcal{N}(\epsilon; 0,1);\ \  g(\epsilon, x) = \mu(x) + \epsilon
     until convergence (theta, phi)
     return theta, phi
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Of course, this is very rough psuedo code that is not meant to run. Perhaps in a future post I will go into detail with one model (VAE), and will run through a TensorFlow implementation (including code) with toy data. There I can also discuss how the exact same algorithm can be used to train a BNN, and run through a TF implementation of that with the same data.&lt;/p&gt;
+&lt;p&gt;Of course, this is very rough psuedo code that is not meant to run. Perhaps in a future
+post I will go into detail with one model (VAE), and will run through a TensorFlow
+implementation (including code) with toy data. There I can also discuss how the exact same
+algorithm can be used to train a BNN, and run through a TF implementation of that with the
+same data.&lt;/p&gt;
 &lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
 &lt;hr&gt;
 &lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;

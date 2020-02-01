@@ -642,26 +642,46 @@
   <div class="article-container">
 
     <div class="article-style">
-      <p>Few-shot learning is (in my opinion) one of the most interesting and important research areas in ML. It touches at the very core of what ML/DL can’t do today, and is one of the clear indicators of how much work is left. All the approaches to few-shot learning I am aware of use probabilistic modelling. In fact, one of the reasons I’m so sold on Bayesian learning is that it offers avenues to pursue these problems - its not clear to me how one can even approach this not from a probabilistic perspective.</p>
+      <p>Few-shot learning is (in my opinion) one of the most interesting and important research areas in ML. It touches
+at the very core of what ML/DL can’t do today, and is one of the clear indicators of how much work is left. All
+the approaches to few-shot learning I am aware of use probabilistic modelling. In fact, one of the reasons I’m
+so sold on Bayesian learning is that it offers avenues to pursue these problems - its not clear to me how one can
+even approach this not from a probabilistic perspective.</p>
 <h2 id="a-discriminative-approach">A Discriminative Approach</h2>
 <hr>
-<p>An interesting paper by Rich Turner's group (in collaboration with Bernard Scholkopf's group) [<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>] proposed using the representations found in the final hidden layer of a deepNet to generalize to unseen classes for classification.</p>
-<p>{:refdef: style=&quot;text-align: center;&quot;}
+<p>An interesting paper<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> by Rich Turner's group (in collaboration with Bernard Scholkopf's group) proposed using
+the representations found in the final hidden layer of a deepNet to generalize to unseen classes for
+classification.</p>
 <img src="https://raw.githubusercontent.com/Gordonjo/Jekyll-Mono/gh-pages/images/kshot_discriminative.png" width="100%" height="100%">
-{:refdef}</p>
-<p>By placing a prior on the weights they can perform posterior inference on the values for a new class, and show impressive results using very simple priors and likelihood functions. This is the only discriminative approach I am familiar with, and I think it shows a lot of promise for future work.</p>
+<p>By placing a prior on the weights they can perform posterior inference on the values for a new class, and show
+impressive results using very simple priors and likelihood functions. This is the only discriminative approach
+I am familiar with, and I think it shows a lot of promise for future work.</p>
 <h2 id="generative-models-for-few-shot-learning">Generative Models for Few-Shot Learning</h2>
 <hr>
-<p>More common are the use of generative models. These can largely be placed on a spectrum of how <em>structured</em> the models are.</p>
+<p>More common are the use of generative models. These can largely be placed on a spectrum of how <em>structured</em> the
+models are.</p>
 <h3 id="unstructured-models">Unstructured Models</h3>
-<p>On one end of the generative spectrum are completely unstructured models [<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, <sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>]. Here, researchers attempt to learn meaningful representations in latent variables, and then make use of that ‘information’ for new tasks. This has shown good results, even though optimal mechanisms for information sharing are not yet clear. A lot of interesting work is being done here.</p>
+<p>On one end of the generative spectrum are completely unstructured models [<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, <sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>]. Here, researchers attempt
+to learn meaningful representations in latent variables, and then make use of that ‘information’ for new tasks.
+This has shown good results, even though optimal mechanisms for information sharing are not yet clear. A lot of
+interesting work is being done here.</p>
 <h3 id="heavily-structured-models">Heavily Structured Models</h3>
-<p>On the other hand are heavily structured models [<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>, <sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>, <sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup>]. These works come from a faction of ML researchers who believe we should encode as much knowledge as possible into our models [<sup id="fnref:7"><a href="#fn:7" class="footnote-ref" role="doc-noteref">7</a></sup>]. For example, in [<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>] the authors show how a heavily engineered model can transfer its capabilities to unseen scenarios in game playing, something that state of the art deep RL agents are catastrophically bad at.</p>
-<p>{:refdef: style=&quot;text-align: center;&quot;}
+<p>On the other hand are heavily structured models [<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>, <sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>, <sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup>]. These works come from a faction of ML
+researchers who believe we should encode as much knowledge as possible into our models [<sup id="fnref:7"><a href="#fn:7" class="footnote-ref" role="doc-noteref">7</a></sup>]. For example, in
+Kansky et al.<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup> show how a heavily engineered model can transfer its capabilities to unseen scenarios in game
+playing, something that state of the art deep RL agents are catastrophically bad at.</p>
 <img src="https://raw.githubusercontent.com/Gordonjo/Jekyll-Mono/gh-pages/images/breakout.png" width="100%" height="100%">
-{:refdef}</p>
-<p>There is a tradeoff here: structured models achieve very impressive generalization, sample efficiency, and few-shot capabilities. It is clear that by encoding knowledge we can achieve significant gains in these aspects. On the other hand, this entails expert knowledge and the ability to encode it in a computationally tractable manner. This is obviously not possible for all domains, and it may not be a scalable approach to improving AI [<sup id="fnref:8"><a href="#fn:8" class="footnote-ref" role="doc-noteref">8</a></sup>]. Conversely, unstructured generative modelling relieves the burden of human engineering, which is a clear goal of ML. However, it is not clear how to guide the latent variables towards useful representations, nor is it clear what is the ‘right’ way to then transfer this knowledge.</p>
-<p>One interesting recent paper [<sup id="fnref:9"><a href="#fn:9" class="footnote-ref" role="doc-noteref">9</a></sup>] proposes a method for encoding known axes of variation in partially observed variables while allowing latent variables to capture unknown axes of variation. The paper proposes a general approach for variational inference in these models. I believe this approach of finding the middle ground of the spectrum will be very influential in the near future.</p>
+<p>There is a tradeoff here: structured models achieve very impressive generalization, sample efficiency, and
+few-shot capabilities. It is clear that by encoding knowledge we can achieve significant gains in these aspects.
+On the other hand, this entails expert knowledge and the ability to encode it in a computationally tractable
+manner. This is obviously not possible for all domains, and it may not be a scalable approach to improving AI
+[<sup id="fnref:8"><a href="#fn:8" class="footnote-ref" role="doc-noteref">8</a></sup>]. Conversely, unstructured generative modelling relieves the burden of human engineering, which is a clear
+goal of ML. However, it is not clear how to guide the latent variables towards useful representations, nor is it
+clear what is the ‘right’ way to then transfer this knowledge.</p>
+<p>One interesting recent paper<sup id="fnref:9"><a href="#fn:9" class="footnote-ref" role="doc-noteref">9</a></sup> proposes a method for encoding known axes of variation in partially observed
+variables while allowing latent variables to capture unknown axes of variation. The paper proposes a general
+approach for variational inference in these models. I believe this approach of finding the middle ground of the
+spectrum will be very influential in the near future.</p>
 <p><em>Originally a <a href="https://www.quora.com/What-are-the-recent-developments-in-one-shot-learning/answer/Jonathan-Gordon-23">Quora answer</a></em></p>
 <h2 id="references">References</h2>
 <hr>

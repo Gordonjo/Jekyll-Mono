@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.7.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Jonathan Gordon">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="In this post, I will discuss two topics that I have been thinking a lot about recently: Deep Sets and Neural Processes. I&#39;ll lay out what I see as the important bits of these models, and hopefully provide some intuition as to why they are useful. My motivation will, in particular, focus on meta-learning. I&#39;ll start with a brief introduction to meta-learning, which will serve the dual purpose of (i) motivating everything I&#39;ll talk about later, and (ii) will allow me to introduce some terminology and objects that we&#39;ll need for the rest of the post.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/deepsets_nps/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="hsl(339, 90%, 68%)">
+  
+
+  
+  
+  
+  <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" crossorigin="anonymous" title="hl-light" disabled>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark">
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="/post/deepsets_nps/">
+
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="og:site_name" content="Jonathan Gordon">
+  <meta property="og:url" content="/post/deepsets_nps/">
+  <meta property="og:title" content="A Gentle Introduction to Deep Sets and Neural Processes | Jonathan Gordon">
+  <meta property="og:description" content="In this post, I will discuss two topics that I have been thinking a lot about recently: Deep Sets and Neural Processes. I&#39;ll lay out what I see as the important bits of these models, and hopefully provide some intuition as to why they are useful. My motivation will, in particular, focus on meta-learning. I&#39;ll start with a brief introduction to meta-learning, which will serve the dual purpose of (i) motivating everything I&#39;ll talk about later, and (ii) will allow me to introduce some terminology and objects that we&#39;ll need for the rest of the post."><meta property="og:image" content="/post/deepsets_nps/featured.png">
+  <meta property="twitter:image" content="/post/deepsets_nps/featured.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2020-01-31T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2020-01-31T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/post/deepsets_nps/"
+  },
+  "headline": "A Gentle Introduction to Deep Sets and Neural Processes",
+  
+  "image": [
+    "/post/deepsets_nps/featured.png"
+  ],
+  
+  "datePublished": "2020-01-31T00:00:00Z",
+  "dateModified": "2020-01-31T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Jonathan Gordon"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Jonathan Gordon",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "img//"
+    }
+  },
+  "description": "In this post, I will discuss two topics that I have been thinking a lot about recently: Deep Sets and Neural Processes. I'll lay out what I see as the important bits of these models, and hopefully provide some intuition as to why they are useful. My motivation will, in particular, focus on meta-learning. I'll start with a brief introduction to meta-learning, which will serve the dual purpose of (i) motivating everything I'll talk about later, and (ii) will allow me to introduce some terminology and objects that we'll need for the rest of the post."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>A Gentle Introduction to Deep Sets and Neural Processes | Jonathan Gordon</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="dark">
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">Jonathan Gordon</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">Jonathan Gordon</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#featured"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#experience"><span>Experience</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/files/cv.pdf"><span>CV</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>A Gentle Introduction to Deep Sets and Neural Processes</h1>
+
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Jan 31, 2020
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    11 min read
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 452px;">
+  <div style="position: relative">
+    <img src="/post/deepsets_nps/featured_hu47419bea8b0aec368a3ce955454a89c9_148036_720x0_resize_lanczos_2.png" alt="" class="featured-image">
+    
+  </div>
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>In this post, I will discuss two topics that I have been thinking a lot about recently: Deep Sets and Neural
+Processes. I'll lay out what I see as the important bits of these models, and hopefully provide some intuition
+as to why they are useful. My motivation will, in particular, focus on meta-learning. I'll start with a brief
+introduction to meta-learning, which will serve the dual purpose of (i) motivating everything I'll talk about
+later, and (ii) will allow me to introduce some terminology and objects that we'll need for the rest of the post.</p>
+<h2 id="quick-background-on-meta-learning">Quick Background on Meta-Learning</h2>
+<p>Let's first recall what the (supervised) meta-learning setting is. In the standard supervised learning setting,
+we are often interested in learning / approximating a function ($f$) that maps inputs ($x$) to outputs ($y$).
+A supervised learning algorithm ($L$) may be considered an algorithm that, given a dataset of such input-output
+pairs, returns a function approximator ($\hat f$). If $L$ is a good algorithm, $\hat f \approx f$ in some
+meaningful sense.</p>
+<p><img src="https://i.imgur.com/gwuSltc.png" alt="">
+<em>Fig. 1: Observations from a nonlinear function are passed to a learning algorithm. In this visualization I am
+using a Gaussian Process (GP) as the learning algorithm $L$. GPs being probabilistic models, this produces
+a <em>distribution</em> over $\hat{f}$.</em></p>
+<p>In the meta-learning setting, rather than assuming we have access to one such (potentially very large) dataset,
+we assume that our dataset is comprised of many <em>tasks</em>, each containing a <em>context set</em> ($D_c$) and a target set
+($D_\tau$). Each of these, in turn, contain a variable number of input-output pairs. Our assumption is that while
+the mapping between inputs and outputs may differ across tasks, the tasks share some statistical properties
+that, when modelled appropriately, should improve the overall performance of the learning algorithms.</p>
+<p>So the goal of meta-learning is to learn to produce the black-box algorithm that maps from datasets to function
+approximators. In other words, our goal is to use our dataset of tasks to train a model that, at test time accepts
+new training sets, and produces function approximators that perform well on unseen data from the same task.
+Intuitively, the meta-learning algorithm <em><strong>learns a learning algorithm</strong></em> that is appropriate for all of the
+observed tasks. A good meta-learning algorithm results in a learning algorithm that has desirable properties for
+tasks similar to those in our training set (e.g., produce good function approximators, are sample-efficient, etc&rsquo;).
+This is where the popular description of meta-learning as <em><strong>learning to learn</strong></em> comes from.</p>
+<p><img src="https://i.imgur.com/Ui9k16t.png" alt="">
+<em>Fig. 2: A large collection of few-shot tasks is provided during <em>meta-training</em>. The meta-learner learns to map
+few-shot tasks to meaningful predictive distributions.</em></p>
+<p>One of the most compelling motivations for meta-learning is <em>data efficiency</em>. Neural networks notoriously
+require large datasets to learn from. However, it has been observed<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> that humans, for example, are able to
+learn from just a handful of examples. This is a major difference between human intelligence and our current
+machine learning systems, and an extremely attractive feature to aspire for with our learning systems. Sample-efficient learners would be wildly useful in many applications such as robotics, reinforcement learning,
+and others. This line of thinking has lead to the sub-field of research called <em><strong>few-shot</strong></em> learning. In this
+setting, models are only provided a handful of examples of the task they are required to perform. Meta-learning
+is a particularly successful approach to designing models that can achieve this.</p>
+<p><img src="https://i.imgur.com/McDSeRM.png" alt=""></p>
+<p><em>Fig. 3: Two examples of few-shot learning problems. (Left) An example image is shown (in the red box). All
+images of the same object must be identified from the set on the bottom. (Right) Same setup, now with characters
+from an alphabet. Images borrowed from [1].</em></p>
+<h2 id="the-neural-process-family">The Neural Process Family</h2>
+<p>Let us know focus our attention on the Neural Process (NP) family<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>. NPs are a recently introduced family of
+models for probabilistic meta-learning. While there are interesting latent variable variants, in this blog post
+I'll focus on <em><strong>conditional</strong></em> neural processes (CNPs), which are a simple deterministic variant of NPs.</p>
+<p>CNPs leverage a series of mappings to directly model the predictive distribution at some location of interest
+($x_t$) conditioned on a <em><strong>context set</strong></em>. Mathematically, for a Gaussian predictive likelihood we can express
+this as</p>
+<p>$$
+p(y_t | x_t, D_c) = \mathcal{N} \left(y_t; \mu_\theta(x_t, D_c), \sigma^2_\theta(x_t, D_c) \right),
+\tag{1}\label{eq1}
+$$</p>
+<p>where $x_t$ is the input we wish to make a prediction at, and $D_c$ is the context set to condition on. The
+computational structure of NPs is best understood from an encoder-decoder perspective: computationally, we can
+visualize this model as follows:</p>
+<p><img src="https://i.imgur.com/rjsDE9N.png" alt="">
+<em>Fig. 3: Computational diagram of CNPs. On the left, $(x_i, y_i)$ represent the context set. The $e$ block is the
+encoder, the $a$-circle the pooling operation, and the $d$ block is the decoder. Output is a Gaussian distribution
+over $y_t$ for the $x_t$ passed to the decoder. Image borrowed from the DeepMind NP repository<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>.</em></p>
+<p>Note the important form of the encoder: it first applies the same mapping ($e$) to each of the $(x_i, y_i)$ pairs
+in the context set, producing a representation ($r_i$). A natural choice is to implement $e$ with a neural network.
+Then, a <em><strong>pooling operation</strong></em> $a$ is applied to the representations, yielding a single, vector-valued
+representation of the context set, denoted $r$. This pooling operation is very important, and we'll return to it
+later. Finally, to make predictions at $x_t$, we concatenate it to $r$, and pass this through our decoder, $d$,
+which maps to a mean and variance for the predictive distribution. A natural choice for $d$ is also a neural
+network.</p>
+<p>That's it! Given a dataset of tasks, we can now train the parameters of the model (the weights $\theta$ of the
+encoder and decoder) to maximize the log-likelihood i.e., the $\log$ of Eq. $\eqref{eq1}$:
+$$
+\theta^\ast = \underset{\theta \in \Theta}{\text{argmax}}\  \mathbb{E}_\tau
+\left[ \sum \log p \left(y; x, D_c \right) \right],
+$$</p>
+<p>where we can take the expectation over tasks $\tau$ with our dataset, and the inner summation is over $(x_t, y_t)$
+pairs in the target set. In practice, at every iteration we sample a batch of tasks from our dataset of tasks,
+and (if they are not already) partition them into context and target sets. We then pass each context set through
+$e$ to produce $r$. Each $x_t$ in the target sets is concatenated with $r$, and this is passed through the decoder
+to get the predictive distribution. The objective function for the iteration is then the sum over the likelihoods
+in the target sets, averaged across the tasks. This is fully differentiable wrt the model parameters, so we can
+use standard optimizers and auto-differentiation to train the model.</p>
+<p>Below, I show the training progression of a simple CNP trained on samples from a Gaussian Process with an EQ
+kernel after 0, 20, and 40 epochs of training.</p>
+<p><img src="https://i.imgur.com/gi2gPVt.png" alt="">
+<em>Fig. 4: Snapshots from CNP training procedure after 0, 20, and 40 epochs. Each epoch iterates over 1024 randomly
+sampled tasks.</em></p>
+<p>One thing you might immediately notice is that the CNP seems to underfit compared to the oracle GP (by oracle, I
+mean using the ground truth kernel). On the one hand, this is true: the uncertainty is not tight, even when many
+data points are observed. One the other hand, the GP has far more domain knowledge (the exact kernel used to
+generate the data), and so it is not clear how certain the CNP really should be. Regardless, CNPs suffer from a
+severe under-fitting problem. In my next post, I will explore several interesting additions to the NP-family that
+are aimed at addressing this issue.</p>
+<h2 id="deep-sets">Deep Sets</h2>
+<p>OK, let's dive a little deeper into the inner workings of the CNP. A useful way to think about them is as follows.
+Our <em><strong>decoder</strong></em> is a standard neural network that maps $X \to Y$, with one small tweak: we condition it on an
+additional input $r$, which is a <em><strong>dataset-specific</strong></em> representation. The <em><strong>encoder's</strong></em> job is really just to
+embed datasets into an appropriate vector space. CNPs specify such an embedding, and provide a way to train this
+embedding end-to-end with a predictive model. However, one might ask &ndash; is this the &ldquo;correct&rdquo; form for such an
+embedding?</p>
+<p>So the question that really arises is &ndash; what does a function that embeds datasets into a vector space look like?
+This is quite different from the standard machine learning model, where we expect inputs to be an instance from
+some space, typically a vector space (feature vectors, images, etc&rsquo;), or at worst &ndash; sequences (e.g., for RNNs).
+Here what we want is a function approximator that accepts as inputs <em><strong>sets</strong></em>.</p>
+<p>What are the properties of sets, and what properties would we want such a function to have? Well, the first
+problem is that sets have varying sizes, and we would like to be able to handle arbitrarily-sized sets. The second
+key issue is that, by definition, <em>sets have no order</em>. As such, any module operating on sets must be invariant to
+the order of the elements to be considered valid. This property is known as <em><strong>permutation invariance</strong></em>, and is
+a key concept in the rapidly growing literature on modelling and representation learning with sets.</p>
+<p>Now, this is a bit of sticky situation: on the one hand, we've declared that sets have no ordering. On the other
+hand, I am now stating that our module must be invariant to their ordering. The resolution to this stickiness is
+that in practice, our algorithms must operate on representations of sets, and must process these sequentially.
+Thus, it would be more accurate to say that we are construcing modules that process <em><strong>ordered tuples</strong></em>, and we
+require that they be permutation invariant, which is equivalent to treating the ordered tuples as sets.</p>
+<h3 id="the-rho-sum-decomposition">The $\rho$-sum Decomposition</h3>
+<p>It turns out that NPs were not the first model to bump into this question. The Neural Statistician<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> and
+PointNet<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>, to name a few examples, also considered the problem of representing sets, and proposed a similar
+solution to CNPs. This form has been dubbed the sum decomposition, or <em>Deep Sets</em>. For a set $S$, it is computed
+as follows
+\begin{equation}
+\hat{f}(S) = \rho \left( \sum_{s \in S} \phi (s) \right),\tag{3}\label{eq3}
+\end{equation}</p>
+<p>where $\phi$ maps elements of $s$ to a vector space $\mathbb{R}^D$, and $\rho$ maps elements of $\mathbb{R}^D$ to
+$\mathbb{R}^M$. Note that this is a more general form of the NP computational graph: in Fig. 3, $e$ plays the
+role of $\phi$, and $d$ is (a conditional version of) $\rho$. Here the pooling operation ($a$ in Fig. 3) is
+implemented as a sum. This was also the operation chosen in the Neural Statistician and PointNet. However, the
+role of this operation is to enforce the permutation invariance, and as such, any permutation invariant pooling
+operation (such as mean or max) would also be suitable in place of the sum.</p>
+<p>Zaheer et al. (2017)<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup> provided a more rigorous treatment of the issue. Their key theorem demonstrates that
+(with a few important caveats) any function on sets has a representation of the form of Eq. $\eqref{eq3}$. Some
+caveats are that $\phi$ and $\rho$ must be universal approximators of their function class (motivating the use of
+neural networks). An important caveat is, when the elements of $S$ are drawn from an uncountable set (e.g.,
+$\mathbb{R}^m$), the theorem was only proven for fixed-size sets. So just shy of the varying-sized requirement.</p>
+<p>Despite the caveats on the theory, Zaheer et al. provide a remarkable result towards characterizing the
+approximation capabilities of Deep Set networks, and justify their usage in a wide range of machine learning
+problems.</p>
+<h2 id="summary">Summary</h2>
+<p>I'll wrap this post up here. We have taken a first look at the Neural Process family of models for probabilistic
+meta-learning, and looked at the key role that representation learning on sets plays in this model class.</p>
+<p>The modelling of sets is an important and fascinating subfield at the frontier of machine learning research.
+Personally, I am drawn to this topic due to its role in meta-learning, a topic which is near and dear to my
+heart. Indeed, one perspective on the meta / few-shot learning lines of research is as learning to flexibly
+condition models on small sets of data, and of course, Deep Sets have a key role to play in that perspective.</p>
+<p>Neural processes take just this approach. Arguably the most straightforward perspective of CNPs is as simple
+predictors parameterized by DeepSet networks, trained with maximum-likelihood. Yet this simple approach has
+proven extremely powerful. The original papers show that this class of models is capable of providing strong
+probabilistic predictions, and perform very well in the low-data regime. Requeima et al.<sup id="fnref:7"><a href="#fn:7" class="footnote-ref" role="doc-noteref">7</a></sup> run with this view,
+and adapt CNPs to the large scale, few-shot image classification setting, demonstrating very strong performance
+(full disclosure, I am an author on that paper). Finally, there have been several recent advances in this class
+of models that has increased their capacity and addressed their susceptibility to underfitting. These will be the
+topic of my next post on Attentive<sup id="fnref:8"><a href="#fn:8" class="footnote-ref" role="doc-noteref">8</a></sup> and Convolutional<sup id="fnref:9"><a href="#fn:9" class="footnote-ref" role="doc-noteref">9</a></sup> CNPs.</p>
+<h1 id="references">References</h1>
+<hr>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p><a href="https://web.mit.edu/cocosci/Papers/Science-2015-Lake-1332-8.pdf">Brendan Lake et al. Human-level concept learning through probabilistic program induction. 2015</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p><a href="https://arxiv.org/abs/1807.01622">Marta Garnelo et al. Neural Processes. 2018</a> <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p><a href="https://github.com/deepmind/neural-processes">DeepMind Neural Process GitHub Repository</a> <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4" role="doc-endnote">
+<p><a href="https://arxiv.org/abs/1606.02185">Harrison Edwards and Amos Storkey. Towards a neural statistician. 2016</a> <a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5" role="doc-endnote">
+<p><a href="https://arxiv.org/abs/1612.00593">Charles R. Qi et al. PointNet: deep learning on point sets for 3d classification and segmentation. 2016</a> <a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:6" role="doc-endnote">
+<p><a href="https://arxiv.org/abs/1703.06114">Manzil Zaheer et al. Deep Sets. 2017</a> <a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:7" role="doc-endnote">
+<p><a href="https://arxiv.org/abs/1906.07697">James Requeima et al. Fast and flexible multi-task classification with conditional neural adaptive processes. 2019</a> <a href="#fnref:7" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:8" role="doc-endnote">
+<p><a href="https://arxiv.org/abs/1901.05761">Hyunjik Kim et al. Attentive Neural Processes. 2019</a> <a href="#fnref:8" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:9" role="doc-endnote">
+<p><a href="https://arxiv.org/abs/1910.13556">Jonathan Gordon et al. Convolutional Conditional Neural Processes. 2020</a> <a href="#fnref:9" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+
+    
+
+
+
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/post/deepsets_nps/&amp;text=A%20Gentle%20Introduction%20to%20Deep%20Sets%20and%20Neural%20Processes" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/post/deepsets_nps/&amp;t=A%20Gentle%20Introduction%20to%20Deep%20Sets%20and%20Neural%20Processes" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=A%20Gentle%20Introduction%20to%20Deep%20Sets%20and%20Neural%20Processes&amp;body=/post/deepsets_nps/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/post/deepsets_nps/&amp;title=A%20Gentle%20Introduction%20to%20Deep%20Sets%20and%20Neural%20Processes" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=A%20Gentle%20Introduction%20to%20Deep%20Sets%20and%20Neural%20Processes%20/post/deepsets_nps/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/post/deepsets_nps/&amp;title=A%20Gentle%20Introduction%20to%20Deep%20Sets%20and%20Neural%20Processes" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="portrait mr-3" src="/authors/admin/avatar_hub380a13c3dd26103e680ba4cbfbaf804_89614_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/">Jonathan Gordon</a></h5>
+      <h6 class="card-subtitle">Machine Learning PhD Student</h6>
+      <p class="card-text">My research interests include probabilistic machine learning, deep learning, and approximate Bayesian inference.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    <li>
+      <a href="mailto:jg801@cam.ac.uk" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/GordonJo76" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.com/citations?user=dZvMjdEAAAAJ&amp;hl=en" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/Gordonjo" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/files/cv.pdf" >
+        <i class="ai ai-cv"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" integrity="sha256-1zu+3BnLYV9LdiY85uXMzii3bdrkelyp37e0ZyTAQh0=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/r.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.a0d331bcd05dbe8b31e244f796710f08.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

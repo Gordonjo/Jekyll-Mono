@@ -28,7 +28,7 @@
   
     
   
-  <meta name="description" content="Recently I&#39;ve had to train a few deep generative models with stochastic backpropagation. I&#39;ve been working with variational autoencoders and Bayesian neural networks. If you&#39;ve read the literature on these training procedures and models, you probably found the theory quite complete. When I implemented these models however, I found that quite a lot of elbow grease is required to get them to work well.
+  <meta name="description" content="Recently I&#39;ve had to train a few deep generative models with stochastic backpropagation. I&#39;ve been working with variational autoencoders and Bayesian neural networks. If you&#39;ve read the literature on these training procedures and models, you probably found the descriptions quite complete. When I implemented these models however, I found that quite a lot of elbow grease is required to get them to work well.
 From talking to some other researchers here, it seems like people dealing with these models are thirsty for practical advice.">
 
   
@@ -234,7 +234,7 @@ From talking to some other researchers here, it seems like people dealing with t
   <meta property="og:site_name" content="Jonathan Gordon">
   <meta property="og:url" content="/post/stochastic-bp/">
   <meta property="og:title" content="Training Deep Models with Stochastic Backpropagation | Jonathan Gordon">
-  <meta property="og:description" content="Recently I&#39;ve had to train a few deep generative models with stochastic backpropagation. I&#39;ve been working with variational autoencoders and Bayesian neural networks. If you&#39;ve read the literature on these training procedures and models, you probably found the theory quite complete. When I implemented these models however, I found that quite a lot of elbow grease is required to get them to work well.
+  <meta property="og:description" content="Recently I&#39;ve had to train a few deep generative models with stochastic backpropagation. I&#39;ve been working with variational autoencoders and Bayesian neural networks. If you&#39;ve read the literature on these training procedures and models, you probably found the descriptions quite complete. When I implemented these models however, I found that quite a lot of elbow grease is required to get them to work well.
 From talking to some other researchers here, it seems like people dealing with these models are thirsty for practical advice."><meta property="og:image" content="/post/stochastic-bp/featured.jpeg">
   <meta property="twitter:image" content="/post/stochastic-bp/featured.jpeg"><meta property="og:locale" content="en-us">
   
@@ -291,7 +291,7 @@ From talking to some other researchers here, it seems like people dealing with t
       "url": "img//"
     }
   },
-  "description": "Recently I've had to train a few deep generative models with stochastic backpropagation. I've been working with variational autoencoders and Bayesian neural networks. If you've read the literature on these training procedures and models, you probably found the theory quite complete. When I implemented these models however, I found that quite a lot of elbow grease is required to get them to work well.\nFrom talking to some other researchers here, it seems like people dealing with these models are thirsty for practical advice."
+  "description": "Recently I've had to train a few deep generative models with stochastic backpropagation. I've been working with variational autoencoders and Bayesian neural networks. If you've read the literature on these training procedures and models, you probably found the descriptions quite complete. When I implemented these models however, I found that quite a lot of elbow grease is required to get them to work well.\nFrom talking to some other researchers here, it seems like people dealing with these models are thirsty for practical advice."
 }
 </script>
 
@@ -644,36 +644,85 @@ From talking to some other researchers here, it seems like people dealing with t
   <div class="article-container">
 
     <div class="article-style">
-      <p>Recently I've had to train a few deep generative models with stochastic backpropagation. I've been working with variational autoencoders and Bayesian neural networks. If you've read the literature on these training procedures and models, you probably found the theory quite complete. When I implemented these models however, I found that quite a lot of elbow grease is required to get them to work well.</p>
-<p>From talking to some other researchers here, it seems like people dealing with these models are thirsty for practical advice. In this post, I will provide some background on the subject, and highlight some tips and hacks that really helped me with successfull implementation.</p>
+      <p>Recently I've had to train a few deep generative models with stochastic backpropagation.
+I've been working with variational autoencoders and Bayesian neural networks. If you've read
+the literature on these training procedures and models, you probably found the descriptions
+quite complete. When I implemented these models however, I found that quite a lot of elbow
+grease is required to get them to work well.</p>
+<p>From talking to some other researchers here, it seems like people dealing with these models
+are thirsty for practical advice. In this post, I will provide some background on the subject,
+and highlight some tips and hacks that really helped me with successful implementation.</p>
 <h2 id="deep-generative-models">Deep Generative Models</h2>
 <hr>
-<p>We are considering the case where we have some complex latent variable model (later we will see how we can consider the weights as our latent variables and extend these ideas to BNNs) as shown below.</p>
-<p>{:refdef: style=&quot;text-align: center;&quot;}
+<p>We are considering the case where we have some complex latent variable model (later we will
+see how we can consider the weights as our latent variables and extend these ideas to BNNs)
+as shown below.</p>
 <img src="https://raw.githubusercontent.com/Gordonjo/Jekyll-Mono/gh-pages/images/vae.png" width="20%" height="20%">
-{:refdef}</p>
-<p>Here, \(x\) are our inputs, \(z\) are the latent variables, and \(\theta\) parameterizes the conditional distribution. Usually, we use deep neural networks to map from \(z\) to \(x\), so \(\theta\) will be the parameters of the network. This is a very powerful family of models known as deep generative models (DGMs), even for very simple distributions of \(z\). What we would like to do is perform learning (i.e., maximum likelihood or a-posteriori estimation) for \(\theta\), and inference for \(z\). Unfortunately, the posterior distribution for \(z\) is intractable, so something like EM would not work for us here.</p>
+<p>Here, \(x\) are our inputs, \(z\) are the latent variables, and \(\theta\) parameterizes
+the conditional distribution. Usually, we use deep neural networks to map from \(z\) to
+\(x\), so \(\theta\) will be the parameters of the network. This is a very powerful
+family of models known as deep generative models (DGMs), even for very simple distributions
+of \(z\). What we would like to do is perform learning (i.e., maximum likelihood or
+a-posteriori estimation) for \(\theta\), and inference for \(z\). Unfortunately,
+the posterior distribution for \(z\) is intractable, so something like EM would not work
+for us here.</p>
 <h2 id="variational-inference-for-dgms">Variational Inference for DGMs</h2>
 <hr>
-<p>The best approach seems to be variational inference (VI). The basic idea with VI is to introduce an approximation to the true posterior, which we`ll call \(q\), and parameterize it with the <em>variational parameters</em> - \(\phi\). To do this, we need to first choose some parameteric family for \(q\), such as a Gaussian. Having chosen \(q\), the idea is to minimize the distance between the true posterior and our approximation. The minimization is over \(\phi\) and with respect to some divergence between distributions, such as the KL-divergence. Once we've optimized \(q\), we can use it instead of \(p\) whenever we need the posterior distribution. The variational objective can be expressed as:</p>
+<p>The best approach seems to be variational inference (VI). The basic idea with VI is to
+introduce an approximation to the true posterior, which we`ll call \(q\), and parameterize
+it with the <em>variational parameters</em> - \(\phi\). To do this, we need to first choose some
+parameteric family for \(q\), such as a Gaussian. Having chosen \(q\), the idea is to
+minimize the distance between the true posterior and our approximation. The minimization is
+over \(\phi\) and with respect to some divergence between distributions, such as the
+KL-divergence. Once we've optimized \(q\), we can use it instead of \(p\) whenever we
+need the posterior distribution. The variational objective can be expressed as:</p>
 <p>\begin{equation}
 \mathcal{L}(\theta, \phi; x) = \mathbb{E}[\log p(x|z)] - KL(q(z|x)||p(z))
 \end{equation}</p>
-<p>which has a nice interpretation: the first term can be seen as reconstruction error - we are trying to maximize the likelihood of the data under the latent variable. The second term can be interpreted as a regularizer - it encourages the approximation to be as simple as possible by penalizing it for being different from the prior on \(z\), which is typically chosen to be something simple like a standard normal distribution.</p>
-<p>What's fantastic about VI is that it allows us to convert inference from an integration problem (which we pretty much suck at) to an optimization one (which we are awesome at). On the flip-side, there are a few drawbacks: one problem is that we are usually limited to very simple posterior approximations, and the quality of our trained model is directly related to the quality of \(q\). Another problem is that posterior inference includes a separate set of variational parameters \(\phi\) for every data-point, and therefore needs to be recomputed for every new example we receive.</p>
+<p>which has a nice interpretation: the first term can be seen as reconstruction error - we are
+trying to maximize the likelihood of the data under the latent variable. The second term can
+be interpreted as a regularizer - it encourages the approximation to be as simple as possible
+by penalizing it for being different from the prior on \(z\), which is typically chosen to
+be something simple like a standard normal distribution.</p>
+<p>What's fantastic about VI is that it allows us to convert inference from an integration
+problem (which we pretty much suck at) to an optimization one (which we are awesome at). On
+the flip-side, there are a few drawbacks: one problem is that we are usually limited to very
+simple posterior approximations, and the quality of our trained model is directly related to
+the quality of \(q\). Another problem is that posterior inference includes a separate set
+of variational parameters \(\phi\) for every data-point, and therefore needs to be
+recomputed for every new example we receive.</p>
 <h2 id="inference-networks-and-reparameterization">Inference Networks and Reparameterization</h2>
 <hr>
-<p>To get around these problems, some guys had the brilliant idea of introducing an <em>inference network</em>. The idea is to use a neural network to learn \(q\). Ideally, we would train both networks \(\theta, \phi\) jointly. The main advantage of this is that it <em>ammortizes</em> posterior inference, so that while the number of latent variables grows linearly with the number of data points, posterior inference now has fixed computational and statistical complexity. This seems great, but of course, there are still some problems.</p>
-<p>To train the things, we would like to use our regular stochastic gradient optimizers. The KL term in \(\mathcal{L}\) can often be evaluated analytically, especially for the standard choices of distributions. The difficult term is the reconstruction error, which is pesky because it is under expectation of the approximate posterior, which is intractable. However, we can use Monte-Carlo to approximate it:</p>
+<p>To get around these problems, some guys had the brilliant idea of introducing an <em>inference
+network</em>. The idea is to use a neural network to learn \(q\). Ideally, we would train both
+networks \(\theta, \phi\) jointly. The main advantage of this is that it <em>ammortizes</em>
+posterior inference, so that while the number of latent variables grows linearly with the
+number of data points, posterior inference now has fixed computational and statistical
+complexity. This seems great, but of course, there are still some problems.</p>
+<p>To train the things, we would like to use our regular stochastic gradient optimizers. The KL
+term in \(\mathcal{L}\) can often be evaluated analytically, especially for the standard
+choices of distributions. The difficult term is the reconstruction error, which is pesky
+because it is under expectation of the approximate posterior, which is intractable. However,
+we can use Monte-Carlo to approximate it:</p>
 <p>\begin{equation}
 \mathbb{E}[\log p(x|z)] = \int q(z|x) \log p(x|z)dz \approx \frac{1}{L}\sum\limits_{l=1}^L \log p(x|z^l)
 \end{equation}</p>
-<p>where we are sampling \(z^l \sim q\). Alas, the problem is that sampling for \(z\) means that \(\hat{\mathcal{L}}\) is not differentiable w.r.t. \(\phi\), so we cannot train the inference network. Another idea might be to directly sample the gradient \(\nabla_{\theta, \phi}\mathcal{L}\). Unfortunately, in <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> it is shown that \(\hat{\nabla}_{\phi}\mathcal{L}\), while unbiased, has very high variance, and training as such tends to diverge more often than not.</p>
-<p>Luckily, some papers from a few years ago (<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, <sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>) fleshed out how we could get around this using an almost embarrasingly simple trick - <em>reparameterization</em>. The idea here is to introduce a random variable \(\epsilon\) that will contain all of the randomness in \(z\) for us. We now set up a new variable \(\tilde{z}\) such that:</p>
+<p>where we are sampling \(z^l \sim q\). Alas, the problem is that sampling for \(z\) means
+that \(\hat{\mathcal{L}}\) is not differentiable w.r.t. \(\phi\), so we cannot train the
+inference network. Another idea might be to directly sample the gradient \(\nabla_{\theta,
+\phi}\mathcal{L}\). Unfortunately, Paisley et al.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> show that \(\hat{\nabla}_{\phi}
+\mathcal{L}\), while unbiased, has very high variance, and training as such tends to diverge
+more often than not.</p>
+<p>Luckily, some papers from a few years ago (<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, <sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>) fleshed out how we could get around
+this using an almost embarrasingly simple trick - <em>reparameterization</em>. The idea here is to
+introduce a random variable \(\epsilon\) that will contain all of the randomness in \(z\)
+for us. We now set up a new variable \(\tilde{z}\) such that:</p>
 <p>\begin{equation}
 \tilde{z} = g_{\phi}(\epsilon, x);\ \ \tilde{z} \sim q(z|x);\ \ \epsilon \sim p(\epsilon)
 \end{equation}</p>
-<p>so all we need is that \(g_{\phi}\) be differentiable and be able to sample from \(p_{\epsilon}\). This is almost always possible, and in many cases it is even super-easy. For example, if:</p>
+<p>so all we need is that \(g_{\phi}\) be differentiable and be able to sample from
+\(p_{\epsilon}\). This is almost always possible, and in many cases it is even super-easy.
+For example, if:</p>
 <p>\begin{equation}
 q(z|x) = \mathcal{N}(z; \mu(x), \sigma^2(x))
 \end{equation}</p>
@@ -681,10 +730,22 @@ q(z|x) = \mathcal{N}(z; \mu(x), \sigma^2(x))
 <p>\begin{equation}
 p(\epsilon) = \mathcal{N}(\epsilon; 0,1);\ \  g(\epsilon, x) = \mu(x) + \epsilon \otimes \sigma(x)
 \end{equation}</p>
-<p>where I am using \(\otimes\) to denote an element-wise multiplication. Reparameterization, simple though it may appear, does two amazing things. (1) It manipulates \(\hat{\mathcal{L}}\) such that it is differentiable w.r.t. \(\phi\) - we can now jointly train the inference network and the model! (2) It allows us to reduce the variance of the estimator by sharing random numbers across terms and iterations. This may not be the only reason, but regardless, \(\nabla_{\theta,\phi}\hat{\mathcal{L}}\) exhibits low variance, and in practice converges very nicely. For a more detailed explanation of how and why reparameterization works, I strongly recommend Carl Doersch's excellent tutorial (<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>).</p>
+<p>where I am using \(\otimes\) to denote an element-wise multiplication. Reparameterization,
+simple though it may appear, does two amazing things. (1) It manipulates
+\(\hat{\mathcal{L}}\) such that it is differentiable w.r.t. \(\phi\) - we can now jointly
+train the inference network and the model! (2) It allows us to reduce the variance of the
+estimator by sharing random numbers across terms and iterations. This may not be the only
+reason, but regardless, \(\nabla_{\theta,\phi}\hat{\mathcal{L}}\) exhibits low variance,
+and in practice converges very nicely. For a more detailed explanation of how and why
+reparameterization works, I strongly recommend Carl Doersch's excellent tutorial (<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>).</p>
 <h2 id="stochastic-backpropagation">Stochastic Backpropagation</h2>
 <hr>
-<p>So that's it. We're ready to put it all together in an algorithm called Auto-encoding Variational Bayes (<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>), or Stochastic Backpropagation (<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>) (the thing was concurrently discovered and published by two separate groups). Conveniently, we can run this optimization in mini-batch form, so basically its just stochastic gradient descent with your favorite optimizer on the estimator described above. Just for closure, here is the complete algorithm (in rough pseudo-code):</p>
+<p>So that's it. We're ready to put it all together in an algorithm called Auto-encoding
+Variational Bayes (<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>), or Stochastic Backpropagation (<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>) (the thing was concurrently
+discovered and published by two separate groups). Conveniently, we can run this optimization
+in mini-batch form, so basically its just stochastic gradient descent with your favorite
+optimizer on the estimator described above. Just for closure, here is the complete algorithm
+(in rough pseudo-code):</p>
 <pre><code>function stochastic_backprop(data, L):
     theta, phi &lt;- initialize_variables()
     repeat:
@@ -695,7 +756,11 @@ p(\epsilon) = \mathcal{N}(\epsilon; 0,1);\ \  g(\epsilon, x) = \mu(x) + \epsilon
     until convergence (theta, phi)
     return theta, phi
 </code></pre>
-<p>Of course, this is very rough psuedo code that is not meant to run. Perhaps in a future post I will go into detail with one model (VAE), and will run through a TensorFlow implementation (including code) with toy data. There I can also discuss how the exact same algorithm can be used to train a BNN, and run through a TF implementation of that with the same data.</p>
+<p>Of course, this is very rough psuedo code that is not meant to run. Perhaps in a future
+post I will go into detail with one model (VAE), and will run through a TensorFlow
+implementation (including code) with toy data. There I can also discuss how the exact same
+algorithm can be used to train a BNN, and run through a TF implementation of that with the
+same data.</p>
 <h2 id="references">References</h2>
 <hr>
 <section class="footnotes" role="doc-endnotes">
