@@ -714,7 +714,7 @@ network.</p>
 encoder and decoder) to maximize the log-likelihood i.e., the $\log$ of Eq. $\eqref{eq1}$:
 $$
 \theta^\ast = \underset{\theta \in \Theta}{\text{argmax}}\  \mathbb{E}_\tau
-\left[ \sum \log p \left(y; x, D_c \right) \right],
+\left[ \sum \log p \left(y | x, D_c \right) \right],
 $$</p>
 <p>where we can take the expectation over tasks $\tau$ with our dataset, and the inner summation is over $(x_t, y_t)$
 pairs in the target set. In practice, at every iteration we sample a batch of tasks from our dataset of tasks,
