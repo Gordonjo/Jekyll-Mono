@@ -716,7 +716,7 @@ $$
 \theta^\ast = \underset{\theta \in \Theta}{\text{argmax}}\  \mathbb{E}_\tau
 \left[ \sum \log p \left(y | x, D_c \right) \right],
 $$</p>
-<p>where we can take the expectation over tasks $\tau$ with our dataset, and the inner summation is over $(x_t, y_t)$
+<p>where we can take the expectation over tasks $\tau$ with our dataset, and the inner summation is over the $(x_t, y_t)$
 pairs in the target set. In practice, at every iteration we sample a batch of tasks from our dataset of tasks,
 and (if they are not already) partition them into context and target sets. We then pass each context set through
 $e$ to produce $r$. Each $x_t$ in the target sets is concatenated with $r$, and this is passed through the decoder
