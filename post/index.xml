@@ -420,28 +420,28 @@ best of both worlds.&lt;/p&gt;
 &lt;hr&gt;
 &lt;ol&gt;
 &lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Goodfellow J., Ian, et al. An Emprical Investigation of Catastrophic Forgetting in Gradient-Based Neural Networks. 2013 &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://arxiv.org/abs/1312.6211&#34;&gt;Goodfellow J., Ian, et al. An Emprical Investigation of Catastrophic Forgetting in Gradient-Based Neural Networks. 2013&lt;/a&gt; &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:2&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Lake M., Brenden, Salakhutdinov, Ruslan, and Tenenbaum B. Joshua. Human-level Concept Learning Through Probabilistic Program Induction. 2015 &lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://science.sciencemag.org/content/350/6266/1332&#34;&gt;Lake M., Brenden, Salakhutdinov, Ruslan, and Tenenbaum B. Joshua. Human-level Concept Learning Through Probabilistic Program Induction. 2015&lt;/a&gt; &lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:3&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Lake M., Brenden, et al. Building Machines that Learn and Think Like People. 2017 &lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://arxiv.org/abs/1604.00289&#34;&gt;Lake M., Brenden, et al. Building Machines that Learn and Think Like People. 2017&lt;/a&gt; &lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:4&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Botvinick, Matthew, et al. Building Machines that Learn and Think for Themselves: Commentary on Lake, Ullman, Tenebaum, and Gershamn. 2017 &lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://arxiv.org/abs/1711.08378&#34;&gt;Botvinick, Matthew, et al. Building Machines that Learn and Think for Themselves: Commentary on Lake, Ullman, Tenebaum, and Gershamn. 2017&lt;/a&gt; &lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:5&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Mnih, Volodymyr, et al. Human-Level Control Through Deep Reinforcement Learning. 2015 &lt;a href=&#34;#fnref:5&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://web.stanford.edu/class/psych209/Readings/MnihEtAlHassibis15NatureControlDeepRL.pdf&#34;&gt;Mnih, Volodymyr, et al. Human-Level Control Through Deep Reinforcement Learning. 2015&lt;/a&gt; &lt;a href=&#34;#fnref:5&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:6&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Silver, David, et al. Mastering the Game of Go Without Human Knowledge. 2017 &lt;a href=&#34;#fnref:6&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.nature.com/articles/nature24270&#34;&gt;Silver, David, et al. Mastering the Game of Go Without Human Knowledge. 2017&lt;/a&gt; &lt;a href=&#34;#fnref:6&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:7&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Kansky, Ken, et al. Schema Networks: Zero-shot Transfer with a Generative Causal Model of Intuitive Physics. 2017 &lt;a href=&#34;#fnref:7&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://arxiv.org/abs/1706.04317&#34;&gt;Kansky, Ken, et al. Schema Networks: Zero-Shot Transfer with a Generative Causal Model of Intuitive Physics. 2017&lt;/a&gt; &lt;a href=&#34;#fnref:7&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:8&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;George, Dileep, et al. A Generative Vision Model that Trains with High Data-Efficiency and Breaks Text-Based CAPTCHAs. 2017 &lt;a href=&#34;#fnref:8&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://science.sciencemag.org/content/358/6368/eaag2612&#34;&gt;George, Dileep, et al. A Generative Vision Model that Trains with High Data-Efficiency and Breaks Text-Based CAPTCHAs. 2017&lt;/a&gt; &lt;a href=&#34;#fnref:8&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/section&gt;
@@ -500,31 +500,31 @@ spectrum will be very influential in the near future.&lt;/p&gt;
 &lt;hr&gt;
 &lt;ol&gt;
 &lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Bauer, Matthias, et al. Discriminative K-Shot Learning Using Probabilistic Models. 2017 &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://arxiv.org/abs/1706.00326&#34;&gt;Bauer, Matthias, et al. Discriminative K-Shot Learning Using Probabilistic Models. 2017&lt;/a&gt; &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:2&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Rezende J., Danilo, et al. One-Shot Generalization in Deep Generative Models. 2016 &lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://arxiv.org/abs/1603.05106&#34;&gt;Rezende J., Danilo, et al. One-Shot Generalization in Deep Generative Models. 2016&lt;/a&gt; &lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:3&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Edwards, Harrison, and Storkey, Amos. Towards a Neural Statistician. 2017 &lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://arxiv.org/abs/1606.02185&#34;&gt;Edwards, Harrison, and Storkey, Amos. Towards a Neural Statistician. 2017&lt;/a&gt; &lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:4&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Salakhutdinov, Ruslan, Tenenbaum, Joshua, Torralba, Antonio. One-Shot Learning with a Hierarchical Nonparametric Bayesian Model. 2012 &lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://proceedings.mlr.press/v27/salakhutdinov12a/salakhutdinov12a.pdf&#34;&gt;Salakhutdinov, Ruslan, Tenenbaum, Joshua, Torralba, Antonio. One-Shot Learning with a Hierarchical Nonparametric Bayesian Model. 2012&lt;/a&gt; &lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:5&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Kansky, Ken, et al. Schema Networks: Zero-Shot Transfer with a Generative Causal Model of Intuitive Physics. 2017 &lt;a href=&#34;#fnref:5&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://arxiv.org/abs/1706.04317&#34;&gt;Kansky, Ken, et al. Schema Networks: Zero-Shot Transfer with a Generative Causal Model of Intuitive Physics. 2017&lt;/a&gt; &lt;a href=&#34;#fnref:5&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:6&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;George, Dileep, et al. A Generative Vision Model that Trains with High Data-Efficiency and Breaks Text-Based CAPTCHAs. 2017 &lt;a href=&#34;#fnref:6&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://science.sciencemag.org/content/358/6368/eaag2612&#34;&gt;George, Dileep, et al. A Generative Vision Model that Trains with High Data-Efficiency and Breaks Text-Based CAPTCHAs. 2017&lt;/a&gt; &lt;a href=&#34;#fnref:6&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:7&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Lake M., Brenden, et al. Building Machines that Learn and Think Like People. 2017 &lt;a href=&#34;#fnref:7&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://arxiv.org/abs/1604.00289&#34;&gt;Lake M., Brenden, et al. Building Machines that Learn and Think Like People. 2017&lt;/a&gt; &lt;a href=&#34;#fnref:7&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:8&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Botvinick, Matthew, et al. Building Machines that Learn and Think for Themselves: Commentary on Lake, Ullman, Tenebaum, and Gershamn. 2017 &lt;a href=&#34;#fnref:8&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://arxiv.org/abs/1711.08378&#34;&gt;Botvinick, Matthew, et al. Building Machines that Learn and Think for Themselves: Commentary on Lake, Ullman, Tenebaum, and Gershamn. 2017&lt;/a&gt; &lt;a href=&#34;#fnref:8&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:9&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Siddarth, N., et al. Learning Disentangled Representations with Semi-Supervised Deep Generative Models. 2017 &lt;a href=&#34;#fnref:9&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://papers.nips.cc/paper/7174-learning-disentangled-representations-with-semi-supervised-deep-generative-models.pdf&#34;&gt;Siddarth, N., et al. Learning Disentangled Representations with Semi-Supervised Deep Generative Models. 2017&lt;/a&gt; &lt;a href=&#34;#fnref:9&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/section&gt;
@@ -536,12 +536,33 @@ spectrum will be very influential in the near future.&lt;/p&gt;
       <link>/post/bayesian_nnets/</link>
       <pubDate>Tue, 05 Sep 2017 00:00:00 +0000</pubDate>
       <guid>/post/bayesian_nnets/</guid>
-      <description>&lt;p&gt;A Bayesian neural network (BNN) refers to extending standard networks with posterior inference. They arise naturally when priors are placed on the weights of a network. They are relatively simple beasts, and (in my opinion) far more interesting than the model itself is the approximate posterior inference associated with them.&lt;/p&gt;
+      <description>&lt;p&gt;A Bayesian neural network (BNN) refers to extending standard networks by treating the weights
+as random variables. Thus, training a BNN focuses on posterior inference given data. In practice,
+they arise naturally when priors are placed on the weights of a network. They are relatively
+simple beasts, and, in my opinion, far more interesting than the model itself is the
+approximate posterior inference associated with them.&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;Standard NN training via optimization is (from a probabilistic perspective) equivalent to maximum likelihood estimation (MLE) for the weights. For many reasons this is unsatisfactory. One reason is that it lacks proper theoretical justification from a probabilistic perspective: why maximum likelihood? Why just point estimates? Using MLE ignores any uncertainty that we may have in the proper weight values. From a practical standpoint, this type of training is often susceptible to overfitting, as NNs often do.&lt;/p&gt;
-&lt;p&gt;One partial fix for this is to introduce regularization. From a Bayesian perspective, this is equivalent to inducing priors on the weights (say Gaussian distributions if we are using L2 regularization). Optimization in this case is akin to searching for MAP estimators rather than MLE. Again from a probabilistic perspective, this is not the right thing to do, though it certainly works well in practice.&lt;/p&gt;
-&lt;p&gt;The correct (i.e., theoretically justifiable) thing to do is posterior inference [&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;, &lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;], though this is very challenging both from a modelling and computational point of view. BNNs are neural networks that take this approach. In the past this was all but impossible, and we had to resort to poor approximations such as Laplace’s method (low complexity) or MCMC (long convergence, difficult to diagnose). However, lately there have been some super-interesting results on using variational inference to do this [&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;], and this has sparked a great deal of interest in the area.&lt;/p&gt;
-&lt;p&gt;BNNs are important in specific settings, especially when we care about uncertainty very much. Some examples of these cases are decision making systems, (relatively) smaller data settings, Bayesian Optimization, model-based reinforcement learning and others.&lt;/p&gt;
+&lt;p&gt;Standard NN training via optimization is (from a probabilistic perspective) equivalent to
+maximum likelihood estimation (MLE) for the weights. For many reasons this is unsatisfactory.
+One reason is that it lacks proper theoretical justification from a probabilistic perspective:
+why maximum likelihood? Why just point estimates? Using MLE ignores any uncertainty that we
+may have in the proper weight values. From a practical standpoint, this type of training is
+susceptible to overfitting, as NNs often do.&lt;/p&gt;
+&lt;p&gt;One partial fix for this is to introduce regularization. From a Bayesian perspective, this
+is equivalent to inducing priors on the weights (say Gaussian distributions if we are using
+L2 regularization). Optimization in this case is akin to searching for MAP estimators rather
+than MLE. Again from a probabilistic perspective, this is not the right thing to do, though
+it certainly works well in practice.&lt;/p&gt;
+&lt;p&gt;The correct (i.e., theoretically justifiable) thing to do is posterior inference [&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;, &lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;],
+though this is very challenging both from a modelling and computational point of view. BNNs
+are neural networks that take this approach. In the past this was all but impossible, and we
+had to resort to poor approximations such as Laplace’s method (low complexity) or MCMC
+(long convergence, difficult to diagnose). However, lately there have been some super-interesting
+results on using variational inference to do this [&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;], and this has sparked a great deal
+of interest in the area.&lt;/p&gt;
+&lt;p&gt;BNNs are important in specific settings, especially when we care about uncertainty very much.
+Some examples of these cases are decision making systems, (relatively) smaller data settings,
+Bayesian Optimization, model-based reinforcement learning and others.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Originally a &lt;a href=&#34;https://www.quora.com/What-is-a-Bayesian-Neural-Network&#34;&gt;Quora answer&lt;/a&gt;, later a &lt;a href=&#34;https://www.kdnuggets.com/2017/12/what-bayesian-neural-network.html&#34;&gt;KDnuggets post&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 &lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
 &lt;hr&gt;
@@ -549,13 +570,13 @@ spectrum will be very influential in the near future.&lt;/p&gt;
 &lt;hr&gt;
 &lt;ol&gt;
 &lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Radford, Neal. Bayesian Learning for Neural Networks. 2012 &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.446.9306&amp;amp;rep=rep1&amp;amp;type=pdf&#34;&gt;Radford, Neal. Bayesian Learning for Neural Networks. 2012&lt;/a&gt; &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:2&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Mackay, David. Bayesian Neural Networks and Density Networks. 1995 &lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.inference.org.uk/mackay/ch_learning.pdf&#34;&gt;Mackay, David. Bayesian Neural Networks and Density Networks. 1995&lt;/a&gt; &lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:3&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Blundell, Charles, et al. Weight Uncertainty in Neural Networks. 2015 &lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://arxiv.org/abs/1505.05424&#34;&gt;Blundell, Charles, et al. Weight Uncertainty in Neural Networks. 2015&lt;/a&gt; &lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/section&gt;
@@ -690,16 +711,16 @@ same data.&lt;/p&gt;
 &lt;hr&gt;
 &lt;ol&gt;
 &lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Paisley, John, Blei, David M, and Jordan, Michael I. Variational Bayesian Inference with Stochastic Search. 2012 &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://icml.cc/2012/papers/687.pdf&#34;&gt;Paisley, John, Blei, David M, and Jordan, Michael I. Variational Bayesian Inference with Stochastic Search. 2012&lt;/a&gt; &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:2&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Kingma, Diederik P and Welling, Max. Auto-encoding variational Bayes. 2013 &lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://arxiv.org/abs/1312.6114&#34;&gt;Kingma, Diederik P and Welling, Max. Auto-encoding variational Bayes. 2013&lt;/a&gt; &lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:3&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Rezende, Danilo Jimenez, Mohamed, Shakir, and Wierstra, Daan. Stochastic backpropagation and approximate inference in deep generative models. 2014 &lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://arxiv.org/abs/1401.4082&#34;&gt;Rezende, Danilo Jimenez, Mohamed, Shakir, and Wierstra, Daan. Stochastic backpropagation and approximate inference in deep generative models. 2014&lt;/a&gt; &lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:4&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Doerch, Carl. Tutorial on Variational Autoencoders. 2016 &lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://arxiv.org/abs/1606.05908&#34;&gt;Doerch, Carl. Tutorial on Variational Autoencoders. 2016&lt;/a&gt; &lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/section&gt;

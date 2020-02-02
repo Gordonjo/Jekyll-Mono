@@ -28,8 +28,8 @@
   
     
   
-  <meta name="description" content="A Bayesian neural network (BNN) refers to extending standard networks with posterior inference. They arise naturally when priors are placed on the weights of a network. They are relatively simple beasts, and (in my opinion) far more interesting than the model itself is the approximate posterior inference associated with them.
- Standard NN training via optimization is (from a probabilistic perspective) equivalent to maximum likelihood estimation (MLE) for the weights. For many reasons this is unsatisfactory.">
+  <meta name="description" content="A Bayesian neural network (BNN) refers to extending standard networks by treating the weights as random variables. Thus, training a BNN focuses on posterior inference given data. In practice, they arise naturally when priors are placed on the weights of a network. They are relatively simple beasts, and, in my opinion, far more interesting than the model itself is the approximate posterior inference associated with them.
+ Standard NN training via optimization is (from a probabilistic perspective) equivalent to maximum likelihood estimation (MLE) for the weights.">
 
   
   <link rel="alternate" hreflang="en-us" href="/post/bayesian_nnets/">
@@ -234,8 +234,8 @@
   <meta property="og:site_name" content="Jonathan Gordon">
   <meta property="og:url" content="/post/bayesian_nnets/">
   <meta property="og:title" content="What is a Bayesian Neural Network? | Jonathan Gordon">
-  <meta property="og:description" content="A Bayesian neural network (BNN) refers to extending standard networks with posterior inference. They arise naturally when priors are placed on the weights of a network. They are relatively simple beasts, and (in my opinion) far more interesting than the model itself is the approximate posterior inference associated with them.
- Standard NN training via optimization is (from a probabilistic perspective) equivalent to maximum likelihood estimation (MLE) for the weights. For many reasons this is unsatisfactory."><meta property="og:image" content="/post/bayesian_nnets/featured.jpeg">
+  <meta property="og:description" content="A Bayesian neural network (BNN) refers to extending standard networks by treating the weights as random variables. Thus, training a BNN focuses on posterior inference given data. In practice, they arise naturally when priors are placed on the weights of a network. They are relatively simple beasts, and, in my opinion, far more interesting than the model itself is the approximate posterior inference associated with them.
+ Standard NN training via optimization is (from a probabilistic perspective) equivalent to maximum likelihood estimation (MLE) for the weights."><meta property="og:image" content="/post/bayesian_nnets/featured.jpeg">
   <meta property="twitter:image" content="/post/bayesian_nnets/featured.jpeg"><meta property="og:locale" content="en-us">
   
     
@@ -291,7 +291,7 @@
       "url": "img//"
     }
   },
-  "description": "A Bayesian neural network (BNN) refers to extending standard networks with posterior inference. They arise naturally when priors are placed on the weights of a network. They are relatively simple beasts, and (in my opinion) far more interesting than the model itself is the approximate posterior inference associated with them.\n Standard NN training via optimization is (from a probabilistic perspective) equivalent to maximum likelihood estimation (MLE) for the weights. For many reasons this is unsatisfactory."
+  "description": "A Bayesian neural network (BNN) refers to extending standard networks by treating the weights as random variables. Thus, training a BNN focuses on posterior inference given data. In practice, they arise naturally when priors are placed on the weights of a network. They are relatively simple beasts, and, in my opinion, far more interesting than the model itself is the approximate posterior inference associated with them.\n Standard NN training via optimization is (from a probabilistic perspective) equivalent to maximum likelihood estimation (MLE) for the weights."
 }
 </script>
 
@@ -644,12 +644,33 @@
   <div class="article-container">
 
     <div class="article-style">
-      <p>A Bayesian neural network (BNN) refers to extending standard networks with posterior inference. They arise naturally when priors are placed on the weights of a network. They are relatively simple beasts, and (in my opinion) far more interesting than the model itself is the approximate posterior inference associated with them.</p>
+      <p>A Bayesian neural network (BNN) refers to extending standard networks by treating the weights
+as random variables. Thus, training a BNN focuses on posterior inference given data. In practice,
+they arise naturally when priors are placed on the weights of a network. They are relatively
+simple beasts, and, in my opinion, far more interesting than the model itself is the
+approximate posterior inference associated with them.</p>
 <hr>
-<p>Standard NN training via optimization is (from a probabilistic perspective) equivalent to maximum likelihood estimation (MLE) for the weights. For many reasons this is unsatisfactory. One reason is that it lacks proper theoretical justification from a probabilistic perspective: why maximum likelihood? Why just point estimates? Using MLE ignores any uncertainty that we may have in the proper weight values. From a practical standpoint, this type of training is often susceptible to overfitting, as NNs often do.</p>
-<p>One partial fix for this is to introduce regularization. From a Bayesian perspective, this is equivalent to inducing priors on the weights (say Gaussian distributions if we are using L2 regularization). Optimization in this case is akin to searching for MAP estimators rather than MLE. Again from a probabilistic perspective, this is not the right thing to do, though it certainly works well in practice.</p>
-<p>The correct (i.e., theoretically justifiable) thing to do is posterior inference [<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>], though this is very challenging both from a modelling and computational point of view. BNNs are neural networks that take this approach. In the past this was all but impossible, and we had to resort to poor approximations such as Laplace’s method (low complexity) or MCMC (long convergence, difficult to diagnose). However, lately there have been some super-interesting results on using variational inference to do this [<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>], and this has sparked a great deal of interest in the area.</p>
-<p>BNNs are important in specific settings, especially when we care about uncertainty very much. Some examples of these cases are decision making systems, (relatively) smaller data settings, Bayesian Optimization, model-based reinforcement learning and others.</p>
+<p>Standard NN training via optimization is (from a probabilistic perspective) equivalent to
+maximum likelihood estimation (MLE) for the weights. For many reasons this is unsatisfactory.
+One reason is that it lacks proper theoretical justification from a probabilistic perspective:
+why maximum likelihood? Why just point estimates? Using MLE ignores any uncertainty that we
+may have in the proper weight values. From a practical standpoint, this type of training is
+susceptible to overfitting, as NNs often do.</p>
+<p>One partial fix for this is to introduce regularization. From a Bayesian perspective, this
+is equivalent to inducing priors on the weights (say Gaussian distributions if we are using
+L2 regularization). Optimization in this case is akin to searching for MAP estimators rather
+than MLE. Again from a probabilistic perspective, this is not the right thing to do, though
+it certainly works well in practice.</p>
+<p>The correct (i.e., theoretically justifiable) thing to do is posterior inference [<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>],
+though this is very challenging both from a modelling and computational point of view. BNNs
+are neural networks that take this approach. In the past this was all but impossible, and we
+had to resort to poor approximations such as Laplace’s method (low complexity) or MCMC
+(long convergence, difficult to diagnose). However, lately there have been some super-interesting
+results on using variational inference to do this [<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>], and this has sparked a great deal
+of interest in the area.</p>
+<p>BNNs are important in specific settings, especially when we care about uncertainty very much.
+Some examples of these cases are decision making systems, (relatively) smaller data settings,
+Bayesian Optimization, model-based reinforcement learning and others.</p>
 <p><em>Originally a <a href="https://www.quora.com/What-is-a-Bayesian-Neural-Network">Quora answer</a>, later a <a href="https://www.kdnuggets.com/2017/12/what-bayesian-neural-network.html">KDnuggets post</a></em></p>
 <h2 id="references">References</h2>
 <hr>
@@ -657,13 +678,13 @@
 <hr>
 <ol>
 <li id="fn:1" role="doc-endnote">
-<p>Radford, Neal. Bayesian Learning for Neural Networks. 2012 <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p><a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.446.9306&amp;rep=rep1&amp;type=pdf">Radford, Neal. Bayesian Learning for Neural Networks. 2012</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:2" role="doc-endnote">
-<p>Mackay, David. Bayesian Neural Networks and Density Networks. 1995 <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p><a href="http://www.inference.org.uk/mackay/ch_learning.pdf">Mackay, David. Bayesian Neural Networks and Density Networks. 1995</a> <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:3" role="doc-endnote">
-<p>Blundell, Charles, et al. Weight Uncertainty in Neural Networks. 2015 <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p><a href="https://arxiv.org/abs/1505.05424">Blundell, Charles, et al. Weight Uncertainty in Neural Networks. 2015</a> <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>
