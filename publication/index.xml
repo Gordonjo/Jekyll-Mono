@@ -23,7 +23,7 @@
     <item>
       <title>Permutation Equivariant Models for Compositional Generalization in Language</title>
       <link>/publication/compositional/</link>
-      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 09 Jan 2020 00:00:00 +0000</pubDate>
       <guid>/publication/compositional/</guid>
       <description></description>
     </item>
@@ -53,6 +53,14 @@
     </item>
     
     <item>
+      <title>Meta Learning Probabilistic Inference for Prediction</title>
+      <link>/publication/mlpip/</link>
+      <pubDate>Mon, 06 May 2019 00:00:00 +0000</pubDate>
+      <guid>/publication/mlpip/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Refining the Variational Posterior Through Iterative Optimization</title>
       <link>/publication/refining/</link>
       <pubDate>Mon, 10 Dec 2018 00:00:00 +0000</pubDate>
@@ -61,10 +69,18 @@
     </item>
     
     <item>
-      <title>Meta Learning Probabilistic Inference for Prediction</title>
-      <link>/publication/mlpip/</link>
-      <pubDate>Tue, 10 Apr 2018 00:00:00 +0000</pubDate>
-      <guid>/publication/mlpip/</guid>
+      <title>Consolidating the Meta-Learning Zoo: A Unifying Perspective as Posterior Predictive Inference</title>
+      <link>/publication/consolidating/</link>
+      <pubDate>Sat, 08 Dec 2018 00:00:00 +0000</pubDate>
+      <guid>/publication/consolidating/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>VERSA: Versatile and Efficient Few-shot Learning</title>
+      <link>/publication/versa/</link>
+      <pubDate>Sat, 08 Dec 2018 00:00:00 +0000</pubDate>
+      <guid>/publication/versa/</guid>
       <description></description>
     </item>
     

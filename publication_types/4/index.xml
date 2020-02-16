@@ -1,24 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Matthias Bauer | Jonathan Gordon</title>
-    <link>/authors/matthias-bauer/</link>
-      <atom:link href="/authors/matthias-bauer/index.xml" rel="self" type="application/rss+xml" />
-    <description>Matthias Bauer</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 06 May 2019 00:00:00 +0000</lastBuildDate>
+    <title>4 | Jonathan Gordon</title>
+    <link>/publication_types/4/</link>
+      <atom:link href="/publication_types/4/index.xml" rel="self" type="application/rss+xml" />
+    <description>4</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 08 Dec 2018 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
-      <title>Matthias Bauer</title>
-      <link>/authors/matthias-bauer/</link>
+      <title>4</title>
+      <link>/publication_types/4/</link>
     </image>
-    
-    <item>
-      <title>Meta Learning Probabilistic Inference for Prediction</title>
-      <link>/publication/mlpip/</link>
-      <pubDate>Mon, 06 May 2019 00:00:00 +0000</pubDate>
-      <guid>/publication/mlpip/</guid>
-      <description></description>
-    </item>
     
     <item>
       <title>Consolidating the Meta-Learning Zoo: A Unifying Perspective as Posterior Predictive Inference</title>

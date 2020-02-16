@@ -13,42 +13,10 @@
     </image>
     
     <item>
-      <title></title>
-      <link>/authors/admin/</link>
-      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/authors/admin/</guid>
-      <description>&lt;p&gt;I am a Ph.D. candidate with the &lt;a href=&#34;http://mlg.eng.cam.ac.uk/&#34;&gt;Computational and Biological Learning group&lt;/a&gt; at the University
-of Cambridge, supervised by &lt;a href=&#34;https://jmhl.org/&#34;&gt;Dr José Miguel Hernández-Lobato&lt;/a&gt; and advised by
-&lt;a href=&#34;http://cbl.eng.cam.ac.uk/Public/Turner/WebHome&#34;&gt;Dr Richard Turner&lt;/a&gt;. My research focuses on developing probabilistic
-models (typically parameterized by deep neural networks) and associated scalable approximate inference procedures.&lt;/p&gt;
-&lt;p&gt;I am particularly interested in developing deep probabilistic models that capture structure existing in specific data modalities,
-and exhibit nice behaviours such as sample and parameter efficiency, generalization, and calibrated uncertainties. Much of
-my recent work has focused on meta-learning, which enables fast few-shot generalization. Another theme in my research
-is modelling symmetries in the data, such as by incorporating translation or permutation equivariance.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Andrew Y. K. Foong</title>
       <link>/authors/andrew-y.-k.-foong/</link>
       <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
       <guid>/authors/andrew-y.-k.-foong/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>David Lopez-Paz</title>
-      <link>/authors/david-lopez-paz/</link>
-      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/authors/david-lopez-paz/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Diane Bouchecourt</title>
-      <link>/authors/diane-bouchecourt/</link>
-      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/authors/diane-bouchecourt/</guid>
       <description></description>
     </item>
     
@@ -65,14 +33,6 @@ is modelling symmetries in the data, such as by incorporating translation or per
       <link>/authors/jonathan-gordon/</link>
       <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
       <guid>/authors/jonathan-gordon/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Marco Baroni</title>
-      <link>/authors/marco-baroni/</link>
-      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/authors/marco-baroni/</guid>
       <description></description>
     </item>
     
@@ -97,6 +57,46 @@ is modelling symmetries in the data, such as by incorporating translation or per
       <link>/authors/yann-dubois/</link>
       <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
       <guid>/authors/yann-dubois/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/authors/admin/</link>
+      <pubDate>Thu, 09 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/authors/admin/</guid>
+      <description>&lt;p&gt;I am a Ph.D. candidate with the &lt;a href=&#34;http://mlg.eng.cam.ac.uk/&#34;&gt;Computational and Biological Learning group&lt;/a&gt; at the University
+of Cambridge, supervised by &lt;a href=&#34;https://jmhl.org/&#34;&gt;Dr José Miguel Hernández-Lobato&lt;/a&gt; and advised by
+&lt;a href=&#34;http://cbl.eng.cam.ac.uk/Public/Turner/WebHome&#34;&gt;Dr Richard Turner&lt;/a&gt;. My research focuses on developing probabilistic
+models (typically parameterized by deep neural networks) and associated scalable approximate inference procedures.&lt;/p&gt;
+&lt;p&gt;I am particularly interested in developing deep probabilistic models that capture structure existing in specific data modalities,
+and exhibit nice behaviours such as sample and parameter efficiency, generalization, and calibrated uncertainties. Much of
+my recent work has focused on meta-learning, which enables fast few-shot generalization. Another theme in my research
+is modelling symmetries in the data, such as by incorporating translation or permutation equivariance.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>David Lopez-Paz</title>
+      <link>/authors/david-lopez-paz/</link>
+      <pubDate>Thu, 09 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/authors/david-lopez-paz/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Diane Bouchecourt</title>
+      <link>/authors/diane-bouchecourt/</link>
+      <pubDate>Thu, 09 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/authors/diane-bouchecourt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Marco Baroni</title>
+      <link>/authors/marco-baroni/</link>
+      <pubDate>Thu, 09 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/authors/marco-baroni/</guid>
       <description></description>
     </item>
     
@@ -141,6 +141,14 @@ is modelling symmetries in the data, such as by incorporating translation or per
     </item>
     
     <item>
+      <title>Matthias Bauer</title>
+      <link>/authors/matthias-bauer/</link>
+      <pubDate>Mon, 06 May 2019 00:00:00 +0000</pubDate>
+      <guid>/authors/matthias-bauer/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Dustin Tran</title>
       <link>/authors/dustin-tran/</link>
       <pubDate>Mon, 10 Dec 2018 00:00:00 +0000</pubDate>
@@ -161,14 +169,6 @@ is modelling symmetries in the data, such as by incorporating translation or per
       <link>/authors/marton-havasi/</link>
       <pubDate>Mon, 10 Dec 2018 00:00:00 +0000</pubDate>
       <guid>/authors/marton-havasi/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Matthias Bauer</title>
-      <link>/authors/matthias-bauer/</link>
-      <pubDate>Tue, 10 Apr 2018 00:00:00 +0000</pubDate>
-      <guid>/authors/matthias-bauer/</guid>
       <description></description>
     </item>
     
