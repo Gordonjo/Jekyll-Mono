@@ -5,7 +5,7 @@
     <link>/authors/</link>
       <atom:link href="/authors/index.xml" rel="self" type="application/rss+xml" />
     <description>Authors</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 10 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 09 Mar 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
       <title>Authors</title>
@@ -13,25 +13,25 @@
     </image>
     
     <item>
-      <title>Andrew Y. K. Foong</title>
-      <link>/authors/andrew-y.-k.-foong/</link>
-      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/authors/andrew-y.-k.-foong/</guid>
+      <title>James Requeima*</title>
+      <link>/authors/james-requeima/</link>
+      <pubDate>Mon, 09 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>/authors/james-requeima/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>James Requeima*</title>
-      <link>/authors/james-requeima/</link>
-      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/authors/james-requeima/</guid>
+      <title>John Bronskill*</title>
+      <link>/authors/john-bronskill/</link>
+      <pubDate>Mon, 09 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>/authors/john-bronskill/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Jonathan Gordon*</title>
       <link>/authors/jonathan-gordon/</link>
-      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 09 Mar 2020 00:00:00 +0000</pubDate>
       <guid>/authors/jonathan-gordon/</guid>
       <description></description>
     </item>
@@ -39,8 +39,24 @@
     <item>
       <title>Richard Turner</title>
       <link>/authors/richard-turner/</link>
-      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 09 Mar 2020 00:00:00 +0000</pubDate>
       <guid>/authors/richard-turner/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sebastian Nowozin</title>
+      <link>/authors/sebastian-nowozin/</link>
+      <pubDate>Mon, 09 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>/authors/sebastian-nowozin/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Andrew Y. K. Foong</title>
+      <link>/authors/andrew-y.-k.-foong/</link>
+      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/authors/andrew-y.-k.-foong/</guid>
       <description></description>
     </item>
     
@@ -97,22 +113,6 @@ is modelling symmetries in the data, such as by incorporating translation or per
       <link>/authors/marco-baroni/</link>
       <pubDate>Thu, 09 Jan 2020 00:00:00 +0000</pubDate>
       <guid>/authors/marco-baroni/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>John Bronskill*</title>
-      <link>/authors/john-bronskill/</link>
-      <pubDate>Sun, 01 Dec 2019 00:00:00 +0000</pubDate>
-      <guid>/authors/john-bronskill/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Sebastian Nowozin</title>
-      <link>/authors/sebastian-nowozin/</link>
-      <pubDate>Sun, 01 Dec 2019 00:00:00 +0000</pubDate>
-      <guid>/authors/sebastian-nowozin/</guid>
       <description></description>
     </item>
     

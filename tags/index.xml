@@ -5,7 +5,7 @@
     <link>/tags/</link>
       <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     <description>Tags</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 10 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 09 Mar 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
       <title>Tags</title>
@@ -15,8 +15,24 @@
     <item>
       <title>Deep learning</title>
       <link>/tags/deep-learning/</link>
-      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 09 Mar 2020 00:00:00 +0000</pubDate>
       <guid>/tags/deep-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Few-shot learning</title>
+      <link>/tags/few-shot-learning/</link>
+      <pubDate>Mon, 09 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>/tags/few-shot-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Meta learning</title>
+      <link>/tags/meta-learning/</link>
+      <pubDate>Mon, 09 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>/tags/meta-learning/</guid>
       <description></description>
     </item>
     
@@ -25,14 +41,6 @@
       <link>/tags/deep-sets/</link>
       <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
       <guid>/tags/deep-sets/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Meta learning</title>
-      <link>/tags/meta-learning/</link>
-      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/tags/meta-learning/</guid>
       <description></description>
     </item>
     
@@ -73,14 +81,6 @@
       <link>/tags/approximate-inference/</link>
       <pubDate>Sun, 01 Dec 2019 00:00:00 +0000</pubDate>
       <guid>/tags/approximate-inference/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Few-shot learning</title>
-      <link>/tags/few-shot-learning/</link>
-      <pubDate>Sun, 01 Dec 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/few-shot-learning/</guid>
       <description></description>
     </item>
     

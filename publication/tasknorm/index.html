@@ -28,10 +28,10 @@
   
     
   
-  <meta name="description" content="Machine Learning PhD Student">
+  <meta name="description" content="Powerful meta-learning system based on the neural process framework (Spotlight)">
 
   
-  <link rel="alternate" hreflang="en-us" href="/tags/meta-learning/">
+  <link rel="alternate" hreflang="en-us" href="/publication/tasknorm/">
 
   
 
@@ -210,14 +210,12 @@
 
 
   
-  <link rel="alternate" href="/tags/meta-learning/index.xml" type="application/rss+xml" title="Jonathan Gordon">
-  
 
   <link rel="manifest" href="/index.webmanifest">
   <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
   <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png">
 
-  <link rel="canonical" href="/tags/meta-learning/">
+  <link rel="canonical" href="/publication/tasknorm/">
 
   
   
@@ -225,35 +223,86 @@
   
   
     
-    
   
   
-  <meta property="twitter:card" content="summary">
+  <meta property="twitter:card" content="summary_large_image">
   
   <meta property="og:site_name" content="Jonathan Gordon">
-  <meta property="og:url" content="/tags/meta-learning/">
-  <meta property="og:title" content="Meta learning | Jonathan Gordon">
-  <meta property="og:description" content="Machine Learning PhD Student"><meta property="og:image" content="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png">
-  <meta property="twitter:image" content="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
+  <meta property="og:url" content="/publication/tasknorm/">
+  <meta property="og:title" content="TaskNorm: Rethinking Batch Normalization for Meta-Learning | Jonathan Gordon">
+  <meta property="og:description" content="Powerful meta-learning system based on the neural process framework (Spotlight)"><meta property="og:image" content="/publication/tasknorm/featured.png">
+  <meta property="twitter:image" content="/publication/tasknorm/featured.png"><meta property="og:locale" content="en-us">
   
-    <meta property="og:updated_time" content="2020-03-09T00:00:00&#43;00:00">
+    
+      <meta property="article:published_time" content="2020-03-09T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2020-03-09T00:00:00&#43;00:00">
   
-
-  
-
-
-
 
   
 
 
+    
+
+
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/publication/tasknorm/"
+  },
+  "headline": "TaskNorm: Rethinking Batch Normalization for Meta-Learning",
+  
+  "image": [
+    "/publication/tasknorm/featured.png"
+  ],
+  
+  "datePublished": "2020-03-09T00:00:00Z",
+  "dateModified": "2020-03-09T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "John Bronskill*"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Jonathan Gordon",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "img//"
+    }
+  },
+  "description": "Powerful meta-learning system based on the neural process framework (Spotlight)"
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
   
 
 
 
 
 
-  <title>Meta learning | Jonathan Gordon</title>
+  <title>TaskNorm: Rethinking Batch Normalization for Meta-Learning | Jonathan Gordon</title>
 
 </head>
 
@@ -490,98 +539,380 @@
 </nav>
 
 
-  
-
-
-
-
-
-
-
-
-
-
-
+  <div class="pub">
 
   
 
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
   
     
   
-<div class="universal-wrapper pt-3">
-  <h1>Meta learning</h1>
+
+
+<div class="article-container pt-3">
+  <h1>TaskNorm: Rethinking Batch Normalization for Meta-Learning</h1>
 
   
 
+  
+
+
+<div class="article-metadata">
+
+  
+  
+  
+  
+  <div>
+    
+
+
+
+  
+  <span><a href="/authors/john-bronskill/">John Bronskill*</a></span>, <span><a href="/authors/jonathan-gordon/">Jonathan Gordon*</a></span>, <span><a href="/authors/james-requeima/">James Requeima</a></span>, <span><a href="/authors/sebastian-nowozin/">Sebastian Nowozin</a></span>, <span><a href="/authors/richard-turner/">Richard Turner</a></span>
+
+  </div>
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    March 2020
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+
+  
+  
+
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<div class="btn-links mb-3">
+  
+  
+
+
+
+
+
+
+
+
+  
+    
+  
+
+
+
+<a class="btn btn-outline-primary my-1 mr-1" href="https://128.84.21.199/pdf/2003.03284" target="_blank" rel="noopener">
+  PDF
+</a>
+
+
+
+<button type="button" class="btn btn-outline-primary my-1 mr-1 js-cite-modal"
+        data-filename="/publication/tasknorm/cite.bib">
+  Cite
+</button>
+
+
+  
+  
+    
+  
+<a class="btn btn-outline-primary my-1 mr-1" href="https://github.com/cambridge-mlg/cnaps" target="_blank" rel="noopener">
+  Code
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 235px;">
+  <div style="position: relative">
+    <img src="/publication/tasknorm/featured_hu175476b97024c9437d2b53defc9a203c_389474_720x0_resize_lanczos_2.png" alt="" class="featured-image">
+    
+  </div>
+</div>
+
+
+
+  <div class="article-container">
+
+    
+    <h3>Abstract</h3>
+    <p class="pub-abstract">Modern meta-learning approaches for image classification rely on increasingly deep networks to achieve state-of-the-art performance, making batch normalization an essential component of meta-learning pipelines. However, the hierarchical nature of the meta-learning setting presents several challenges that can render conventional batch normalization ineffective, giving rise to the need to rethink normalization in this setting. We evaluate a range of approaches to batch normalization for meta-learning scenarios, and develop a novel approach that we call TaskNorm. Experiments on fourteen datasets demonstrate that the choice of batch normalization has a dramatic effect on both classification accuracy and training time for both gradient based and gradient-free meta-learning approaches. Importantly, TaskNorm is found to consistently improve performance. Finally, we provide a set of best practices for normalization that will allow fair comparison of meta-learning algorithms.</p>
+    
+
+    
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+        <div class="row">
+          <div class="col-12 col-md-3 pub-row-heading">Type</div>
+          <div class="col-12 col-md-9">
+            
+            
+            <a href="/publication/#3">
+              Preprint
+            </a>
+            
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+    <div class="d-md-none space-below"></div>
+    
+
+    
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+        <div class="row">
+          <div class="col-12 col-md-3 pub-row-heading">Publication</div>
+          <div class="col-12 col-md-9">In <em>ArXiv</em></div>
+        </div>
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+    <div class="d-md-none space-below"></div>
+    
+
+    <div class="space-below"></div>
+
+    <div class="article-style"></div>
+
+    
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/meta-learning/">Meta learning</a>
+  
+  <a class="badge badge-light" href="/tags/few-shot-learning/">Few-shot learning</a>
+  
+  <a class="badge badge-light" href="/tags/deep-learning/">Deep learning</a>
   
 </div>
 
 
 
-<div class="universal-wrapper">
-  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/publication/tasknorm/&amp;text=TaskNorm:%20Rethinking%20Batch%20Normalization%20for%20Meta-Learning" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/publication/tasknorm/&amp;t=TaskNorm:%20Rethinking%20Batch%20Normalization%20for%20Meta-Learning" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=TaskNorm:%20Rethinking%20Batch%20Normalization%20for%20Meta-Learning&amp;body=/publication/tasknorm/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/publication/tasknorm/&amp;title=TaskNorm:%20Rethinking%20Batch%20Normalization%20for%20Meta-Learning" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=TaskNorm:%20Rethinking%20Batch%20Normalization%20for%20Meta-Learning%20/publication/tasknorm/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/publication/tasknorm/&amp;title=TaskNorm:%20Rethinking%20Batch%20Normalization%20for%20Meta-Learning" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
 
   
   
-  <div>
-    <h2><a href="/publication/tasknorm/">TaskNorm: Rethinking Batch Normalization for Meta-Learning</a></h2>
-    <div class="article-style">
+    
+  
+  
+
+
+
+
+
+
+  
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/authors/john-bronskill/"></a></h5>
       
-      Powerful meta-learning system based on the neural process framework (Spotlight)
       
+      <ul class="network-icon" aria-hidden="true">
+  
+</ul>
+
     </div>
   </div>
+
+
+
+
+
+
+
+
+
   
-  <div>
-    <h2><a href="/publication/convcnp/">Convolutional Conditional Neural Processes</a></h2>
-    <div class="article-style">
-      
-      We extend deep sets to functional embeddings and Neural Processes to include translation equivariant members (Oral Presentaiton).
-      
-    </div>
-  </div>
   
-  <div>
-    <h2><a href="/publication/cnaps/">Fast and Flexible Multi-Task Classification Using Conditional Neural Adaptive Processes</a></h2>
-    <div class="article-style">
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
       
-      Powerful meta-learning system based on the neural process framework (Spotlight)
+      <li><a href="/publication/cnaps/">Fast and Flexible Multi-Task Classification Using Conditional Neural Adaptive Processes</a></li>
       
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/publication/mlpip/">Meta Learning Probabilistic Inference for Prediction</a></h2>
-    <div class="article-style">
+      <li><a href="/publication/versa/">VERSA: Versatile and Efficient Few-shot Learning</a></li>
       
-      We introduce ML-PIP, a general probabilistic framework for meta-learning
+      <li><a href="/publication/compositional/">Permutation Equivariant Models for Compositional Generalization in Language</a></li>
       
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/publication/consolidating/">Consolidating the Meta-Learning Zoo: A Unifying Perspective as Posterior Predictive Inference</a></h2>
-    <div class="article-style">
-      
-      A unifying perspective on meta-learning algorithms based on posterior predictive inference.
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/publication/versa/">VERSA: Versatile and Efficient Few-shot Learning</a></h2>
-    <div class="article-style">
-      
-      Introducing VERSA, an efficient and flexible few-shot learner based on amortized inference.
-      
-    </div>
+    </ul>
   </div>
   
 
-  
 
+
+  </div>
 </div>
 
       
