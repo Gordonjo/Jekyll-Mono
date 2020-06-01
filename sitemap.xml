@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/publication_types/3/</loc>
+    <loc>/publication_types/2/</loc>
     <lastmod>2020-03-09T00:00:00+00:00</lastmod>
   </url>
   
@@ -198,11 +198,6 @@
   </url>
   
   <url>
-    <loc>/publication_types/2/</loc>
-    <lastmod>2019-05-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/publication/combining/</loc>
     <lastmod>2019-05-10T00:00:00+00:00</lastmod>
   </url>
@@ -230,6 +225,11 @@
   <url>
     <loc>/post/amortized_vi/</loc>
     <lastmod>2019-04-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/publication_types/3/</loc>
+    <lastmod>2018-12-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
