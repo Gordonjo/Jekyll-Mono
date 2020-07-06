@@ -5,7 +5,7 @@
     <link>/authors/</link>
       <atom:link href="/authors/index.xml" rel="self" type="application/rss+xml" />
     <description>Authors</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 09 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 15 Jun 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
       <title>Authors</title>
@@ -13,10 +13,66 @@
     </image>
     
     <item>
+      <title>Andrew Y. K. Foong</title>
+      <link>/authors/andrew-y.-k.-foong/</link>
+      <pubDate>Mon, 15 Jun 2020 00:00:00 +0000</pubDate>
+      <guid>/authors/andrew-y.-k.-foong/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Eric Nalisnick</title>
+      <link>/authors/eric-nalisnick/</link>
+      <pubDate>Mon, 15 Jun 2020 00:00:00 +0000</pubDate>
+      <guid>/authors/eric-nalisnick/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>James Requeima*</title>
       <link>/authors/james-requeima/</link>
-      <pubDate>Mon, 09 Mar 2020 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 15 Jun 2020 00:00:00 +0000</pubDate>
       <guid>/authors/james-requeima/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jonathan Gordon*</title>
+      <link>/authors/jonathan-gordon/</link>
+      <pubDate>Mon, 15 Jun 2020 00:00:00 +0000</pubDate>
+      <guid>/authors/jonathan-gordon/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jose Miguel Hernandez-Lobato</title>
+      <link>/authors/jose-miguel-hernandez-lobato/</link>
+      <pubDate>Mon, 15 Jun 2020 00:00:00 +0000</pubDate>
+      <guid>/authors/jose-miguel-hernandez-lobato/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Richard Turner</title>
+      <link>/authors/richard-turner/</link>
+      <pubDate>Mon, 15 Jun 2020 00:00:00 +0000</pubDate>
+      <guid>/authors/richard-turner/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Wessel Bruinsma*</title>
+      <link>/authors/wessel-bruinsma/</link>
+      <pubDate>Mon, 15 Jun 2020 00:00:00 +0000</pubDate>
+      <guid>/authors/wessel-bruinsma/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Yann Dubois</title>
+      <link>/authors/yann-dubois/</link>
+      <pubDate>Mon, 15 Jun 2020 00:00:00 +0000</pubDate>
+      <guid>/authors/yann-dubois/</guid>
       <description></description>
     </item>
     
@@ -29,50 +85,10 @@
     </item>
     
     <item>
-      <title>Jonathan Gordon*</title>
-      <link>/authors/jonathan-gordon/</link>
-      <pubDate>Mon, 09 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>/authors/jonathan-gordon/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Richard Turner</title>
-      <link>/authors/richard-turner/</link>
-      <pubDate>Mon, 09 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>/authors/richard-turner/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Sebastian Nowozin</title>
       <link>/authors/sebastian-nowozin/</link>
       <pubDate>Mon, 09 Mar 2020 00:00:00 +0000</pubDate>
       <guid>/authors/sebastian-nowozin/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Andrew Y. K. Foong</title>
-      <link>/authors/andrew-y.-k.-foong/</link>
-      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/authors/andrew-y.-k.-foong/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Wessel Bruinsma*</title>
-      <link>/authors/wessel-bruinsma/</link>
-      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/authors/wessel-bruinsma/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Yann Dubois</title>
-      <link>/authors/yann-dubois/</link>
-      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/authors/yann-dubois/</guid>
       <description></description>
     </item>
     
@@ -113,22 +129,6 @@ is modelling symmetries in the data, such as by incorporating translation or per
       <link>/authors/marco-baroni/</link>
       <pubDate>Thu, 09 Jan 2020 00:00:00 +0000</pubDate>
       <guid>/authors/marco-baroni/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Eric Nalisnick</title>
-      <link>/authors/eric-nalisnick/</link>
-      <pubDate>Tue, 10 Sep 2019 00:00:00 +0000</pubDate>
-      <guid>/authors/eric-nalisnick/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Jose Miguel Hernandez-Lobato</title>
-      <link>/authors/jose-miguel-hernandez-lobato/</link>
-      <pubDate>Tue, 10 Sep 2019 00:00:00 +0000</pubDate>
-      <guid>/authors/jose-miguel-hernandez-lobato/</guid>
       <description></description>
     </item>
     
