@@ -206,6 +206,42 @@
 
 
 
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-180159529-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           document.location = url;
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target);  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'UA-180159529-1', {});
+
+  
+  document.addEventListener('click', onClickCallback, false);
+</script>
+
+
   
 
 
@@ -3013,7 +3049,7 @@ is modelling symmetries in the data, such as by incorporating translation or per
           
           
           
-          <a href="/tags/deep-learning/" style="font-size:1.9405152622711224rem">Deep learning</a>
+          <a href="/tags/deep-learning/" style="font-size:1.9405152622711224rem">Deep Learning</a>
         
           
           
@@ -3023,12 +3059,12 @@ is modelling symmetries in the data, such as by incorporating translation or per
           
           
           
-          <a href="/tags/meta-learning/" style="font-size:1.7986274520185337rem">Meta learning</a>
+          <a href="/tags/meta-learning/" style="font-size:1.7986274520185337rem">Meta-learning</a>
         
           
           
           
-          <a href="/tags/neural-processes/" style="font-size:1.320257631135561rem">Neural processes</a>
+          <a href="/tags/neural-processes/" style="font-size:1.320257631135561rem">Neural Processes</a>
         
           
           
